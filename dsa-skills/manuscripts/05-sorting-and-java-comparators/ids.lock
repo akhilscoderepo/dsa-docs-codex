@@ -1,12 +1,17 @@
 {
  "lessons": [
   "arrays-sort",
+  "comparator-contracts",
   "ordering-contracts"
  ],
  "exercises": [
   "boxed-integers-descending",
+  "comparator-chained-keys",
+  "comparator-equal-extreme-keys",
   "extreme-integer-order",
   "largest-concatenated-number",
+  "largest-number-comparator-contract",
+  "safe-integer-comparator",
   "sort-array-merge-contract",
   "sort-array-subrange",
   "sort-boundary-values",

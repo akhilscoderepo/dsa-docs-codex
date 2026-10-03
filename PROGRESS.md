@@ -22,7 +22,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - updated: `2026-10-03T20:16:00+05:30`
 - completed_lessons: `[01-ordering-contracts, 02-arrays-sort]`
 - next_lesson: `03-comparator-contracts`
-- push_status: `not_yet_pushed`
+- push_status: `pushed at a5be80c`
 
 ## Decision log
 

@@ -4,6 +4,7 @@
   "comparator-contracts",
   "object-ordering",
   "ordering-contracts",
+  "sort-and-deduplicate",
   "sort-and-sweep",
   "stability-and-ties"
  ],
@@ -12,6 +13,10 @@
   "comparator-chained-keys",
   "comparator-equal-extreme-keys",
   "comparator-equality-boundary",
+  "deduplicate-all-equal",
+  "deduplicate-array-intersection",
+  "deduplicate-contains-duplicate",
+  "deduplicate-longest-buildable-word",
   "explicit-index-tie",
   "extreme-integer-order",
   "largest-concatenated-number",

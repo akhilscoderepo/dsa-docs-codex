@@ -4,6 +4,7 @@
   "comparator-contracts",
   "object-ordering",
   "ordering-contracts",
+  "sort-and-sweep",
   "stability-and-ties"
  ],
  "exercises": [
@@ -26,7 +27,14 @@
   "sort-contains-duplicate",
   "sort-primitive-copy",
   "stable-score-sort",
-  "stable-sort-by-bit-count"
+  "stable-sort-by-bit-count",
+  "sweep-long-equal-run",
+  "sweep-minimum-absolute-difference",
+  "sweep-minimum-increment-unique",
+  "sweep-queue-reconstruction",
+  "sweep-sorted-squares-baseline"
  ],
- "retired": []
+ "retired": [
+  "sweep-minimum-absolute-difference"
+ ]
 }

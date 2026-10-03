@@ -1,0 +1,35 @@
+# Curriculum progress
+
+The machine-readable lines below are the recovery ledger. Update them only at a completed lesson boundary.
+
+## Chapter state
+
+| Chapter | Topic | Status | Completed lessons | Next lesson |
+| --- | --- | --- | --- | --- |
+| 00 | Problem contracts, complexity, and sequence language | content_complete_human_review_pending | 8/8 | human review |
+| 01 | Arrays core operations | content_complete_human_review_pending | 12/12 | human review |
+| 02 | Matrices and 2D arrays | content_complete_human_review_pending | 7/7 | human review |
+| 03 | Strings | content_complete_human_review_pending | 7/7 | human review |
+| 04 | Hash maps and sets | content_complete_human_review_pending | 9/9 | human review |
+| 05 | Sorting and Java comparators | in_progress | 2/9 | Comparator Contracts |
+| 06-41 | Remaining specifications | not_started | 0 | chapter 06 after chapter 05 |
+
+## Active claim
+
+- chapter: `05-sorting-and-java-comparators`
+- owner: `codex-local-scheduled-pipeline`
+- started: `2026-10-03T20:00:00+05:30`
+- updated: `2026-10-03T20:16:00+05:30`
+- completed_lessons: `[01-ordering-contracts, 02-arrays-sort]`
+- next_lesson: `03-comparator-contracts`
+- push_status: `not_yet_pushed`
+
+## Decision log
+
+- Chapters 00-04 use the full accepted Markdown manuscripts and shared renderer, not the earlier compact HTML source.
+- Scheduled work processes one chapter per run and checkpoints only at complete lesson boundaries.
+- Chapter 05 contains eight independent lessons plus one released combination lesson: Strings, Maps, and Sorting.
+- Human review is never inferred from an automated audit.
+- Chapter 05 lesson 01 passed the draft audit on JDK 25 with four compiled-and-run solution blocks. Remaining warnings identify the eight future lessons, the two chapter wrap-up sections, and human review.
+- Chapter 05 lesson 02 passed the draft audit on JDK 25. The chapter now has eight exercise solutions compiled and run; remaining warnings name only future lessons, wrap-up sections, and human review.
+

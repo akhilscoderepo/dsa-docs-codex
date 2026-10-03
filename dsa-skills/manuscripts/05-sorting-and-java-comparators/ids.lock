@@ -1,0 +1,17 @@
+{
+ "lessons": [
+  "arrays-sort",
+  "ordering-contracts"
+ ],
+ "exercises": [
+  "boxed-integers-descending",
+  "extreme-integer-order",
+  "largest-concatenated-number",
+  "sort-array-merge-contract",
+  "sort-array-subrange",
+  "sort-boundary-values",
+  "sort-contains-duplicate",
+  "sort-primitive-copy"
+ ],
+ "retired": []
+}

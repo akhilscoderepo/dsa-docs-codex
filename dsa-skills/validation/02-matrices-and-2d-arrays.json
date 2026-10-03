@@ -1,0 +1,21 @@
+{
+ "schema": 2,
+ "date": "2026-10-03",
+ "status": "validated",
+ "jdk": {
+  "version": "25.0.1",
+  "vendor": "Oracle Corporation",
+  "feature": "25"
+ },
+ "release_requested": "25",
+ "release_effective": "25",
+ "blocks": 42,
+ "ok": 42,
+ "failed": 0,
+ "skipped": 0,
+ "not_validated": 0,
+ "ran_with_assertions": 28,
+ "javaDigest": "b8caadaf13ab1323637d54aa9253f1fa48b3cbe9b79adf7d111b0fdbbef00f63",
+ "manuscriptDigest": "e8f9d8196c42536d94443d87ee9970e68146b282ddf429b5604b03126686a8ee",
+ "digest": "b8caadaf13ab1323637d54aa9253f1fa48b3cbe9b79adf7d111b0fdbbef00f63"
+}

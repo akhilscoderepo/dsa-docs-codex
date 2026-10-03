@@ -1,0 +1,24 @@
+# Local and generated scratch state
+tmp/
+.agents/
+**/__pycache__/
+*.pyc
+.dsa-scratch/
+
+# Legacy generation inputs kept locally but not part of the canonical repo
+curriculum/
+build_*.py
+scripts/*.py
+scripts/*.mjs
+
+# Legacy packaged output. Canonical chapter HTML files live directly in output/.
+output/*/
+output/*.zip
+output/*.pdf
+
+# IDE and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+

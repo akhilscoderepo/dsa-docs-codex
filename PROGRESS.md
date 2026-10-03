@@ -11,7 +11,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 02 | Matrices and 2D arrays | content_complete_human_review_pending | 7/7 | human review |
 | 03 | Strings | content_complete_human_review_pending | 7/7 | human review |
 | 04 | Hash maps and sets | content_complete_human_review_pending | 9/9 | human review |
-| 05 | Sorting and Java comparators | in_progress | 3/9 | Object Ordering |
+| 05 | Sorting and Java comparators | in_progress | 4/9 | Stability And Ties |
 | 06-41 | Remaining specifications | not_started | 0 | chapter 06 after chapter 05 |
 
 ## Active claim
@@ -19,9 +19,9 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - chapter: `05-sorting-and-java-comparators`
 - owner: `codex-local-scheduled-pipeline`
 - started: `2026-10-03T20:00:00+05:30`
-- updated: `2026-10-03T20:21:31+05:30`
-- completed_lessons: `[01-ordering-contracts, 02-arrays-sort, 03-comparator-contracts]`
-- next_lesson: `04-object-ordering`
+- updated: `2026-10-03T20:27:28+05:30`
+- completed_lessons: `[01-ordering-contracts, 02-arrays-sort, 03-comparator-contracts, 04-object-ordering]`
+- next_lesson: `05-stability-and-ties`
 - push_status: `checkpoint pending`
 
 ## Decision log
@@ -33,4 +33,5 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Chapter 05 lesson 01 passed the draft audit on JDK 25 with four compiled-and-run solution blocks. Remaining warnings identify the eight future lessons, the two chapter wrap-up sections, and human review.
 - Chapter 05 lesson 02 passed the draft audit on JDK 25. The chapter now has eight exercise solutions compiled and run; remaining warnings name only future lessons, wrap-up sections, and human review.
 - Chapter 05 lesson 03 passed the draft audit on JDK 25. Twelve exercises now have paired compiled-and-run solutions; the remaining nine warnings identify six future lessons, two wrap-up sections, and human review.
+- Chapter 05 lesson 04 passed the draft audit on JDK 25. Sixteen exercises now have paired compiled-and-run solutions; the remaining eight warnings identify five future lessons, two wrap-up sections, and human review.
 

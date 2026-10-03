@@ -2,6 +2,7 @@
  "lessons": [
   "arrays-sort",
   "comparator-contracts",
+  "object-ordering",
   "ordering-contracts"
  ],
  "exercises": [
@@ -11,6 +12,10 @@
   "extreme-integer-order",
   "largest-concatenated-number",
   "largest-number-comparator-contract",
+  "object-equal-primary-keys",
+  "object-queue-reconstruction",
+  "object-reorder-log-files",
+  "object-sort-scores",
   "safe-integer-comparator",
   "sort-array-merge-contract",
   "sort-array-subrange",

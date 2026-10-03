@@ -3,12 +3,15 @@
   "arrays-sort",
   "comparator-contracts",
   "object-ordering",
-  "ordering-contracts"
+  "ordering-contracts",
+  "stability-and-ties"
  ],
  "exercises": [
   "boxed-integers-descending",
   "comparator-chained-keys",
   "comparator-equal-extreme-keys",
+  "comparator-equality-boundary",
+  "explicit-index-tie",
   "extreme-integer-order",
   "largest-concatenated-number",
   "largest-number-comparator-contract",
@@ -21,7 +24,9 @@
   "sort-array-subrange",
   "sort-boundary-values",
   "sort-contains-duplicate",
-  "sort-primitive-copy"
+  "sort-primitive-copy",
+  "stable-score-sort",
+  "stable-sort-by-bit-count"
  ],
  "retired": []
 }

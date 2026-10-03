@@ -22,7 +22,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - updated: `2026-10-03T20:48:19+05:30`
 - completed_lessons: `[01-ordering-contracts, 02-arrays-sort, 03-comparator-contracts, 04-object-ordering, 05-stability-and-ties, 06-sort-and-sweep, 07-sort-and-deduplicate, 08-sort-then-scan]`
 - next_lesson: `09-strings-maps-and-sorting`
-- push_status: `checkpoint pending`
+- push_status: `pushed at af70d46`
 
 ## Decision log
 

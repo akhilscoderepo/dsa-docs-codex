@@ -6,6 +6,7 @@
   "ordering-contracts",
   "sort-and-deduplicate",
   "sort-and-sweep",
+  "sort-then-scan",
   "stability-and-ties"
  ],
  "exercises": [
@@ -26,6 +27,10 @@
   "object-reorder-log-files",
   "object-sort-scores",
   "safe-integer-comparator",
+  "scan-fewer-than-k-distinct",
+  "scan-missing-number",
+  "scan-relative-ranks",
+  "scan-third-maximum",
   "sort-array-merge-contract",
   "sort-array-subrange",
   "sort-boundary-values",

@@ -1,14 +1,24 @@
 {
  "lessons": [
+  "earliest-balance",
   "exclusion-state",
   "prefix-construction",
   "prefix-counts",
-  "range-queries"
+  "range-queries",
+  "remainder-classes"
  ],
  "exercises": [
+  "ps-balanced-prefix-zero",
   "ps-binary-subarrays-sum",
+  "ps-contiguous-array",
+  "ps-continuous-divisible",
+  "ps-divisible-subarrays",
   "ps-empty-prefix",
+  "ps-equal-a-b",
+  "ps-even-vowel-parity",
   "ps-half-open-query",
+  "ps-longest-divisible-span",
+  "ps-negative-remainders",
   "ps-nice-subarrays",
   "ps-pivot-index",
   "ps-prefix-averages",

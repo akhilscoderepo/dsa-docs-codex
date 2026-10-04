@@ -1,5 +1,6 @@
 {
  "lessons": [
+  "difference-arrays",
   "earliest-balance",
   "exclusion-state",
   "prefix-construction",
@@ -14,6 +15,10 @@
   "ps-contiguous-array",
   "ps-continuous-divisible",
   "ps-count-xor-k",
+  "ps-diff-car-pooling",
+  "ps-diff-final-endpoint",
+  "ps-diff-flight-bookings",
+  "ps-diff-one-range-add",
   "ps-divisible-subarrays",
   "ps-empty-prefix",
   "ps-equal-a-b",

@@ -13,7 +13,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 04 | Hash maps and sets | content_complete_human_review_pending | 9/9 | human review |
 | 05 | Sorting and Java comparators | content_complete_human_review_pending | 9/9 | human review |
 | 06 | Binary search | in_progress | 4/11 | Peak Search |
-| 07 | Prefix sums and difference arrays | in_progress | 7/11 | Difference Arrays |
+| 07 | Prefix sums and difference arrays | in_progress | 8/11 | 2D Prefix |
 | 08 | Two pointers | in_progress | 9/10 | Index State And Floyd |
 | 09 | Sliding window | content_complete_human_review_pending | 10/10 | human review |
 | 10 | Intervals | in_progress | 1/7 | Touching-Boundary Semantics |
@@ -64,4 +64,5 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - The recovery ledger correction for Chapter 07 points to Difference Arrays: Earliest Balance was already released as lesson 05 in commit 14c860c.
 - Chapter 08 Strings And Two Pointers passed the JDK 25 draft audit: 9/10 lessons, 36 paired solutions, zero errors; next is Index State And Floyd.
 - Chapter 06 First True passed the JDK 25 draft audit: 4/11 lessons, 16 paired solutions, zero errors; next is Peak Search.
+- Chapter 07 Difference Arrays passed the JDK 25 draft audit: 8/11 lessons, 32 paired solutions, zero errors; next is 2D Prefix.
 

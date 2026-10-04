@@ -46,6 +46,21 @@ One rule set, applied everywhere:
 - Prefer compact, exact prose over sheer length. Match the approved exemplar's clarity and completeness, not its word count. Remove any paragraph that does not change recognition, correctness, implementation or transfer.
 - Never imitate compressed PDF-builder labels as prose and never generate grammatical filler by joining specification fields.
 
+### Readability contract
+
+Apply these rules to every teaching paragraph, exercise, hint, and solution explanation:
+
+- Use active voice. Name the actor that performs each action: the algorithm compares, `left` moves, the loop stops, or the method returns. Rewrite passive forms such as "is used" or "will be divided" when they hide that actor.
+- Describe algorithm execution in the present tense. Write "the method returns `-1`" and "the loop stops when `left > right`" rather than moving the explanation into the future.
+- Keep the logical order explicit. Use ordinary transitions such as "because," "therefore," "however," and "as a result" when the connection matters. Never use `->` as a substitute for a causal or conditional sentence.
+- Put actions in verbs. Prefer "the algorithm computes the midpoint" to "the calculation of the midpoint," and prefer "when the loop stops" to "upon termination of the loop."
+- Anchor every reference to a concrete subject. Name `nums[mid]`, the current interval, the active window, or the processed prefix instead of writing "the process," "the situation," "the aspect," or "the element" when several elements exist.
+- Use standard computer-science terms. Replace private metaphors, dramatic labels, and author-specific catchphrases with the terminology that engineers, interviewers, and textbooks use.
+- Keep one main idea in each sentence. If a sentence asks the reader to track the contract, complexity, test design, and a new technique at once, split it and teach those decisions in sequence.
+- Introduce a section with the practical reason the concept matters, then walk through one small concrete input. Let the reader track the exact array cells, indices, pointers, intervals, or state values as the code runs.
+
+Perform a sentence-level cognitive-load pass before handoff. A reader should not need to translate a noun phrase into an action, guess an unnamed actor, resolve a vague pronoun, decode an arrow, or hold several new decisions in working memory. For example, replace "practice reading a contract, predicting a cost and designing a hostile test, one at a time, before any named algorithm competes for your attention" with three direct sentences that introduce the input contract, the cost estimate, and the boundary test separately.
+
 ## The lesson stages
 
 Every lesson file contains these stages in order, each introduced by an invisible marker such as `<!-- stage: bottleneck -->`:

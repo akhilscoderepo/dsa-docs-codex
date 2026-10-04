@@ -35,6 +35,8 @@ Put the marker on its own line before the stage's `###` heading.
 
 Judgment: order the scenario so the naive solution feels natural, and choose the bottleneck input so the waste is visible to the eye, not just in the Big-O.
 
+Judgment: run the readability contract across every stage. Each sentence names its actor, stays in the present tense while code executes, and anchors references to exact variables or data regions. Use explicit causal words instead of arrows, standard technical terms instead of private metaphors, and verbs instead of abstract action nouns. Split sentences that ask the reader to learn several independent decisions at once.
+
 ## Trace block format
 
 ````

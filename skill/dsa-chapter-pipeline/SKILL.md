@@ -34,6 +34,8 @@ The compact specification is a contract, not prose. Every lesson must satisfy th
 
 Use plain technical English. Vary sentence structure naturally. Do not reuse exercise boilerplate, splice specification labels into hints, or decorate a lesson with a story that contributes nothing to the algorithmic decision.
 
+Apply the authoring skill's readability contract before accepting a lesson. The prose uses active subjects and present tense, expresses causal links in words rather than arrows, turns abstract noun phrases back into verbs, anchors references to exact variables or data regions, and uses standard computer-science terminology. Split any sentence that introduces several independent decisions at once; audit cognitive load as seriously as technical correctness.
+
 ## Persistence
 
 After each passing lesson audit, the coordinator updates `PROGRESS.md`. At the end of a run, follow the runbook's checkpoint procedure and push every chapter boundary. A checkpoint represents a durable lesson boundary, not completion. Do not stop for user confirmation after a chapter or batch; continue with the next recorded work while execution time remains.

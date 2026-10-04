@@ -2,14 +2,19 @@
  "lessons": [
   "exact-search",
   "first-and-last",
+  "first-true",
   "lower-and-upper-bounds"
  ],
  "exercises": [
   "bs-complete-target-range",
   "bs-descending-target",
   "bs-exact-target",
+  "bs-first-bad-version",
   "bs-first-occurrence",
+  "bs-first-true-boolean",
+  "bs-kth-missing-positive",
   "bs-last-occurrence",
+  "bs-no-true-value",
   "bs-outside-range",
   "bs-recognize-first-bad",
   "bs-recognize-row-major",

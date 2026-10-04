@@ -8,9 +8,14 @@
   "prefix-xor",
   "range-queries",
   "remainder-classes",
+  "two-dimensional-difference",
   "two-dimensional-prefix"
  ],
  "exercises": [
+  "ps-2d-diff-bottom-right-edge",
+  "ps-2d-diff-increment-submatrices",
+  "ps-2d-diff-one-rectangle",
+  "ps-2d-diff-weighted-updates",
   "ps-2d-matrix-block-sum",
   "ps-2d-range-sum-query",
   "ps-2d-single-cell-rectangle",

@@ -3,14 +3,14 @@
 ## Java Cost Habits
 
 <!-- stage: context -->
-### The Job That Only Failed In Production
+### Convenient Calls Can Hide Quadratic Work
 
 An engineer builds an event processor that takes events off the front of a list and handles them one at a time, then writes a summary line for each event by appending text to a growing report string. In testing, with a few hundred events, it finishes before she can switch windows. On the first real night, with a hundred thousand events, it is still running when the morning shift arrives.
 
 She re-reads the code and finds no nested loops, so the usual quadratic suspects are absent. The slowness comes from two ordinary-looking library calls, each of which does a large hidden piece of work every time it is called. Writing a correct algorithm is only half of the job in Java, because the other half is knowing what the convenient calls actually do.
 
 <!-- stage: naive -->
-### Use Whatever Reads Nicely
+### Choose The Most Readable Call
 
 The processor, written the way it first reads, looks like this.
 
@@ -28,14 +28,14 @@ static String processAll(List<Integer> events) {
 It is short and obviously correct. Each statement states its intent plainly, `remove(0)` takes the first event and `+` builds text, and a reviewer would have no reason to object. The loop runs once per event, which looks like O(n).
 
 <!-- stage: bottleneck -->
-### Two Calls, Each Doing O(n) Work
+### Repeated Linear Calls Become Quadratic
 
 Draining an `ArrayList` from the front is the first problem. Removing the element at index 0 shifts every later element one position to the left, which the class documents. So the first removal moves `n - 1` elements, the next moves `n - 2`, and the total is `n * (n - 1) / 2`, which is O(n^2). For 100,000 events that is about five billion element moves.
 
 Building a string with `+` in a loop is the second problem. Strings are immutable, so each concatenation creates a brand-new string and copies every character of the old one. After `k` steps the string has about `k` times a constant number of characters, so the total number of characters copied also grows as O(n^2) and reaches billions for a long report. Both costs are invisible in the source, because neither shows up as a loop. The loop count said O(n), and the library calls multiplied it by another factor of `n` each.
 
 <!-- stage: insight -->
-### Every Call Has A Cost
+### Include Every API Cost
 
 Treat every library call in a loop as an operation whose cost must be added to the analysis. The code you write is only part of the work, and the call you do not see may be the dominant part.
 
@@ -48,12 +48,12 @@ Two more Java facts matter for correctness, not speed. **Reference equality**, w
 The invariant is that the cost and meaning of every library call you rely on must be known and included in the claimed bound. Convenience syntax never changes the contract you are supposed to satisfy.
 
 <!-- stage: variables -->
-### What To Ask About Each Call
+### Check Cost Semantics And Representation
 
 For each library call inside a loop, write three things beside it. First, its cost per call as a function of the sizes involved, and whether that cost is amortized. Second, whether it mutates its input or returns something new. Third, whether it compares by reference or by value, and whether it works on primitives or on boxed objects. A call you cannot describe on those three lines is a call you should look up before relying on it.
 
 <!-- stage: trace -->
-### Draining Four Events From The Front
+### Remove Four Front Elements
 
 Take a list holding 10, 20, 30 and 40, and drain it with `remove(0)`. The first call removes 10 and shifts the other three values one place left, so three elements move. The second call removes what is now at the front, 20, and shifts the remaining two, so two elements move. The third call removes 30 and shifts the last one. The fourth call removes 40 and has nothing left to shift.
 
@@ -64,7 +64,7 @@ The totals are 3, then 2, then 1, then 0, which is 6 moves in all, and the formu
 ```
 
 <!-- stage: code -->
-### Cheaper Versions And A Few Facts
+### Replace Expensive Java Operations
 
 ```java
 import java.util.*;
@@ -95,7 +95,7 @@ public final class JavaCosts {
 The loop makes one pass, so the time is O(n) for the loop plus amortized O(1) per append, which is O(n) in total, and the extra space is the report itself. The two `remove` calls at the end show the overload trap, where an `int` argument removes by position and an object argument removes by value. A `List<Integer>` needs `Integer.valueOf(7)` to remove the value 7, which is easy to get wrong in a hurry.
 
 <!-- stage: applicability -->
-### Checking The Calls You Did Not Write
+### Inspect Library Calls Inside Loops
 
 Scan every loop body for library calls and ask the three questions. The invariant is that the cost and meaning of each call you rely on are known and included in the bound you state. Whenever a method name is unfamiliar in a loop, check its documented cost before writing the analysis.
 

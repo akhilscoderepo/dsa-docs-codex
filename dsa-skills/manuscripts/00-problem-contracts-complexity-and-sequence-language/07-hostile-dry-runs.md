@@ -3,14 +3,14 @@
 ## Hostile Dry Runs
 
 <!-- stage: context -->
-### The Bug That Survived A Thousand Tests
+### Random Tests Miss Boundary Failures
 
 A developer writes a method that finds the longest climb in a list of daily step counts, meaning the longest stretch where each day beats the one before. She tests it with the examples from the ticket, then with a thousand randomly generated lists of a hundred days each, and everything passes. A week after release, a user with a single logged day sees "longest climb: 0 days" on their dashboard.
 
 The randomized tests were not careless. They simply could not reach the failing case, because a random list of a hundred days almost never forms one unbroken climb and almost never has length one. A bug that hides behind a boundary is found by choosing the boundary on purpose. This lesson is about designing the smallest input that attacks one specific weakness, and about tracing the variables by hand so the weakness becomes visible.
 
 <!-- stage: naive -->
-### Samples Then Random Data
+### Test Samples And Random Inputs
 
 The method below has a flaw that nobody sees by reading it, because every line looks reasonable.
 
@@ -32,14 +32,14 @@ static int longestClimb(int[] steps) {
 On `[1, 3, 2, 4, 5, 1]` it returns 3, which is correct. It passes the ticket's examples and, as the story shows, nearly every random list. The common reaction to green tests is to stop.
 
 <!-- stage: bottleneck -->
-### Volume Does Not Reach The Corners
+### Random Volume Misses Rare Cases
 
 Count what random testing actually buys. A thousand lists of a hundred values cost about 100,000 element visits, which is O(n) work per list and trivial to run. Yet for values drawn from a small range such as 0 to 9, a list of more than ten days can never be strictly increasing from start to end, so the failing case, an unbroken climb that never triggers the `else` branch, is unreachable at that size. Running a million such lists would still test the same set of behaviors a thousand did.
 
 The failing inputs are tiny. A list of one day returns 0 instead of 1, because the loop never runs and `best` keeps its initial value. A list that climbs every day also returns 0, because `best` is updated only when a climb ends and the last climb never ends inside the loop. Both failures sit at the edge of the loop, where the first and last iterations behave differently from the middle, and a small deliberate input reaches them in seconds.
 
 <!-- stage: insight -->
-### Aim One Small Input At One Weakness
+### Attack One Assumption At A Time
 
 Choose test inputs the way an attacker would, one weakness at a time. Each plausible implementation depends on some unstated happy-path assumption, and the hostile input is the smallest one that makes that assumption false.
 
@@ -52,12 +52,12 @@ For each failure mode there is a standard small attacker. For initialization, us
 The invariant for a dry run is that after each state change you can say what every variable means. In the climb method, `current` means the length of the climb that ends at the index just examined, and `best` means the longest climb that has already ended. Written that way, the bug is obvious. A climb that is still open when the loop ends has not been recorded, so `best` is stale.
 
 <!-- stage: variables -->
-### The Variable Ledger
+### Record Every Variable Change
 
 For a dry run keep a small ledger with one row per state change and one column per variable. Alongside each variable, write its meaning in a few words. Sample outputs reproduce a result and do not show whether any meaning was violated, so you check the meanings, not the outputs. Pick the input first, say which failure mode it attacks, and predict the result before you execute anything. A prediction that disagrees with the code is the whole point of the exercise.
 
 <!-- stage: trace -->
-### Dry-Running A Pure Climb
+### Trace A Strictly Increasing Run
 
 Trace the method on `[1, 2, 3]`. The variables start at `best = 0` and `current = 1`. At index 1 the value 2 beats 1, so `current` becomes 2 and `best` stays 0. At index 2 the value 3 beats 2, so `current` becomes 3 and `best` is still 0.
 
@@ -68,7 +68,7 @@ The loop ends. The method returns `best`, which is 0, although the true answer i
 ```
 
 <!-- stage: code -->
-### The Corrected Method And Its Attackers
+### Test The Corrected Method
 
 ```java
 static int longestClimb(int[] steps) {
@@ -85,7 +85,7 @@ static int longestClimb(int[] steps) {
 The repair is to update `best` after every step, so an unfinished climb is always counted, and to start `best` at 1 because any non-empty list contains a climb of length one. The empty list is allowed by this method's contract and returns 0 explicitly. The method runs in O(n) time and O(1) space. The attackers that now pass are `[7]`, `[1, 2, 3]`, `[4, 4, 4]` and `[3, 2, 1]`, and each was chosen to hit a different failure mode, from initialization to equality.
 
 <!-- stage: applicability -->
-### Choosing The Smallest Attacker
+### Choose The Smallest Adversarial Input
 
 Before trusting any solution, write down which failure modes it could have and pick one tiny input for each. The invariant is that a dry run records the meaning of every variable after every state change, and that each hostile input targets one weakness. Run the prediction first, then the code.
 

@@ -1,6 +1,6 @@
 {
- "schema": 2,
- "date": "2026-10-03",
+ "schema": 1,
+ "date": "2026-10-04",
  "status": "validated",
  "jdk": {
   "version": "25.0.1",
@@ -15,7 +15,5 @@
  "skipped": 0,
  "not_validated": 0,
  "ran_with_assertions": 32,
- "javaDigest": "69da5404171cb3210e23ffca929aa2355309382a286be845d88c9912b5bd340e",
- "manuscriptDigest": "8e2255aca6b392dcc4891eb9c6acdf31935eae2c131a886d69e2a1511bdf6a2f",
  "digest": "69da5404171cb3210e23ffca929aa2355309382a286be845d88c9912b5bd340e"
 }

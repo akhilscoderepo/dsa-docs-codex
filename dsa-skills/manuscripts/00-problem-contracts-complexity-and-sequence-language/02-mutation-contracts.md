@@ -3,14 +3,14 @@
 ## Mutation Contracts
 
 <!-- stage: context -->
-### The Report That Printed Garbage
+### A Valid Prefix Hides Garbage
 
 A reporting tool keeps the day's sensor readings in one array and hands it to two helpers. The first helper strips out the readings flagged as faulty. The second prints the full day's readings for an audit. After the first helper runs, the audit page shows duplicates and missing values, and nobody has changed the audit code in months.
 
 The helpers are not buggy in isolation. The first one rewrote the shared array to save memory, and the second one trusted that the array was untouched. Neither had been told what the other was allowed to do, because the interface never said whether the input could change. Every problem statement and every method signature carries an answer to that question, spoken or unspoken, and this lesson is about stating it out loud.
 
 <!-- stage: naive -->
-### Overwrite And Return The Same Array
+### Overwrite The Input Array
 
 The tempting implementation reuses the input, because that costs no extra memory and looks efficient. The method below removes every occurrence of a value by overwriting from the front.
 
@@ -30,14 +30,14 @@ static int removeValue(int[] nums, int target) {
 Called on `[3, 2, 2, 3]` with target 3, it returns 2, and the array afterward reads `[2, 2, 2, 3]`. A caller who prints `nums.length` elements sees three twos and a three, and a caller who kept a second reference to the same array sees the damage too.
 
 <!-- stage: bottleneck -->
-### The Cost Is Surprise
+### Mutation Breaks Caller Expectations
 
 The method runs in O(n) time with O(1) extra space, so no step is slow. The cost is that the data the caller still holds has been changed under them. The array has not become shorter, because a Java array's length is fixed when it is created. Only the first `write` slots are meaningful now, and the slots after that still hold old values that look real.
 
 The safe alternative copies the input first. That copy costs O(n) extra space and O(n) extra time, which is cheap for one call and expensive for a million. So neither choice is free, and the right one depends on a promise that the code alone cannot reveal. When the statement says the input must be preserved, in-place rewriting is wrong however fast it is. When the statement asks for constant extra space, copying is wrong however clean it is.
 
 <!-- stage: insight -->
-### Separate The Container From The Answer
+### Separate Storage From Logical Output
 
 Two different things are easy to confuse here. The array is a physical container with a fixed length. The answer is a logical result that occupies some part of it. After an in-place filter, the logical result is the first `k` slots and nothing else, and the method's return value tells you `k`.
 
@@ -50,12 +50,12 @@ The cost counted against a solution is its **auxiliary space**, the extra workin
 The invariant that keeps an in-place rewrite safe is that every write must not destroy a value a later read still needs. The filter above is safe because `write` never passes `read`, so a slot is overwritten only after its original value has been read.
 
 <!-- stage: variables -->
-### Reference, Container And Boundary
+### Track Reference Storage And Boundary
 
 Three things deserve names. The reference is the variable that points at the array, and two variables can point at the same one. The container is the array object itself with its fixed length. The boundary `k` is the count of meaningful slots, which in the filter equals `write` at the end. When a method may mutate, the contract must name `k` and say what the suffix holds, which is normally "unspecified", and the caller must never read it.
 
 <!-- stage: trace -->
-### Filtering The Four Readings
+### Filter Four Readings In Place
 
 Run the filter on `[3, 2, 2, 3]` with target 3. The read index starts at slot 0, which holds a 3, so it is skipped and nothing is written. At slot 1 the value 2 is kept and copied to slot 0, which turns the array into `[2, 2, 2, 3]`. At slot 2 the next 2 is copied to slot 1, and the array does not visibly change because it was already a 2. At slot 3 the value 3 is skipped.
 
@@ -66,7 +66,7 @@ When the loop ends, `write` is 2, so the logical result is `[2, 2]`, the first t
 ```
 
 <!-- stage: code -->
-### Two Contracts, Two Methods
+### Match Code To Mutation Rules
 
 ```java
 // Contract A: input may be overwritten. Meaningful result is nums[0..k-1], suffix unspecified.
@@ -92,7 +92,7 @@ static int[] removeValueCopy(int[] nums, int target) {
 The first method is O(n) time and O(1) auxiliary space and gives up the original data. The second is O(n) time, makes two passes so the result has the exact length, and uses O(n) space for the answer it was required to return. Neither performs extra work for the other's contract, and picking the wrong one for the stated promise is a correctness error, not a style choice.
 
 <!-- stage: applicability -->
-### Reading The Promise
+### Read Mutation Rules First
 
 Check the mutation contract before writing a single line of an array or string solution. The invariant to keep in mind is that every write preserves the data a later read still needs, and that nothing outside the stated meaningful range is ever read by the caller. If the statement says nothing about mutation, ask or state your assumption, and prefer to leave the input intact when the cost is small.
 

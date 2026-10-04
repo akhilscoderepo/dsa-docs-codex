@@ -1,15 +1,24 @@
 <!-- solutions-for: 04-input-guarantees -->
 ### Input Guarantees
 
-#### Solution: [Build] Non-Empty Maximum (Author exercise)
+#### Solution: Non-Empty Maximum
 <!-- id: pc-non-empty-maximum -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Approach.** The contract promises at least one element, so `nums[0]` is a real member of the input and a safe starting point. Starting from zero assumes zero is below every value, which fails on `[-8,-3]`, where it returns 0 instead of -3. An empty-array guard would be dead code under this contract, and its presence would suggest a promise that the problem never made.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time, O(1) extra space.
+The contract promises at least one element, so `nums[0]` is a real member of the input and a safe starting point. Starting from zero assumes zero is below every value, which fails on `[-8,-3]`, where it returns 0 instead of -3. An empty-array guard would be dead code under this contract, and its presence would suggest a promise that the problem never made.
+
+##### Complexity Analysis
+
+O(n) time, O(1) extra space.
 
 ```java run
 public final class NonEmptyMaximum {
+    // Algorithm: The contract promises at least one element, so nums[0] is a real member of the input
+    //   and a safe starting point.
+    // Complexity: O(n) time, O(1) extra space.
     static int maxNonEmpty(int[] nums) {
         int best = nums[0];
         for (int i = 1; i < nums.length; i++) best = Math.max(best, nums[i]);
@@ -30,17 +39,25 @@ public final class NonEmptyMaximum {
 }
 ```
 
-#### Solution: [Vary] Possibly Empty (Author exercise)
+#### Solution: Possibly Empty
 <!-- id: pc-possibly-empty -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Approach.** Pick the optional-result design. `OptionalInt` makes absence part of the type, so a caller must decide what to do with it. A sentinel such as `Integer.MIN_VALUE` would collide with a legal answer when the range may contain that value, and any integer in `-10^9..10^9` can be a legal maximum, so no safe sentinel exists unless the range excludes one. The signature returns the optional, the documentation says "empty when the array is empty", and nothing else is invented.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time, O(1) extra space.
+Pick the optional-result design. `OptionalInt` makes absence part of the type, so a caller must decide what to do with it. A sentinel such as `Integer.MIN_VALUE` would collide with a legal answer when the range may contain that value, and any integer in `-10^9..10^9` can be a legal maximum, so no safe sentinel exists unless the range excludes one. The signature returns the optional, the documentation says "empty when the array is empty", and nothing else is invented.
+
+##### Complexity Analysis
+
+O(n) time, O(1) extra space.
 
 ```java run
 import java.util.OptionalInt;
 
 public final class PossiblyEmpty {
+    // Algorithm: Pick the optional-result design.
+    // Complexity: O(n) time, O(1) extra space.
     static OptionalInt maxOrNone(int[] nums) {
         if (nums.length == 0) return OptionalInt.empty();
         int best = nums[0];
@@ -56,15 +73,23 @@ public final class PossiblyEmpty {
 }
 ```
 
-#### Solution: [Boundary] Rectangular Or Ragged (Author exercise)
+#### Solution: Rectangular Or Ragged
 <!-- id: pc-rectangular-or-ragged -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Approach.** `grid[0].length` measures only the first row. When rows can differ it overruns a shorter row with an `ArrayIndexOutOfBoundsException`, or it silently skips cells in a longer one. The safe bound is each row's own length, `grid[r].length`, evaluated inside the outer loop. That form is correct for rectangular grids too, so it costs nothing to use when the shape is unclear.
+##### Algorithmic Solution
 
-**Complexity.** O(total cells) time and O(1) extra space.
+`grid[0].length` measures only the first row. When rows can differ it overruns a shorter row with an `ArrayIndexOutOfBoundsException`, or it silently skips cells in a longer one. The safe bound is each row's own length, `grid[r].length`, evaluated inside the outer loop. That form is correct for rectangular grids too, so it costs nothing to use when the shape is unclear.
+
+##### Complexity Analysis
+
+O(total cells) time and O(1) extra space.
 
 ```java run
 public final class RectangularOrRagged {
+    // Algorithm: grid[0].length measures only the first row.
+    // Complexity: O(total cells) time and O(1) extra space.
     static int cellsSafe(int[][] grid) {
         int count = 0;
         for (int r = 0; r < grid.length; r++)
@@ -91,15 +116,24 @@ public final class RectangularOrRagged {
 }
 ```
 
-#### Solution: [Recognize] Sorted Promise (Author exercise)
+#### Solution: Sorted Promise
 <!-- id: pc-sorted-promise -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Approach.** Sorted order means equal values are neighbors, so a new value has started exactly when the current element differs from the previous one. Count 1 for the first element and then one more at every position where `nums[i] != nums[i - 1]`. This relies on the sorted guarantee and never checks it. On an unsorted array the same loop would count runs, not distinct values, and `[1,2,1]` would be wrong.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time, O(1) extra space.
+Sorted order means equal values are neighbors, so a new value has started exactly when the current element differs from the previous one. Count 1 for the first element and then one more at every position where `nums[i] != nums[i - 1]`. This relies on the sorted guarantee and never checks it. On an unsorted array the same loop would count runs, not distinct values, and `[1,2,1]` would be wrong.
+
+##### Complexity Analysis
+
+O(n) time, O(1) extra space.
 
 ```java run
 public final class SortedPromise {
+    // Algorithm: Sorted order means equal values are neighbors, so a new value has started exactly
+    //   when the current element differs from the previous one.
+    // Complexity: O(n) time, O(1) extra space.
     static int distinctInSorted(int[] nums) {
         if (nums.length == 0) return 0;
         int distinct = 1;

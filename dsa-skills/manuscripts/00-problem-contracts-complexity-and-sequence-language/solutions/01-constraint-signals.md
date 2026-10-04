@@ -1,15 +1,26 @@
 <!-- solutions-for: 01-constraint-signals -->
 ### Constraint Signals
 
-#### Solution: [Build] Budget Check (Author exercise)
+#### Solution: Budget Check
 <!-- id: pc-budget-check -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Approach.** At `n = 100_000` a single scan takes about 100,000 steps, a sort followed by a scan takes about `n * 17`, which is 1.7 million, and all pairs takes `n * (n - 1) / 2`, which is 4,999,950,000. Against a budget of 10^8, the first two are comfortably plausible and the third is about fifty times over. The code below states the budget and checks each claim, so the verdict is an assertion rather than a feeling.
+##### Algorithmic Solution
 
-**Complexity.** The estimate itself is O(1). The plans it judges are O(n), O(n log n) and O(n^2) respectively.
+At `n = 100_000` a single scan takes about 100,000 steps, a sort followed by a scan takes about `n * 17`, which is 1.7 million, and all pairs takes `n * (n - 1) / 2`, which is 4,999,950,000. Against a budget of 10^8, the first two are comfortably plausible and the third is about fifty times over. The code below states the budget and checks each claim, so the verdict is an assertion rather than a feeling.
+
+##### Complexity Analysis
+
+The estimate itself is O(1). The plans it judges are O(n), O(n log n) and O(n^2) respectively.
 
 ```java run
 public final class BudgetCheck {
+    // Algorithm: At n = 100_000 a single scan takes about 100,000 steps, a sort followed by a scan
+    //   takes about n * 17, which is 1.7 million, and all pairs takes n * (n - 1) / 2, which is
+    //   4,999,950,000.
+    // Complexity: The estimate itself is O(1). The plans it judges are O(n), O(n log n) and O(n^2)
+    //   respectively.
     static final long BUDGET = 100_000_000L;
 
     static long scan(long n) { return n; }
@@ -27,15 +38,26 @@ public final class BudgetCheck {
 }
 ```
 
-#### Solution: [Vary] Small Domain (Author exercise)
+#### Solution: Small Domain
 <!-- id: pc-small-domain -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Approach.** A value-indexed table has one slot per possible value, so its size is the size of the value range and has nothing to do with `n`. Values in `0..100` need 101 four-byte counters, which is 404 bytes. Values in `0..1_000_000_000` would need a billion and one counters, about four gigabytes. The size limit is identical in both cases, and the value limit is what changes the decision.
+##### Algorithmic Solution
 
-**Complexity.** Building the counts is O(n) time. The table costs O(V) space, where V is the number of distinct possible values, so 101 slots in the first case and about 10^9 slots in the second.
+A value-indexed table has one slot per possible value, so its size is the size of the value range and has nothing to do with `n`. Values in `0..100` need 101 four-byte counters, which is 404 bytes. Values in `0..1_000_000_000` would need a billion and one counters, about four gigabytes. The size limit is identical in both cases, and the value limit is what changes the decision.
+
+##### Complexity Analysis
+
+Building the counts is O(n) time. The table costs O(V) space, where V is the number of distinct possible values, so 101 slots in the first case and about 10^9 slots in the second.
 
 ```java run
 public final class SmallDomain {
+    // Algorithm: A value-indexed table has one slot per possible value, so its size is the size of the
+    //   value range and has nothing to do with n.
+    // Complexity: Building the counts is O(n) time. The table costs O(V) space, where V is the number
+    //   of distinct possible values, so 101 slots in the first case and about 10^9 slots in the
+    //   second.
     static long tableBytes(long maxValue) { return (maxValue + 1) * 4L; }
 
     static int[] countSmall(int[] nums) {
@@ -53,15 +75,23 @@ public final class SmallDomain {
 }
 ```
 
-#### Solution: [Boundary] Hidden Overflow (Author exercise)
+#### Solution: Hidden Overflow
 <!-- id: pc-hidden-overflow -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Approach.** The largest possible sum is `100_000 * 1_000_000_000`, which is 10^14. The `int` ceiling is 2,147,483,647, so the sum cannot be trusted to an `int`, and the accumulator must be a `long`, which holds values up to about 9.2 * 10^18. The hostile input is one hundred thousand copies of the largest legal value. A small sample like `[5, 7, 9]` passes either way, which is why the limit must be read rather than tested.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time and O(1) extra space. Widening the accumulator costs nothing extra.
+The largest possible sum is `100_000 * 1_000_000_000`, which is 10^14. The `int` ceiling is 2,147,483,647, so the sum cannot be trusted to an `int`, and the accumulator must be a `long`, which holds values up to about 9.2 * 10^18. The hostile input is one hundred thousand copies of the largest legal value. A small sample like `[5, 7, 9]` passes either way, which is why the limit must be read rather than tested.
+
+##### Complexity Analysis
+
+O(n) time and O(1) extra space. Widening the accumulator costs nothing extra.
 
 ```java run
 public final class HiddenOverflow {
+    // Algorithm: The largest possible sum is 100_000 * 1_000_000_000, which is 10^14.
+    // Complexity: O(n) time and O(1) extra space. Widening the accumulator costs nothing extra.
     static int sumAsInt(int[] nums) { int s = 0; for (int v : nums) s += v; return s; }
     static long sumAsLong(int[] nums) { long s = 0; for (int v : nums) s += v; return s; }
 
@@ -77,15 +107,25 @@ public final class HiddenOverflow {
 }
 ```
 
-#### Solution: [Recognize] Query Pressure (Author exercise)
+#### Solution: Query Pressure
 <!-- id: pc-query-pressure -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Approach.** One range-sum query by a plain loop costs at most `n = 100_000` steps, which is far below the budget. One hundred thousand such queries cost up to `100_000 * 100_000 = 10^10` steps, which is a hundred times the budget. The array did not change and neither did its size. Only the operation count changed, so a design that spends time up front to make each query cheap becomes necessary. The prefix-sum chapter provides that design, and this exercise only decides that one is needed.
+##### Algorithmic Solution
 
-**Complexity.** Looping per query is O(n) per query, so O(n * q) in total. The estimate itself is O(1).
+One range-sum query by a plain loop costs at most `n = 100_000` steps, which is far below the budget. One hundred thousand such queries cost up to `100_000 * 100_000 = 10^10` steps, which is a hundred times the budget. The array did not change and neither did its size. Only the operation count changed, so a design that spends time up front to make each query cheap becomes necessary. The prefix-sum chapter provides that design, and this exercise only decides that one is needed.
+
+##### Complexity Analysis
+
+Looping per query is O(n) per query, so O(n * q) in total. The estimate itself is O(1).
 
 ```java run
 public final class QueryPressure {
+    // Algorithm: One range-sum query by a plain loop costs at most n = 100_000 steps, which is far
+    //   below the budget.
+    // Complexity: Looping per query is O(n) per query, so O(n * q) in total. The estimate itself is
+    //   O(1).
     static final long BUDGET = 100_000_000L;
     static long loopCost(long n, long queries) { return n * queries; }
 

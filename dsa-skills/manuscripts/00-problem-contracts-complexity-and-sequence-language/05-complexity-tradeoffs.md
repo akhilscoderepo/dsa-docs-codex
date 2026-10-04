@@ -109,70 +109,126 @@ Java adds hidden costs that loop counting misses. A library call inside a loop, 
 <!-- stage: exercises -->
 ### Exercises
 
-#### [Build] Consecutive Loops (Author exercise)
+#### Consecutive Loops
 <!-- id: pc-consecutive-loops -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** Counting loop executions as in this lesson.
+##### Problem Statement
 
-**Problem.** Determine the time cost of scanning an `n`-element array twice in a row. Explain why `O(n) + O(n)` simplifies to `O(n)` and why the two scans do not multiply.
+Determine the time cost of scanning an `n`-element array twice in a row. Explain why `O(n) + O(n)` simplifies to `O(n)` and why the two scans do not multiply.
 
-**Constraints.** `1 <= n <= 10^5`. The two scans are sequential, and neither is nested inside the other.
+##### Constraints
+
+`1 <= n <= 10^5`. The two scans are sequential, and neither is nested inside the other.
+
+##### Examples
 
 **Example 1.** Input `n = 10`, output 20 loop-body executions, which is O(n).
 
 **Example 2.** Input `n = 1`, output 2 executions, so a constant factor of two persists even on the smallest input.
 
-**Hint.** Do the executions of the second loop depend on how many times the first loop ran? What does a constant factor do to growth as `n` doubles?
+##### Prerequisites
 
-**Changed decision.** First rung: separates adding sequential work from multiplying nested work.
+Counting loop executions as in this lesson.
 
-#### [Vary] Triangular Work (Author exercise)
+##### Hint
+
+Do the executions of the second loop depend on how many times the first loop ran? What does a constant factor do to growth as `n` doubles?
+
+##### Learning Objective
+
+First rung: separates adding sequential work from multiplying nested work.
+
+#### Triangular Work
 <!-- id: pc-triangular-work -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The consecutive-loops exercise above.
+##### Problem Statement
 
-**Problem.** Count the iterations of `for (i = 0; i < n; i++) for (j = i + 1; j < n; j++)`. Derive the formula `n(n-1)/2` and classify the loop pair as O(n^2).
+Count the iterations of `for (i = 0; i < n; i++) for (j = i + 1; j < n; j++)`. Derive the formula `n(n-1)/2` and classify the loop pair as O(n^2).
 
-**Constraints.** `0 <= n <= 10^5`. The inner loop starts at `i + 1`, so it shrinks as `i` grows.
+##### Constraints
+
+`0 <= n <= 10^5`. The inner loop starts at `i + 1`, so it shrinks as `i` grows.
+
+##### Examples
 
 **Example 1.** Input `n = 5`, output 10 iterations.
 
 **Example 2.** Input `n = 1`, output 0 iterations, because the inner loop never runs.
 
-**Hint.** Add up how many inner iterations happen for `i = 0`, then for `i = 1`, and so on. What does `1 + 2 + ... + (n-1)` equal?
+##### Prerequisites
 
-**Changed decision.** The inner bound now depends on the outer index, so the total is a sum and not a simple product.
+The consecutive-loops exercise above.
 
-#### [Boundary] Two Dimensions (Author exercise)
+##### Hint
+
+Add up how many inner iterations happen for `i = 0`, then for `i = 1`, and so on. What does `1 + 2 + ... + (n-1)` equal?
+
+##### Learning Objective
+
+The inner bound now depends on the outer index, so the total is a sum and not a simple product.
+
+#### Two Dimensions
 <!-- id: pc-two-dimensions -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The two exercises above.
+##### Problem Statement
 
-**Problem.** A grid has `rows` and `cols`. State the traversal time as `O(rows * cols)` rather than silently calling both dimensions `n`, and show one input where calling it O(n^2) overstates the cost badly.
+A grid has `rows` and `cols`. State the traversal time as `O(rows * cols)` rather than silently calling both dimensions `n`, and show one input where calling it O(n^2) overstates the cost badly.
 
-**Constraints.** `1 <= rows, cols <= 10^5`, with `rows * cols <= 10^6`. Visit every cell exactly once.
+##### Constraints
+
+`1 <= rows, cols <= 10^5`, with `rows * cols <= 10^6`. Visit every cell exactly once.
+
+##### Examples
 
 **Example 1.** Input `rows = 3, cols = 4`, output 12 visits.
 
 **Example 2.** Input `rows = 1000, cols = 2`, output 2,000 visits, whereas treating the larger dimension as `n` and claiming O(n^2) would suggest 1,000,000.
 
-**Hint.** If one dimension is tiny, what does the product look like? What would you write for a grid that is a single row?
+##### Prerequisites
 
-**Changed decision.** A second size variable appears, and the bound must keep both instead of merging them.
+The two exercises above.
 
-#### [Recognize] Sort Then Scan (Author exercise)
+##### Hint
+
+If one dimension is tiny, what does the product look like? What would you write for a grid that is a single row?
+
+##### Learning Objective
+
+A second size variable appears, and the bound must keep both instead of merging them.
+
+#### Sort Then Scan
 <!-- id: pc-sort-then-scan -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** All three exercises above.
+##### Problem Statement
 
-**Problem.** To detect whether an array contains a duplicate, compare O(n^2) all-pairs work with O(n log n) sorting followed by one O(n) scan of neighbors. State the tradeoff in full: the lower time, the changed order, and the copy or mutation needed to keep the original intact.
+To detect whether an array contains a duplicate, compare O(n^2) all-pairs work with O(n log n) sorting followed by one O(n) scan of neighbors. State the tradeoff in full: the lower time, the changed order, and the copy or mutation needed to keep the original intact.
 
-**Constraints.** `1 <= n <= 10^5`. Sorting a copy costs O(n) extra space, while sorting in place destroys the original order.
+##### Constraints
+
+`1 <= n <= 10^5`. Sorting a copy costs O(n) extra space, while sorting in place destroys the original order.
+
+##### Examples
 
 **Example 1.** Input `[4,1,3,1]`, output true, because the sorted copy `[1,1,3,4]` has equal neighbors.
 
 **Example 2.** Input `[4,1,3,2]`, output false, since the sorted neighbors are all different.
 
-**Hint.** After sorting, where must two equal values be? What do you give up by sorting, and how could you avoid giving up the original order?
+##### Prerequisites
 
-**Changed decision.** The algorithm swaps one resource for another: it spends time on ordering to remove an entire nested loop, and it pays with a changed or copied array.
+All three exercises above.
+
+##### Hint
+
+After sorting, where must two equal values be? What do you give up by sorting, and how could you avoid giving up the original order?
+
+##### Learning Objective
+
+The algorithm swaps one resource for another: it spends time on ordering to remove an entire nested loop, and it pays with a changed or copied array.

@@ -100,70 +100,126 @@ Java gives mild support for the contiguous case and none for the others. `String
 <!-- stage: exercises -->
 ### Exercises
 
-#### [Build] Classify [2,4] (Author exercise)
+#### Classify [2,4]
 <!-- id: pc-classify-2-4 -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The position rules for subarray, subsequence and subset in this lesson.
+##### Problem Statement
 
-**Problem.** For `nums = [1,2,3,4]`, decide whether `[2,4]` is a subarray, a subsequence and a subset. Justify each answer from the positions of the values in the original array, and not from how the values look.
+For `nums = [1,2,3,4]`, decide whether `[2,4]` is a subarray, a subsequence and a subset. Justify each answer from the positions of the values in the original array, and not from how the values look.
 
-**Constraints.** The array holds distinct values, so each value has one position. Treat the empty selection as out of scope for this exercise.
+##### Constraints
+
+The array holds distinct values, so each value has one position. Treat the empty selection as out of scope for this exercise.
+
+##### Examples
 
 **Example 1.** Input `nums = [1,2,3,4]` and candidate `[2,4]`, output not a subarray, yes a subsequence and yes a subset.
 
 **Example 2.** Input `nums = [1,2,3,4]` and candidate `[2,3]`, output yes for all three, because positions 1 and 2 are consecutive.
 
-**Hint.** Write down the position of each candidate value. Are the positions consecutive, merely increasing, or neither?
+##### Prerequisites
 
-**Changed decision.** First rung: replaces an impression of similarity with a test on positions.
+The position rules for subarray, subsequence and subset in this lesson.
 
-#### [Vary] Order Matters (Author exercise)
+##### Hint
+
+Write down the position of each candidate value. Are the positions consecutive, merely increasing, or neither?
+
+##### Learning Objective
+
+First rung: replaces an impression of similarity with a test on positions.
+
+#### Order Matters
 <!-- id: pc-order-matters -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The classification exercise above.
+##### Problem Statement
 
-**Problem.** For the same input `nums = [1,2,3,4]`, classify the candidate `[4,2]`. State the single changed decision compared with `[2,4]`, which is whether the original relative order must be preserved.
+For the same input `nums = [1,2,3,4]`, classify the candidate `[4,2]`. State the single changed decision compared with `[2,4]`, which is whether the original relative order must be preserved.
 
-**Constraints.** The values are distinct. A subset is judged by membership alone, with no promise about order.
+##### Constraints
+
+The values are distinct. A subset is judged by membership alone, with no promise about order.
+
+##### Examples
 
 **Example 1.** Input `nums = [1,2,3,4]` and candidate `[4,2]`, output not a subarray, not a subsequence, yes a subset.
 
 **Example 2.** Input `nums = [1,2,3,4]` and candidate `[1,2,3,4]`, output yes for all three, since the candidate is the whole array.
 
-**Hint.** What happens to the positions when you list 4 before 2? Which of the three rules cares about the direction of the positions?
+##### Prerequisites
 
-**Changed decision.** The candidate's order flips, so the test moves from checking gaps to checking direction.
+The classification exercise above.
 
-#### [Boundary] Empty Choice (Author exercise)
+##### Hint
+
+What happens to the positions when you list 4 before 2? Which of the three rules cares about the direction of the positions?
+
+##### Learning Objective
+
+The candidate's order flips, so the test moves from checking gaps to checking direction.
+
+#### Empty Choice
 <!-- id: pc-empty-choice -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The two exercises above.
+##### Problem Statement
 
-**Problem.** A statement asks for the maximum sum of a subarray of `nums = [-8,-3,-6]`. Decide whether the empty subarray is legal only after reading the contract, and show how the answer differs when the empty choice is allowed and when it is forbidden.
+A statement asks for the maximum sum of a subarray of `nums = [-8,-3,-6]`. Decide whether the empty subarray is legal only after reading the contract, and show how the answer differs when the empty choice is allowed and when it is forbidden.
 
-**Constraints.** `1 <= nums.length <= 10^5` and `-10^4 <= nums[i] <= 10^4`. The statement must say whether the result may be empty. Do not assume a convention.
+##### Constraints
+
+`1 <= nums.length <= 10^5` and `-10^4 <= nums[i] <= 10^4`. The statement must say whether the result may be empty. Do not assume a convention.
+
+##### Examples
 
 **Example 1.** Input `nums = [-8,-3,-6]` with a non-empty requirement, output -3, the best single reading.
 
 **Example 2.** Input `nums = [-8,-3,-6]` with the empty choice allowed, output 0, the sum of choosing nothing.
 
-**Hint.** What is the sum of an empty block, and does the contract say such a block counts? Which answer would an all-negative array expose if you guessed wrongly?
+##### Prerequisites
 
-**Changed decision.** The legal set of candidates changes by one element, the empty selection, and that one element flips the answer.
+The two exercises above.
 
-#### [Recognize] Contiguous Maximum (Author exercise)
+##### Hint
+
+What is the sum of an empty block, and does the contract say such a block counts? Which answer would an all-negative array expose if you guessed wrongly?
+
+##### Learning Objective
+
+The legal set of candidates changes by one element, the empty selection, and that one element flips the answer.
+
+#### Contiguous Maximum
 <!-- id: pc-contiguous-maximum -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** All three exercises above.
+##### Problem Statement
 
-**Problem.** For `nums = [5,-10,4]`, compute the maximum sum of a non-empty subarray and the maximum sum of a non-empty subsequence. Explain why a subarray cannot skip a negative middle value while a subsequence can. The algorithm for the contiguous case belongs to Chapter 01.
+For `nums = [5,-10,4]`, compute the maximum sum of a non-empty subarray and the maximum sum of a non-empty subsequence. Explain why a subarray cannot skip a negative middle value while a subsequence can. The algorithm for the contiguous case belongs to Chapter 01.
 
-**Constraints.** `1 <= nums.length <= 20`, small enough to enumerate every candidate by brute force.
+##### Constraints
+
+`1 <= nums.length <= 20`, small enough to enumerate every candidate by brute force.
+
+##### Examples
 
 **Example 1.** Input `nums = [5,-10,4]` as a subarray question, output 5.
 
 **Example 2.** Input `nums = [5,-10,4]` as a subsequence question, output 9, from positions 0 and 2.
 
-**Hint.** Which blocks of consecutive positions contain both the 5 and the 4? What do they also contain?
+##### Prerequisites
 
-**Changed decision.** The same data and the same sum objective give two answers because the position rule changes.
+All three exercises above.
+
+##### Hint
+
+Which blocks of consecutive positions contain both the 5 and the 4? What do they also contain?
+
+##### Learning Objective
+
+The same data and the same sum objective give two answers because the position rule changes.

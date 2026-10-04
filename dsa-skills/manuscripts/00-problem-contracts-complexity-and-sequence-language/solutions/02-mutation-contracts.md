@@ -1,17 +1,26 @@
 <!-- solutions-for: 02-mutation-contracts -->
 ### Mutation Contracts
 
-#### Solution: [Build] Meaningful Prefix (Author exercise)
+#### Solution: Meaningful Prefix
 <!-- id: pc-meaningful-prefix -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Approach.** The guarantee is that `nums[0..k-1]` holds the kept values in their original order, and nothing else is promised. The slots from `k` onward hold whatever the rewrite left behind, so they are unspecified and the caller must never read them as data. The array's own `length` stays 4, which says nothing about the answer, so the returned `k` is the only boundary. When every element is removed, `k = 0` and the entire array is unspecified.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time, O(1) auxiliary space.
+The guarantee is that `nums[0..k-1]` holds the kept values in their original order, and nothing else is promised. The slots from `k` onward hold whatever the rewrite left behind, so they are unspecified and the caller must never read them as data. The array's own `length` stays 4, which says nothing about the answer, so the returned `k` is the only boundary. When every element is removed, `k = 0` and the entire array is unspecified.
+
+##### Complexity Analysis
+
+O(n) time, O(1) auxiliary space.
 
 ```java run
 import java.util.Arrays;
 
 public final class MeaningfulPrefix {
+    // Algorithm: The guarantee is that nums[0..k-1] holds the kept values in their original order, and
+    //   nothing else is promised.
+    // Complexity: O(n) time, O(1) auxiliary space.
     static int removeValue(int[] nums, int target) {
         int write = 0;
         for (int read = 0; read < nums.length; read++) {
@@ -33,17 +42,27 @@ public final class MeaningfulPrefix {
 }
 ```
 
-#### Solution: [Vary] Preserve Input (Author exercise)
+#### Solution: Preserve Input
 <!-- id: pc-preserve-input -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Approach.** Under a no-mutation contract, build a fresh array of the kept values and never write into `nums`. Returning correct numbers is not enough, because the caller holds the original array and relies on it staying whole. Any other design silently changes data the caller still owns. When the contract is permissive, rewriting in place is valid and saves O(n) memory, so the design follows from the contract and not from habit.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time and O(n) space for the returned array. The in-place variant is O(n) time and O(1) auxiliary space.
+Under a no-mutation contract, build a fresh array of the kept values and never write into `nums`. Returning correct numbers is not enough, because the caller holds the original array and relies on it staying whole. Any other design silently changes data the caller still owns. When the contract is permissive, rewriting in place is valid and saves O(n) memory, so the design follows from the contract and not from habit.
+
+##### Complexity Analysis
+
+O(n) time and O(n) space for the returned array. The in-place variant is O(n) time and O(1) auxiliary space.
 
 ```java run
 import java.util.Arrays;
 
 public final class PreserveInput {
+    // Algorithm: Under a no-mutation contract, build a fresh array of the kept values and never write
+    //   into nums.
+    // Complexity: O(n) time and O(n) space for the returned array. The in-place variant is O(n) time
+    //   and O(1) auxiliary space.
     static int[] withoutValue(int[] nums, int target) {
         int kept = 0;
         for (int v : nums) if (v != target) kept++;
@@ -64,17 +83,26 @@ public final class PreserveInput {
 }
 ```
 
-#### Solution: [Boundary] Aliased Input (Author exercise)
+#### Solution: Aliased Input
 <!-- id: pc-aliased-input -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Approach.** The assignment `b = a` copies the reference, not the array, so there is one array object and two names for it. A write through either name is visible through the other. If the two views must stay independent, take a copy before the call, for example `int[] b = a.clone()`, which allocates a second array and copies the elements. For an array of primitives this copy is complete, whereas an array of arrays would need a deeper copy.
+##### Algorithmic Solution
 
-**Complexity.** Cloning is O(n) time and O(n) space. Reading or writing through a reference is O(1).
+The assignment `b = a` copies the reference, not the array, so there is one array object and two names for it. A write through either name is visible through the other. If the two views must stay independent, take a copy before the call, for example `int[] b = a.clone()`, which allocates a second array and copies the elements. For an array of primitives this copy is complete, whereas an array of arrays would need a deeper copy.
+
+##### Complexity Analysis
+
+Cloning is O(n) time and O(n) space. Reading or writing through a reference is O(1).
 
 ```java run
 import java.util.Arrays;
 
 public final class AliasedInput {
+    // Algorithm: The assignment b = a copies the reference, not the array, so there is one array
+    //   object and two names for it.
+    // Complexity: Cloning is O(n) time and O(n) space. Reading or writing through a reference is O(1).
     static void setFirst(int[] arr, int value) { arr[0] = value; }
 
     public static void main(String[] args) {
@@ -92,15 +120,25 @@ public final class AliasedInput {
 }
 ```
 
-#### Solution: [Recognize] Output Space (Author exercise)
+#### Solution: Output Space
 <!-- id: pc-output-space -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Approach.** A method that must hand back `n` values cannot do it with less than O(n) memory of any kind, because the result itself has that size. Convention one counts everything, so the total is O(n). Convention two charges only auxiliary space, the working memory beyond the input and the required output, so the same method is O(1) because it adds only a few scalars. A solution description should say which convention it uses, since an interviewer asking for O(1) space almost always means the second.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time, O(n) total space counting the result, and O(1) auxiliary space excluding it.
+A method that must hand back `n` values cannot do it with less than O(n) memory of any kind, because the result itself has that size. Convention one counts everything, so the total is O(n). Convention two charges only auxiliary space, the working memory beyond the input and the required output, so the same method is O(1) because it adds only a few scalars. A solution description should say which convention it uses, since an interviewer asking for O(1) space almost always means the second.
+
+##### Complexity Analysis
+
+O(n) time, O(n) total space counting the result, and O(1) auxiliary space excluding it.
 
 ```java run
 public final class OutputSpace {
+    // Algorithm: A method that must hand back n values cannot do it with less than O(n) memory of any
+    //   kind, because the result itself has that size.
+    // Complexity: O(n) time, O(n) total space counting the result, and O(1) auxiliary space excluding
+    //   it.
     static int[] doubled(int[] nums) {
         int[] out = new int[nums.length];   // required output: O(n), not auxiliary
         for (int i = 0; i < nums.length; i++) out[i] = nums[i] * 2;   // only scalar working state

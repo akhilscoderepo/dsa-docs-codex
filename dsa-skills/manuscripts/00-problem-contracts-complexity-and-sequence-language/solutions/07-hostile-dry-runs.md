@@ -1,15 +1,24 @@
 <!-- solutions-for: 07-hostile-dry-runs -->
 ### Hostile Dry Runs
 
-#### Solution: [Build] Singleton (Author exercise)
+#### Solution: Singleton
 <!-- id: pc-singleton -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Approach.** With one element the loop `for (i = 1; i < 1; ...)` never executes, so the result comes entirely from the initialization. The corrected method starts `best` at 1, because any non-empty list holds a climb of length one, and returns 1. The flawed version starts `best` at 0 and only updates it inside the loop, so it returns 0. The dry-run ledger therefore has a single row, the initial one, and that row already shows the wrong meaning for `best`.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time, O(1) space, and zero loop iterations for a single element.
+With one element the loop `for (i = 1; i < 1; ...)` never executes, so the result comes entirely from the initialization. The corrected method starts `best` at 1, because any non-empty list holds a climb of length one, and returns 1. The flawed version starts `best` at 0 and only updates it inside the loop, so it returns 0. The dry-run ledger therefore has a single row, the initial one, and that row already shows the wrong meaning for `best`.
+
+##### Complexity Analysis
+
+O(n) time, O(1) space, and zero loop iterations for a single element.
 
 ```java run
 public final class Singleton {
+    // Algorithm: With one element the loop for (i = 1; i < 1; ...) never executes, so the result comes
+    //   entirely from the initialization.
+    // Complexity: O(n) time, O(1) space, and zero loop iterations for a single element.
     static int fixed(int[] a) {
         if (a.length == 0) return 0;
         int best = 1, cur = 1;
@@ -34,15 +43,24 @@ public final class Singleton {
 }
 ```
 
-#### Solution: [Vary] All Equal (Author exercise)
+#### Solution: All Equal
 <!-- id: pc-all-equal -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Approach.** With a strict comparison, two equal neighbors do not extend a climb, so every day restarts at length 1 and the answer is 1. With a non-strict comparison, equal neighbors do extend the run, so the answer is 3. The values never differ, so this one input separates the two comparisons completely, and no input with distinct values could do so.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time and O(1) space for each version.
+With a strict comparison, two equal neighbors do not extend a climb, so every day restarts at length 1 and the answer is 1. With a non-strict comparison, equal neighbors do extend the run, so the answer is 3. The values never differ, so this one input separates the two comparisons completely, and no input with distinct values could do so.
+
+##### Complexity Analysis
+
+O(n) time and O(1) space for each version.
 
 ```java run
 public final class AllEqual {
+    // Algorithm: With a strict comparison, two equal neighbors do not extend a climb, so every day
+    //   restarts at length 1 and the answer is 1.
+    // Complexity: O(n) time and O(1) space for each version.
     static int run(int[] a, boolean strict) {
         if (a.length == 0) return 0;
         int best = 1, cur = 1;
@@ -64,15 +82,23 @@ public final class AllEqual {
 }
 ```
 
-#### Solution: [Boundary] Numeric Extremes (Author exercise)
+#### Solution: Numeric Extremes
 <!-- id: pc-numeric-extremes -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Approach.** The true sum is 2 * 2,147,483,647 = 4,294,967,294, which is above the `int` maximum. In two's-complement arithmetic the result wraps around to 4,294,967,294 - 2^32, which is -2. Predict that before running, then confirm it. The fix is a `long` accumulator, which holds 4,294,967,294 exactly. The attacker works because it sits at the extreme of the type, where the wrap-around is guaranteed.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time, O(1) space.
+The true sum is 2 * 2,147,483,647 = 4,294,967,294, which is above the `int` maximum. In two's-complement arithmetic the result wraps around to 4,294,967,294 - 2^32, which is -2. Predict that before running, then confirm it. The fix is a `long` accumulator, which holds 4,294,967,294 exactly. The attacker works because it sits at the extreme of the type, where the wrap-around is guaranteed.
+
+##### Complexity Analysis
+
+O(n) time, O(1) space.
 
 ```java run
 public final class NumericExtremes {
+    // Algorithm: The true sum is 2 * 2,147,483,647 = 4,294,967,294, which is above the int maximum.
+    // Complexity: O(n) time, O(1) space.
     static int sumInt(int[] a) { int s = 0; for (int v : a) s += v; return s; }
     static long sumLong(int[] a) { long s = 0; for (int v : a) s += v; return s; }
 
@@ -85,17 +111,27 @@ public final class NumericExtremes {
 }
 ```
 
-#### Solution: [Recognize] Mutation Order (Author exercise)
+#### Solution: Mutation Order
 <!-- id: pc-mutation-order -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Approach.** Copying left to right does `a[1] = a[0]`, which overwrites the old `a[1]` before it was read, then `a[2] = a[1]`, which copies the already overwritten value, and so on, so every slot ends up holding the first value. Copying right to left does `a[3] = a[2]`, `a[2] = a[1]`, `a[1] = a[0]`, and each write lands on a slot whose old value has already been moved. After the shift the insert writes 9 into slot 0. The general rule is to copy in the direction that keeps the destination behind the source. `System.arraycopy` handles overlapping ranges correctly, as its documentation states, so it is a safe shortcut.
+##### Algorithmic Solution
 
-**Complexity.** O(n) time for the shift, O(1) extra space.
+Copying left to right does `a[1] = a[0]`, which overwrites the old `a[1]` before it was read, then `a[2] = a[1]`, which copies the already overwritten value, and so on, so every slot ends up holding the first value. Copying right to left does `a[3] = a[2]`, `a[2] = a[1]`, `a[1] = a[0]`, and each write lands on a slot whose old value has already been moved. After the shift the insert writes 9 into slot 0. The general rule is to copy in the direction that keeps the destination behind the source. `System.arraycopy` handles overlapping ranges correctly, as its documentation states, so it is a safe shortcut.
+
+##### Complexity Analysis
+
+O(n) time for the shift, O(1) extra space.
 
 ```java run
 import java.util.Arrays;
 
 public final class MutationOrder {
+    // Algorithm: Copying left to right does a[1] = a[0], which overwrites the old a[1] before it was
+    //   read, then a[2] = a[1], which copies the already overwritten value, and so on, so every slot
+    //   ends up holding the first value.
+    // Complexity: O(n) time for the shift, O(1) extra space.
     static void shiftLeftToRight(int[] a, int live) { for (int i = 1; i <= live; i++) a[i] = a[i - 1]; }
     static void shiftRightToLeft(int[] a, int live) { for (int i = live; i >= 1; i--) a[i] = a[i - 1]; }
 

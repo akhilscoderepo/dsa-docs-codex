@@ -101,70 +101,126 @@ Java adds the overflow hazard already mentioned, plus the fact that boxed collec
 <!-- stage: exercises -->
 ### Exercises
 
-#### [Build] Budget Check (Author exercise)
+#### Budget Check
 <!-- id: pc-budget-check -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** Reading Big-O notation for simple loops; this lesson.
+##### Problem Statement
 
-**Problem.** A problem allows `1 <= n <= 100_000`. Classify each of three plans as plausible or implausible for an ordinary interview time limit: a single scan, a sort followed by a scan, and a comparison of every pair of elements. Support each answer with the step count at the maximum input.
+A problem allows `1 <= n <= 100_000`. Classify each of three plans as plausible or implausible for an ordinary interview time limit: a single scan, a sort followed by a scan, and a comparison of every pair of elements. Support each answer with the step count at the maximum input.
 
-**Constraints.** Use a budget of about 10^8 simple steps. Compute at `n = 100_000`, not at the sample size, and use `long` for any product.
+##### Constraints
+
+Use a budget of about 10^8 simple steps. Compute at `n = 100_000`, not at the sample size, and use `long` for any product.
+
+##### Examples
 
 **Example 1.** Input `n = 100000` with a single scan, output plausible, because the step count is about 10^5.
 
 **Example 2.** Input `n = 100000` with all pairs, output implausible, because the count is 4,999,950,000, roughly fifty times the budget.
 
-**Hint.** Do the estimate at the largest legal `n` and write the number out. Which two of the three plans land below 10^8, and which lands far above it?
+##### Prerequisites
 
-**Changed decision.** First rung of the ladder: replaces a feeling about speed with a computed step count at the maximum input.
+Reading Big-O notation for simple loops; this lesson.
 
-#### [Vary] Small Domain (Author exercise)
+##### Hint
+
+Do the estimate at the largest legal `n` and write the number out. Which two of the three plans land below 10^8, and which lands far above it?
+
+##### Learning Objective
+
+First rung of the ladder: replaces a feeling about speed with a computed step count at the maximum input.
+
+#### Small Domain
 <!-- id: pc-small-domain -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The budget check above.
+##### Problem Statement
 
-**Problem.** The limits are `1 <= n <= 100_000` and `0 <= nums[i] <= 100`. Explain why an auxiliary array of 101 counters is a reasonable plan here, and why the same plan is not reasonable when values can be any integer up to a billion. State the memory used in each case.
+The limits are `1 <= n <= 100_000` and `0 <= nums[i] <= 100`. Explain why an auxiliary array of 101 counters is a reasonable plan here, and why the same plan is not reasonable when values can be any integer up to a billion. State the memory used in each case.
 
-**Constraints.** Assume 4-byte `int` counters. Compare the 101-counter table against a table indexed directly by values up to 1,000,000,000.
+##### Constraints
+
+Assume 4-byte `int` counters. Compare the 101-counter table against a table indexed directly by values up to 1,000,000,000.
+
+##### Examples
 
 **Example 1.** Input values limited to `0..100`, output a 101-slot table of about 404 bytes, which is trivial.
 
 **Example 2.** Input values limited to `0..1_000_000_000`, output a table of about 4 gigabytes, which is not an acceptable plan.
 
-**Hint.** The size of a value-indexed table is the size of the value range, not the number of elements. Which signal in the statement is doing the work here, the size limit or the value limit?
+##### Prerequisites
 
-**Changed decision.** The signal changes from the input size to the value range, which decides whether a value-indexed table is affordable.
+The budget check above.
 
-#### [Boundary] Hidden Overflow (Author exercise)
+##### Hint
+
+The size of a value-indexed table is the size of the value range, not the number of elements. Which signal in the statement is doing the work here, the size limit or the value limit?
+
+##### Learning Objective
+
+The signal changes from the input size to the value range, which decides whether a value-indexed table is affordable.
+
+#### Hidden Overflow
 <!-- id: pc-hidden-overflow -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The two exercises above.
+##### Problem Statement
 
-**Problem.** The limits are `n = 100_000` and `|nums[i]| <= 1_000_000_000`. Decide whether the sum of the whole array always fits in a Java `int`. Name the hostile input that decides the question, and say which type the accumulator should use.
+The limits are `n = 100_000` and `|nums[i]| <= 1_000_000_000`. Decide whether the sum of the whole array always fits in a Java `int`. Name the hostile input that decides the question, and say which type the accumulator should use.
 
-**Constraints.** The largest `int` is 2,147,483,647. Consider the worst case, in which every element has the maximum legal magnitude.
+##### Constraints
+
+The largest `int` is 2,147,483,647. Consider the worst case, in which every element has the maximum legal magnitude.
+
+##### Examples
 
 **Example 1.** Input one hundred thousand copies of 1,000,000,000, output a sum of 100,000,000,000,000, which does not fit in an `int`.
 
 **Example 2.** Input `[5, 7, 9]`, output a sum of 21, which fits easily, so a passing small test proves nothing about the limit.
 
-**Hint.** Multiply the largest element by the largest count and compare the product with the `int` ceiling. Does the answer change if the values are mostly small but one hostile test uses the maximum?
+##### Prerequisites
 
-**Changed decision.** The question moves from running time to numeric range, so the constraint signal now decides the accumulator type.
+The two exercises above.
 
-#### [Recognize] Query Pressure (Author exercise)
+##### Hint
+
+Multiply the largest element by the largest count and compare the product with the `int` ceiling. Does the answer change if the values are mostly small but one hostile test uses the maximum?
+
+##### Learning Objective
+
+The question moves from running time to numeric range, so the constraint signal now decides the accumulator type.
+
+#### Query Pressure
 <!-- id: pc-query-pressure -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The budget check and the small-domain exercise.
+##### Problem Statement
 
-**Problem.** A fixed array of 100,000 values is queried for range sums. Compare two situations: one query, and one hundred thousand queries over the same unchanged array. State which plans are acceptable in each, and explain why the number of operations, rather than the word "array", changes the design. Do not implement the faster plan, since the prefix-sum chapter owns it.
+A fixed array of 100,000 values is queried for range sums. Compare two situations: one query, and one hundred thousand queries over the same unchanged array. State which plans are acceptable in each, and explain why the number of operations, rather than the word "array", changes the design. Do not implement the faster plan, since the prefix-sum chapter owns it.
 
-**Constraints.** `n = 100_000`, up to `q = 100_000` queries, each over an arbitrary range. Use the budget of about 10^8 steps.
+##### Constraints
+
+`n = 100_000`, up to `q = 100_000` queries, each over an arbitrary range. Use the budget of about 10^8 steps.
+
+##### Examples
 
 **Example 1.** Input one query, output that a direct loop of at most 100,000 steps is acceptable.
 
 **Example 2.** Input `q = 100000` queries, output that looping per query costs up to 10^10 steps in the worst case, so a smarter plan is required.
 
-**Hint.** Multiply the cost of one query by the number of queries. At what query count does the plain loop leave the budget?
+##### Prerequisites
 
-**Changed decision.** The signal changes from the size of the data to the number of operations asked about it.
+The budget check and the small-domain exercise.
+
+##### Hint
+
+Multiply the cost of one query by the number of queries. At what query count does the plain loop leave the budget?
+
+##### Learning Objective
+
+The signal changes from the size of the data to the number of operations asked about it.

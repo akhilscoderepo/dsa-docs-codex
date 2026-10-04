@@ -103,70 +103,126 @@ One more hazard sits in the language. Strings are immutable, so a method that ap
 <!-- stage: exercises -->
 ### Exercises
 
-#### [Build] Meaningful Prefix (Author exercise)
+#### Meaningful Prefix
 <!-- id: pc-meaningful-prefix -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The filter method in this lesson.
+##### Problem Statement
 
-**Problem.** Given `nums = [3,2,2,3]`, suppose a method removes the value 3 in place and returns `k = 2`. State exactly what is guaranteed about `nums[0..k-1]`, what is unspecified about `nums[k..]`, and what the caller must never do with the suffix.
+Given `nums = [3,2,2,3]`, suppose a method removes the value 3 in place and returns `k = 2`. State exactly what is guaranteed about `nums[0..k-1]`, what is unspecified about `nums[k..]`, and what the caller must never do with the suffix.
 
-**Constraints.** Java array length is fixed at creation. The method returns an `int` and may overwrite the input.
+##### Constraints
+
+Java array length is fixed at creation. The method returns an `int` and may overwrite the input.
+
+##### Examples
 
 **Example 1.** Input `nums = [3,2,2,3]` and target 3, output `k = 2` and a meaningful prefix of `[2,2]`.
 
 **Example 2.** Input `nums = [3,3]` and target 3, output `k = 0`, so there is no meaningful prefix at all and the whole array is unspecified.
 
-**Hint.** The return value is the only thing that says how much of the array counts as the answer. What does the array's own `length` tell you after the call?
+##### Prerequisites
 
-**Changed decision.** First rung: separates the physical array from the logical result and names the boundary `k`.
+The filter method in this lesson.
 
-#### [Vary] Preserve Input (Author exercise)
+##### Hint
+
+The return value is the only thing that says how much of the array counts as the answer. What does the array's own `length` tell you after the call?
+
+##### Learning Objective
+
+First rung: separates the physical array from the logical result and names the boundary `k`.
+
+#### Preserve Input
 <!-- id: pc-preserve-input -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The meaningful-prefix exercise above.
+##### Problem Statement
 
-**Problem.** A contract forbids modifying the input array. Choose between overwriting `nums` and allocating a new `result`, and explain why a method that returns correct values but leaves the input modified still violates the interface.
+A contract forbids modifying the input array. Choose between overwriting `nums` and allocating a new `result`, and explain why a method that returns correct values but leaves the input modified still violates the interface.
 
-**Constraints.** `1 <= nums.length <= 10^5`. Assume callers may keep using the original array after the call.
+##### Constraints
+
+`1 <= nums.length <= 10^5`. Assume callers may keep using the original array after the call.
+
+##### Examples
 
 **Example 1.** Input `nums = [4,1,4,2]` and target 4 under a no-mutation contract, output `[1,2]` with `nums` still equal to `[4,1,4,2]`.
 
 **Example 2.** Input the same call under a permissive contract, output that either design is valid, and the in-place one saves O(n) memory.
 
-**Hint.** Who else may hold a reference to the array? Which part of the interface does a hidden write break even when the returned numbers are right?
+##### Prerequisites
 
-**Changed decision.** The contract flips from permissive to restrictive, which flips the correct design from overwriting to allocating.
+The meaningful-prefix exercise above.
 
-#### [Boundary] Aliased Input (Author exercise)
+##### Hint
+
+Who else may hold a reference to the array? Which part of the interface does a hidden write break even when the returned numbers are right?
+
+##### Learning Objective
+
+The contract flips from permissive to restrictive, which flips the correct design from overwriting to allocating.
+
+#### Aliased Input
 <!-- id: pc-aliased-input -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The two exercises above.
+##### Problem Statement
 
-**Problem.** Two variables `a` and `b` refer to the same `int[]`. A method receives `a` and rewrites its contents in place. Trace why the change is visible through `b`, and state what a caller must do first if both views must remain independent.
+Two variables `a` and `b` refer to the same `int[]`. A method receives `a` and rewrites its contents in place. Trace why the change is visible through `b`, and state what a caller must do first if both views must remain independent.
 
-**Constraints.** `a` and `b` reference one array object. The method assigns into elements and never reassigns the parameter variable itself.
+##### Constraints
+
+`a` and `b` reference one array object. The method assigns into elements and never reassigns the parameter variable itself.
+
+##### Examples
 
 **Example 1.** Input `a = b = [1,2,3]` and a method that sets `a[0] = 9`, output that `b[0]` also reads 9.
 
 **Example 2.** Input `b = a.clone()` taken before the call, output that `b` still reads `[1,2,3]` after `a` changes.
 
-**Hint.** Is there one array or two? What does the assignment `b = a` copy, the contents or the reference?
+##### Prerequisites
 
-**Changed decision.** No algorithm changes. Only the caller-visible contract changes, from a private array to one shared with another reference.
+The two exercises above.
 
-#### [Recognize] Output Space (Author exercise)
+##### Hint
+
+Is there one array or two? What does the assignment `b = a` copy, the contents or the reference?
+
+##### Learning Objective
+
+No algorithm changes. Only the caller-visible contract changes, from a private array to one shared with another reference.
+
+#### Output Space
 <!-- id: pc-output-space -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** All three exercises above.
+##### Problem Statement
 
-**Problem.** A method must return an array of length `n` built from its input. Distinguish the O(n) returned output from additional working memory, and state both conventions explicitly: one in which the output counts as space and one in which only auxiliary space counts.
+A method must return an array of length `n` built from its input. Distinguish the O(n) returned output from additional working memory, and state both conventions explicitly: one in which the output counts as space and one in which only auxiliary space counts.
 
-**Constraints.** `1 <= n <= 10^5`. The method may allocate one result array and a constant number of scalar variables.
+##### Constraints
+
+`1 <= n <= 10^5`. The method may allocate one result array and a constant number of scalar variables.
+
+##### Examples
 
 **Example 1.** Input an array of length 5 and a method that fills a new array of length 5, output auxiliary space O(1) under the convention that the result is excluded.
 
 **Example 2.** Input the same method counted under the convention that includes the result, output total space O(n).
 
-**Hint.** If a method had to return `n` values, could it return them with less than O(n) memory of any kind? Which part of the O(n) did the problem statement demand?
+##### Prerequisites
 
-**Changed decision.** The question moves from whether the input may change to which storage is charged against the solution.
+All three exercises above.
+
+##### Hint
+
+If a method had to return `n` values, could it return them with less than O(n) memory of any kind? Which part of the O(n) did the problem statement demand?
+
+##### Learning Objective
+
+The question moves from whether the input may change to which storage is charged against the solution.

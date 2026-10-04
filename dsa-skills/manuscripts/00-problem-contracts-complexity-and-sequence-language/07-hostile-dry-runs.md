@@ -96,70 +96,126 @@ Java supplies several ready-made attackers. `Integer.MAX_VALUE` and `Integer.MIN
 <!-- stage: exercises -->
 ### Exercises
 
-#### [Build] Singleton (Author exercise)
+#### Singleton
 <!-- id: pc-singleton -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The variable ledger from this lesson.
+##### Problem Statement
 
-**Problem.** Dry-run the corrected `longestClimb` loop over `[7]`. Verify the initialization, the number of times the loop body executes, and the returned value, and say what the original flawed version would have returned.
+Dry-run the corrected `longestClimb` loop over `[7]`. Verify the initialization, the number of times the loop body executes, and the returned value, and say what the original flawed version would have returned.
 
-**Constraints.** The input has exactly one element. The method contract allows lengths from 0 to 10^5.
+##### Constraints
+
+The input has exactly one element. The method contract allows lengths from 0 to 10^5.
+
+##### Examples
 
 **Example 1.** Input `[7]`, output 1, with zero loop iterations.
 
 **Example 2.** Input `[7]` to the flawed version that starts `best` at 0, output 0, which shows the initialization bug.
 
-**Hint.** How many times does a loop that starts at index 1 run when the array has one element? Which line is responsible for the result in that case?
+##### Prerequisites
 
-**Changed decision.** First rung: the smallest legal input attacks initialization, since no loop iteration exists to repair it.
+The variable ledger from this lesson.
 
-#### [Vary] All Equal (Author exercise)
+##### Hint
+
+How many times does a loop that starts at index 1 run when the array has one element? Which line is responsible for the result in that case?
+
+##### Learning Objective
+
+First rung: the smallest legal input attacks initialization, since no loop iteration exists to repair it.
+
+#### All Equal
 <!-- id: pc-all-equal -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The singleton exercise above.
+##### Problem Statement
 
-**Problem.** Use `[4,4,4]` to test strict versus non-strict comparisons. Compute the longest strictly increasing run and the longest non-decreasing run, and explain why this one input tells the two comparisons apart.
+Use `[4,4,4]` to test strict versus non-strict comparisons. Compute the longest strictly increasing run and the longest non-decreasing run, and explain why this one input tells the two comparisons apart.
 
-**Constraints.** The array holds three equal values. A strict comparison uses `>` and a non-strict one uses `>=`.
+##### Constraints
+
+The array holds three equal values. A strict comparison uses `>` and a non-strict one uses `>=`.
+
+##### Examples
 
 **Example 1.** Input `[4,4,4]` with a strict comparison, output 1.
 
 **Example 2.** Input `[4,4,4]` with a non-strict comparison, output 3.
 
-**Hint.** What does each comparison say about two equal neighbors? Which kind of input makes the two versions disagree?
+##### Prerequisites
 
-**Changed decision.** The attacked failure mode changes from initialization to equality handling.
+The singleton exercise above.
 
-#### [Boundary] Numeric Extremes (Author exercise)
+##### Hint
+
+What does each comparison say about two equal neighbors? Which kind of input makes the two versions disagree?
+
+##### Learning Objective
+
+The attacked failure mode changes from initialization to equality handling.
+
+#### Numeric Extremes
 <!-- id: pc-numeric-extremes -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The two exercises above.
+##### Problem Statement
 
-**Problem.** Use `[Integer.MAX_VALUE, Integer.MAX_VALUE]` against code that accumulates a sum into an `int`. Predict the overflow before running anything, then state the correct sum and the type that holds it.
+Use `[Integer.MAX_VALUE, Integer.MAX_VALUE]` against code that accumulates a sum into an `int`. Predict the overflow before running anything, then state the correct sum and the type that holds it.
 
-**Constraints.** The largest `int` is 2,147,483,647 and wrap-around arithmetic applies on overflow. Use `long` for the corrected sum.
+##### Constraints
+
+The largest `int` is 2,147,483,647 and wrap-around arithmetic applies on overflow. Use `long` for the corrected sum.
+
+##### Examples
 
 **Example 1.** Input `[2147483647, 2147483647]` summed in an `int`, output -2.
 
 **Example 2.** Input the same array summed in a `long`, output 4294967294.
 
-**Hint.** Add the two numbers on paper and compare with 2^31 - 1. What does two's-complement wrap-around do to a sum just above the maximum?
+##### Prerequisites
 
-**Changed decision.** The attacked failure mode becomes overflow, and the hostile input is built from the extreme of the type.
+The two exercises above.
 
-#### [Recognize] Mutation Order (Author exercise)
+##### Hint
+
+Add the two numbers on paper and compare with 2^31 - 1. What does two's-complement wrap-around do to a sum just above the maximum?
+
+##### Learning Objective
+
+The attacked failure mode becomes overflow, and the hostile input is built from the extreme of the type.
+
+#### Mutation Order
 <!-- id: pc-mutation-order -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** All three exercises above.
+##### Problem Statement
 
-**Problem.** To insert a value at index 0 of `[1,2,3]`, the elements must shift right inside an array of length 4. Trace a left-to-right copy and show exactly where it overwrites data not yet read. Then justify copying right to left.
+To insert a value at index 0 of `[1,2,3]`, the elements must shift right inside an array of length 4. Trace a left-to-right copy and show exactly where it overwrites data not yet read. Then justify copying right to left.
 
-**Constraints.** The array has length 4 with three live values. Inserting 9 at index 0 should produce `[9,1,2,3]`.
+##### Constraints
+
+The array has length 4 with three live values. Inserting 9 at index 0 should produce `[9,1,2,3]`.
+
+##### Examples
 
 **Example 1.** Input `[1,2,3,_]` shifted left to right, output `[1,1,1,1]` before the insert, so the data is lost.
 
 **Example 2.** Input `[1,2,3,_]` shifted right to left, output `[1,1,2,3]` before the insert, and `[9,1,2,3]` after it.
 
-**Hint.** When you copy `a[0]` into `a[1]`, what happens to the old `a[1]`, and have you read it yet? In which direction can a write never land on an unread slot?
+##### Prerequisites
 
-**Changed decision.** The attacked failure mode is the order of writes, which decides whether a copy destroys its own input.
+All three exercises above.
+
+##### Hint
+
+When you copy `a[0]` into `a[1]`, what happens to the old `a[1]`, and have you read it yet? In which direction can a write never land on an unread slot?
+
+##### Learning Objective
+
+The attacked failure mode is the order of writes, which decides whether a copy destroys its own input.

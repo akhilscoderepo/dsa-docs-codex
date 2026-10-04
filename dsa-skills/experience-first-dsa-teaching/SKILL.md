@@ -81,7 +81,11 @@ context, naive, bottleneck, insight, variables, trace, code, applicability, exer
 
 ## Exercises and solutions
 
-Each lesson has the spec's practice ladder (minimum 4: Build, Vary, Boundary, Recognize). Each exercise is a full record: prerequisites, problem statement, real constraints, two examples, a hint, and the decision it changes. Author exercises must be fully specified, not just titled. LeetCode exercises are restated in your own words with the real constraints; verify them by search if unsure and never paste the original statement. Solutions live in `solutions/` with an approach, complexity, and Java that compiles and, where possible, runs with assertions on the exercise's own examples.
+Each lesson has the spec's practice ladder (minimum 4: Build, Vary, Boundary, Recognize). Store that role in `<!-- role: ... -->` metadata so the curriculum can audit progression without presenting internal planning labels as problem titles. The reader-facing H4 contains only the professional problem title and a source comment records `Author exercise` or `LeetCode N`.
+
+Every exercise uses academic H5 subsections: `Problem Statement`, `Constraints`, `Examples`, `Prerequisites`, `Hint`, and `Learning Objective`. The paired solution uses `Algorithmic Solution` and `Complexity Analysis`. Author exercises must be fully specified, not just titled. Restate LeetCode exercises in your own words with verified constraints and original examples; never paste the source statement.
+
+Java solutions teach the reasoning inside the code. Add professional comments to the primary statements and control-flow decisions. Each comment explains why the statement exists, which invariant it preserves, or which cost it controls. State time and space complexity beside the method or immediately above the relevant block. Do not comment punctuation, braces, imports, or obvious syntax, and do not repeat the Java statement in English; excessive what-only comments make code harder to read.
 
 ## Java rules
 

@@ -91,70 +91,126 @@ Java's `ArrayList` documents that `add` runs in amortized constant time, and int
 <!-- stage: exercises -->
 ### Exercises
 
-#### [Build] Doubling Array (Author exercise)
+#### Doubling Array
 <!-- id: pc-doubling-array -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The size, capacity and copy-count bookkeeping in this lesson.
+##### Problem Statement
 
-**Problem.** Start with capacity 1 and append eight values, doubling the capacity whenever the array is full. List the capacities that occur, count every element copy, and observe that the total stays proportional to the number of appends.
+Start with capacity 1 and append eight values, doubling the capacity whenever the array is full. List the capacities that occur, count every element copy, and observe that the total stays proportional to the number of appends.
 
-**Constraints.** Capacity starts at 1 and doubles on demand. A copy moves each stored element once and the new value's write is not counted as a copy.
+##### Constraints
+
+Capacity starts at 1 and doubles on demand. A copy moves each stored element once and the new value's write is not counted as a copy.
+
+##### Examples
 
 **Example 1.** Input 8 appends, output capacities 1, 2, 4, 8 and a total of 7 copies.
 
 **Example 2.** Input 1 append, output capacity 1 and 0 copies, since the first value fits without any resize.
 
-**Hint.** Which appends find the array full? How many elements are stored at the moment of each resize?
+##### Prerequisites
 
-**Changed decision.** First rung: turns the idea of occasional repair into a concrete tally of copies.
+The size, capacity and copy-count bookkeeping in this lesson.
 
-#### [Vary] Grow By One (Author exercise)
+##### Hint
+
+Which appends find the array full? How many elements are stored at the moment of each resize?
+
+##### Learning Objective
+
+First rung: turns the idea of occasional repair into a concrete tally of copies.
+
+#### Grow By One
 <!-- id: pc-grow-by-one -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The doubling-array exercise above.
+##### Problem Statement
 
-**Problem.** Repeat the experiment when the capacity increases by exactly one each time the array is full. Sum `1 + 2 + ... + (n-1)` and explain why append becomes O(n) amortized instead of O(1).
+Repeat the experiment when the capacity increases by exactly one each time the array is full. Sum `1 + 2 + ... + (n-1)` and explain why append becomes O(n) amortized instead of O(1).
 
-**Constraints.** Capacity starts at 1 and grows by 1 on demand. Copies follow the same counting rule as the doubling exercise.
+##### Constraints
+
+Capacity starts at 1 and grows by 1 on demand. Copies follow the same counting rule as the doubling exercise.
+
+##### Examples
 
 **Example 1.** Input 8 appends, output 28 copies, compared with 7 for doubling.
 
 **Example 2.** Input 1 append, output 0 copies, so the two policies agree on the smallest sequence.
 
-**Hint.** With growth by one, how often is the array full, and how many elements are stored each time? What does the sum of the first `n - 1` integers equal?
+##### Prerequisites
 
-**Changed decision.** Only the growth rule changes, and it converts a linear total into a quadratic one.
+The doubling-array exercise above.
 
-#### [Boundary] One Expensive Append (Author exercise)
+##### Hint
+
+With growth by one, how often is the array full, and how many elements are stored each time? What does the sum of the first `n - 1` integers equal?
+
+##### Learning Objective
+
+Only the growth rule changes, and it converts a linear total into a quadratic one.
+
+#### One Expensive Append
 <!-- id: pc-one-expensive-append -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The two exercises above.
+##### Problem Statement
 
-**Problem.** In a doubling array that reaches 1,025 stored values, identify the single append that triggers an O(n) copy. Reconcile that spike with the claim that appends are amortized O(1) over the whole sequence.
+In a doubling array that reaches 1,025 stored values, identify the single append that triggers an O(n) copy. Reconcile that spike with the claim that appends are amortized O(1) over the whole sequence.
 
-**Constraints.** Capacity starts at 1 and doubles on demand. Count 1,025 appends in total, so the final append is the one to examine.
+##### Constraints
+
+Capacity starts at 1 and doubles on demand. Count 1,025 appends in total, so the final append is the one to examine.
+
+##### Examples
 
 **Example 1.** Input 1,025 appends, output that append number 1,025 copies 1,024 elements while the 1,024 appends before it copied 1,023 elements in total.
 
 **Example 2.** Input 1,024 appends, output no spike at the end, since capacity 1,024 is exactly full and no further append has arrived.
 
-**Hint.** When is the array full after exactly a power of two values? How many copies came from all the earlier resizes combined?
+##### Prerequisites
 
-**Changed decision.** The question moves from the total to a single spike, and the exercise asks you to explain why one costly call does not break the average.
+The two exercises above.
 
-#### [Recognize] Potential Intuition (Author exercise)
+##### Hint
+
+When is the array full after exactly a power of two values? How many copies came from all the earlier resizes combined?
+
+##### Learning Objective
+
+The question moves from the total to a single spike, and the exercise asks you to explain why one costly call does not break the average.
+
+#### Potential Intuition
 <!-- id: pc-potential-intuition -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** All three exercises above.
+##### Problem Statement
 
-**Problem.** Treat the unused slots after a doubling as prepaid capacity. Explain, without formal algebra, how that stored potential funds the future cheap appends and the next resize, and show with numbers why a charge of three units per append is enough.
+Treat the unused slots after a doubling as prepaid capacity. Explain, without formal algebra, how that stored potential funds the future cheap appends and the next resize, and show with numbers why a charge of three units per append is enough.
 
-**Constraints.** Charge three units per append: one to write and two saved. A resize from capacity `c` to `2c` costs `c` units.
+##### Constraints
+
+Charge three units per append: one to write and two saved. A resize from capacity `c` to `2c` costs `c` units.
+
+##### Examples
 
 **Example 1.** Input a resize from capacity 4 to 8 after four stored values, output that the two appends since the previous resize saved 4 units and the copy costs 4.
 
 **Example 2.** Input the very first resize from capacity 1 to 2 after one stored value, output that the one earlier append saved 2 units and the copy costs 1, so a unit is even left over.
 
-**Hint.** After a resize to capacity `2c`, how many appends can happen before the next resize? How many units does each of those appends save?
+##### Prerequisites
 
-**Changed decision.** The argument shifts from counting copies to explaining why the counted total is bounded, using stored credit.
+All three exercises above.
+
+##### Hint
+
+After a resize to capacity `2c`, how many appends can happen before the next resize? How many units does each of those appends save?
+
+##### Learning Objective
+
+The argument shifts from counting copies to explaining why the counted total is bounded, using stored credit.

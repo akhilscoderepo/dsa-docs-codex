@@ -1,15 +1,24 @@
 <!-- solutions-for: 03-sequence-language -->
 ### Sequence Language
 
-#### Solution: [Build] Classify [2,4] (Author exercise)
+#### Solution: Classify [2,4]
 <!-- id: pc-classify-2-4 -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Approach.** Find the position of each candidate value in `[1,2,3,4]`. The value 2 sits at position 1 and the value 4 at position 3. The positions increase, so the original order is kept, which makes the candidate a subsequence. They are not consecutive, because position 2 is skipped, so it is not a subarray. Any selection of positions is a subset, so it is one as well. The code classifies by the position list, so each verdict is derived and not asserted from eyesight.
+##### Algorithmic Solution
 
-**Complexity.** O(n + m) time to locate the positions of `m` candidate values in an array of `n`, and O(m) space for the position list.
+Find the position of each candidate value in `[1,2,3,4]`. The value 2 sits at position 1 and the value 4 at position 3. The positions increase, so the original order is kept, which makes the candidate a subsequence. They are not consecutive, because position 2 is skipped, so it is not a subarray. Any selection of positions is a subset, so it is one as well. The code classifies by the position list, so each verdict is derived and not asserted from eyesight.
+
+##### Complexity Analysis
+
+O(n + m) time to locate the positions of `m` candidate values in an array of `n`, and O(m) space for the position list.
 
 ```java run
 public final class ClassifyPositions {
+    // Algorithm: Find the position of each candidate value in [1,2,3,4].
+    // Complexity: O(n + m) time to locate the positions of m candidate values in an array of n, and
+    //   O(m) space for the position list.
     static int[] positionsOf(int[] nums, int[] cand) {
         int[] pos = new int[cand.length];
         for (int j = 0; j < cand.length; j++) {
@@ -33,15 +42,23 @@ public final class ClassifyPositions {
 }
 ```
 
-#### Solution: [Vary] Order Matters (Author exercise)
+#### Solution: Order Matters
 <!-- id: pc-order-matters -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Approach.** The candidate `[4,2]` has positions 3 and then 1, so the positions fall. The no-gaps test fails, because a drop is not "one more than the previous position". The ordered test fails as well. Only the membership test passes, because both values occur in the array, which is all a subset needs. The one changed decision from `[2,4]` is therefore the direction of the positions.
+##### Algorithmic Solution
 
-**Complexity.** O(n + m) time and O(m) space, as in the previous exercise.
+The candidate `[4,2]` has positions 3 and then 1, so the positions fall. The no-gaps test fails, because a drop is not "one more than the previous position". The ordered test fails as well. Only the membership test passes, because both values occur in the array, which is all a subset needs. The one changed decision from `[2,4]` is therefore the direction of the positions.
+
+##### Complexity Analysis
+
+O(n + m) time and O(m) space, as in the previous exercise.
 
 ```java run
 public final class OrderMatters {
+    // Algorithm: The candidate [4,2] has positions 3 and then 1, so the positions fall.
+    // Complexity: O(n + m) time and O(m) space, as in the previous exercise.
     static int indexOf(int[] a, int v) { for (int i = 0; i < a.length; i++) if (a[i] == v) return i; return -1; }
 
     public static void main(String[] args) {
@@ -57,15 +74,24 @@ public final class OrderMatters {
 }
 ```
 
-#### Solution: [Boundary] Empty Choice (Author exercise)
+#### Solution: Empty Choice
 <!-- id: pc-empty-choice -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Approach.** The contract must say whether an empty block is legal, because its sum is 0 and 0 beats every sum on an all-negative array. With the non-empty requirement the best choice is the single largest reading, -3. With the empty choice allowed the best is to choose nothing, which gives 0. Both answers come from the same brute force, and the only difference is whether the starting best is the sum of nothing or the first block's sum.
+##### Algorithmic Solution
 
-**Complexity.** The brute force is O(n^2) time with a running sum per start, and O(1) space.
+The contract must say whether an empty block is legal, because its sum is 0 and 0 beats every sum on an all-negative array. With the non-empty requirement the best choice is the single largest reading, -3. With the empty choice allowed the best is to choose nothing, which gives 0. Both answers come from the same brute force, and the only difference is whether the starting best is the sum of nothing or the first block's sum.
+
+##### Complexity Analysis
+
+The brute force is O(n^2) time with a running sum per start, and O(1) space.
 
 ```java run
 public final class EmptyChoice {
+    // Algorithm: The contract must say whether an empty block is legal, because its sum is 0 and 0
+    //   beats every sum on an all-negative array.
+    // Complexity: The brute force is O(n^2) time with a running sum per start, and O(1) space.
     static int bestBlock(int[] nums, boolean allowEmpty) {
         int best = allowEmpty ? 0 : Integer.MIN_VALUE;
         for (int start = 0; start < nums.length; start++) {
@@ -87,15 +113,25 @@ public final class EmptyChoice {
 }
 ```
 
-#### Solution: [Recognize] Contiguous Maximum (Author exercise)
+#### Solution: Contiguous Maximum
 <!-- id: pc-contiguous-maximum -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Approach.** Every block of consecutive positions that contains both the 5 and the 4 also contains the -10 between them, so its sum is -1. The best block is the single value 5, giving 5. A subsequence may skip the -10, so it can take positions 0 and 2 for a sum of 9. The data and the objective are identical, and the position rule alone moves the answer from 5 to 9.
+##### Algorithmic Solution
 
-**Complexity.** Enumerating all blocks is O(n^2) and all subsequences is O(2^n) time, and both use O(1) extra space beyond the loops.
+Every block of consecutive positions that contains both the 5 and the 4 also contains the -10 between them, so its sum is -1. The best block is the single value 5, giving 5. A subsequence may skip the -10, so it can take positions 0 and 2 for a sum of 9. The data and the objective are identical, and the position rule alone moves the answer from 5 to 9.
+
+##### Complexity Analysis
+
+Enumerating all blocks is O(n^2) and all subsequences is O(2^n) time, and both use O(1) extra space beyond the loops.
 
 ```java run
 public final class ContiguousMaximum {
+    // Algorithm: Every block of consecutive positions that contains both the 5 and the 4 also contains
+    //   the -10 between them, so its sum is -1.
+    // Complexity: Enumerating all blocks is O(n^2) and all subsequences is O(2^n) time, and both use
+    //   O(1) extra space beyond the loops.
     static int bestSubarray(int[] a) {
         int best = Integer.MIN_VALUE;
         for (int l = 0; l < a.length; l++) { int s = 0; for (int r = l; r < a.length; r++) { s += a[r]; best = Math.max(best, s); } }

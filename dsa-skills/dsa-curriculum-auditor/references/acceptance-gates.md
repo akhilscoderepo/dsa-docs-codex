@@ -20,6 +20,10 @@ Each gate says how it is checked. "Script" means the named check code appears in
 
 ## Practice quality
 
+- Reader-facing problem titles use professional names; Build, Vary, Boundary and Recognize live in metadata and render as standardized progression badges.
+- Every exercise presents Problem Statement, Constraints, Examples, Prerequisites, Hint and Learning Objective as hierarchical academic subsections.
+- Every paired solution presents Algorithmic Solution and Complexity Analysis, and its Java comments explain the strategy, invariant-bearing decisions, and time/space cost without narrating obvious syntax.
+
 - 4 to 7 exercises with Build, Vary, Boundary, Recognize in order: M `ladder-gap`, `ladder-short`, `ladder-long`, `role-order`, `bad-role`.
 - Every exercise has prerequisites, problem, constraints, two examples with input and output, hint and changed decision: M `field-missing`, `field-thin`, `example-shape`, `no-source`.
 - Every exercise has a solution with approach, complexity and Java: M `no-solutions`, `solution-missing`, `solution-field`, `solution-code`.

@@ -30,7 +30,9 @@ def md_exercise_count(ch):
     for f in ch.glob("*.md"):
         t = f.read_text(encoding="utf-8")
         if "lesson-kind:" in t:
-            n += len(re.findall(r"(?m)^####\s+\[(?:Build|Vary|Boundary|Recognize|Extend|Medium|Hard|Challenge)\]", t))
+            legacy = len(re.findall(r"(?m)^####\s+\[(?:Build|Vary|Boundary|Recognize|Extend|Medium|Hard|Challenge)\]", t))
+            academic = len(re.findall(r"(?m)^<!--\s*role:\s*(?:Build|Vary|Boundary|Recognize|Extend|Medium|Hard|Challenge)\s*-->$", t))
+            n += academic if academic else legacy
     return n
 
 

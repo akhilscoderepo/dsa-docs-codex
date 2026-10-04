@@ -106,70 +106,126 @@ Two more Java hazards belong on the same list. Boxed collections such as `List<I
 <!-- stage: exercises -->
 ### Exercises
 
-#### [Build] Front Removal (Author exercise)
+#### Front Removal
 <!-- id: pc-front-removal -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The hidden-cost questions from this lesson.
+##### Problem Statement
 
-**Problem.** Explain why repeatedly calling `ArrayList.remove(0)` to drain `n` elements performs quadratic shifting. Contrast it with maintaining a read index, and state the move counts of both for `n = 5`.
+Explain why repeatedly calling `ArrayList.remove(0)` to drain `n` elements performs quadratic shifting. Contrast it with maintaining a read index, and state the move counts of both for `n = 5`.
 
-**Constraints.** `1 <= n <= 10^5`. Count one move for each element shifted left. Reading an element by index counts as zero moves.
+##### Constraints
+
+`1 <= n <= 10^5`. Count one move for each element shifted left. Reading an element by index counts as zero moves.
+
+##### Examples
 
 **Example 1.** Input `n = 5` drained with `remove(0)`, output 10 element moves in total.
 
 **Example 2.** Input `n = 5` drained with a read index, output 0 element moves, since nothing is shifted.
 
-**Hint.** When the first element is removed, which other elements must change position? What is the sum of the shifts across all `n` removals?
+##### Prerequisites
 
-**Changed decision.** First rung: replaces a convenient call with an index so that the per-step cost becomes constant.
+The hidden-cost questions from this lesson.
 
-#### [Vary] String Construction (Author exercise)
+##### Hint
+
+When the first element is removed, which other elements must change position? What is the sum of the shifts across all `n` removals?
+
+##### Learning Objective
+
+First rung: replaces a convenient call with an index so that the per-step cost becomes constant.
+
+#### String Construction
 <!-- id: pc-string-construction -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The front-removal exercise above.
+##### Problem Statement
 
-**Problem.** Compare `result = result + ch` in a loop with `StringBuilder.append(ch)` for building a string of `n` characters. Explain where the repeated copying occurs and count the characters copied by the concatenation version for `n = 5`.
+Compare `result = result + ch` in a loop with `StringBuilder.append(ch)` for building a string of `n` characters. Explain where the repeated copying occurs and count the characters copied by the concatenation version for `n = 5`.
 
-**Constraints.** `1 <= n <= 10^5`. Count one copy per character moved into a new string. Appending to a builder with spare capacity copies nothing.
+##### Constraints
+
+`1 <= n <= 10^5`. Count one copy per character moved into a new string. Appending to a builder with spare capacity copies nothing.
+
+##### Examples
 
 **Example 1.** Input `n = 5` using `+` in a loop, output 15 characters copied in total (1 + 2 + 3 + 4 + 5).
 
 **Example 2.** Input `n = 5` using a `StringBuilder` with enough capacity, output 0 repeated copies.
 
-**Hint.** Each time the string is extended, how many old characters are copied into the new string? What does `StringBuilder` do differently when it runs out of room?
+##### Prerequisites
 
-**Changed decision.** The costly call moves from list shifting to string copying, and the cure becomes a buffer that grows geometrically.
+The front-removal exercise above.
 
-#### [Boundary] Primitive Arrays (Author exercise)
+##### Hint
+
+Each time the string is extended, how many old characters are copied into the new string? What does `StringBuilder` do differently when it runs out of room?
+
+##### Learning Objective
+
+The costly call moves from list shifting to string copying, and the cure becomes a buffer that grows geometrically.
+
+#### Primitive Arrays
 <!-- id: pc-primitive-arrays -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The two exercises above.
+##### Problem Statement
 
-**Problem.** Evaluate `Arrays.asList(new int[]{1,2,3})`. State why the result is a one-element `List<int[]>` and not a `List<Integer>`, and show a way to get a list of the three integers.
+Evaluate `Arrays.asList(new int[]{1,2,3})`. State why the result is a one-element `List<int[]>` and not a `List<Integer>`, and show a way to get a list of the three integers.
 
-**Constraints.** `Arrays.asList` takes a varargs array of objects. An `int[]` is itself a single object, not an array of objects.
+##### Constraints
+
+`Arrays.asList` takes a varargs array of objects. An `int[]` is itself a single object, not an array of objects.
+
+##### Examples
 
 **Example 1.** Input `Arrays.asList(new int[]{1,2,3})`, output a list of size 1 whose only element is the `int[]`.
 
 **Example 2.** Input `Arrays.asList(1, 2, 3)`, output a list of size 3, because three boxed arguments form the varargs array.
 
-**Hint.** Could an `int[]` be treated as an `Object[]`? What does the compiler pass to the varargs parameter when you hand it one array of primitives?
+##### Prerequisites
 
-**Changed decision.** The question moves from running time to meaning, because the call compiles and runs and still means something other than intended.
+The two exercises above.
 
-#### [Recognize] Value Equality (Author exercise)
+##### Hint
+
+Could an `int[]` be treated as an `Object[]`? What does the compiler pass to the varargs parameter when you hand it one array of primitives?
+
+##### Learning Objective
+
+The question moves from running time to meaning, because the call compiles and runs and still means something other than intended.
+
+#### Value Equality
 <!-- id: pc-value-equality -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** All three exercises above.
+##### Problem Statement
 
-**Problem.** Compare two distinct `String` objects that contain the same characters. Explain why `.equals` expresses value equality while `==` tests reference identity, and say which one a solution should use for contents.
+Compare two distinct `String` objects that contain the same characters. Explain why `.equals` expresses value equality while `==` tests reference identity, and say which one a solution should use for contents.
 
-**Constraints.** Create each string with `new String("abc")` so that the two objects are guaranteed to be separate. Use `.equals` for contents.
+##### Constraints
+
+Create each string with `new String("abc")` so that the two objects are guaranteed to be separate. Use `.equals` for contents.
+
+##### Examples
 
 **Example 1.** Input two separate strings holding "abc", output `==` is false and `.equals` is true.
 
 **Example 2.** Input one string compared with itself, output `==` is true, since both names point to one object.
 
-**Hint.** Does `==` look inside the objects or at where they live? Which operator would a map or a set rely on to find a matching key?
+##### Prerequisites
 
-**Changed decision.** The question changes from cost to identity, and the same two characters give two different answers depending on the operator.
+All three exercises above.
+
+##### Hint
+
+Does `==` look inside the objects or at where they live? Which operator would a map or a set rely on to find a matching key?
+
+##### Learning Objective
+
+The question changes from cost to identity, and the same two characters give two different answers depending on the operator.

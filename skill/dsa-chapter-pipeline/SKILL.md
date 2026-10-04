@@ -36,7 +36,9 @@ Use plain technical English. Vary sentence structure naturally. Do not reuse exe
 
 Apply the authoring skill's readability contract before accepting a lesson. The prose uses active subjects and present tense, expresses causal links in words rather than arrows, turns abstract noun phrases back into verbs, anchors references to exact variables or data regions, and uses standard computer-science terminology. Split any sentence that introduces several independent decisions at once; audit cognitive load as seriously as technical correctness.
 
-Reject a manuscript with a flat or skipped heading structure. The generated chapter title owns H1; lessons and chapter sections use H2; lesson stages use H3; exercises and solution records use H4. Headings name one concrete action or standard concept and never use a level merely to change visual size.
+Reject a manuscript with a flat or skipped heading structure. The generated chapter title owns H1; lessons and chapter sections use H2; lesson stages use H3; exercises and solution records use H4; their academic subsections use H5. Headings name one concrete action or standard concept and never use a level merely to change visual size.
+
+Do not expose Build, Vary, Boundary, or Recognize as reader-facing problem headings. Preserve those roles as exercise metadata for staircase audits, then present each problem through Problem Statement, Constraints, Examples, Hint, and Algorithmic Solution sections. Require Java comments that explain the invariant, control-flow decisions, and complexity without narrating obvious syntax.
 
 ## Persistence
 

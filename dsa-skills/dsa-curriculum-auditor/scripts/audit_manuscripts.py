@@ -85,25 +85,47 @@ def prose(text):
 
 def parse_exercises(body):
     ex = []
-    pieces = re.split(r"(?m)^####\s+(?=\[)", body)
+    pieces = re.split(r"(?m)^####\s+(?!Solution:)", body)
     for piece in pieces[1:]:
         head, _, rest = piece.partition("\n")
         idm = re.match(r"\s*<!--\s*id:\s*([^\s>]+)\s*-->\s*\n?", rest)
         eid = idm.group(1) if idm else None
         if idm:
             rest = rest[idm.end():]
-        m = re.match(r"\[(\w+)\]\s+(.*?)\s*$", head)
-        if not m:
-            ex.append({"role": None, "title": head.strip(), "body": rest, "id": eid}); continue
-        title = m.group(2)
-        src = re.search(r"\((LeetCode\s+(\d+)|Author exercise)\)\s*$", title)
-        ex.append({"role": m.group(1), "title": title, "body": rest, "id": eid, "src": src.group(1) if src else None,
-                   "lc": int(src.group(2)) if src and src.group(2) else None,
-                   "base": NORM(re.sub(r"\((?:LeetCode\s+\d+|Author exercise)\)\s*$", "", title))})
+        legacy = re.match(r"\[(\w+)\]\s+(.*?)\s*$", head)
+        if legacy:
+            role, title = legacy.group(1), legacy.group(2)
+            src = re.search(r"\((LeetCode\s+(\d+)|Author exercise)\)\s*$", title)
+            source = src.group(1) if src else None
+            lc = int(src.group(2)) if src and src.group(2) else None
+            base = NORM(re.sub(r"\((?:LeetCode\s+\d+|Author exercise)\)\s*$", "", title))
+            academic = False
+        else:
+            title = head.strip()
+            rm = re.match(r"\s*<!--\s*role:\s*([^>]+?)\s*-->\s*\n?", rest)
+            role = rm.group(1).strip() if rm else None
+            if rm:
+                rest = rest[rm.end():]
+            sm = re.match(r"\s*<!--\s*source:\s*([^>]+?)\s*-->\s*\n?", rest)
+            source = sm.group(1).strip() if sm else None
+            if sm:
+                rest = rest[sm.end():]
+            lm = re.fullmatch(r"LeetCode\s+(\d+)", source or "")
+            lc = int(lm.group(1)) if lm else None
+            base = NORM(title)
+            academic = True
+        ex.append({"role": role, "title": title, "body": rest, "id": eid, "src": source,
+                   "lc": lc, "base": base, "academic": academic})
     return ex
 
 
 def field(body, label):
+    aliases = {"Problem": "Problem Statement", "Changed decision": "Learning Objective",
+               "Approach": "Algorithmic Solution", "Complexity": "Complexity Analysis"}
+    heading = aliases.get(label, label)
+    hm = re.search(rf"(?ms)^#####\s+{re.escape(heading)}\s*\n(.*?)(?=^#####\s+|\Z)", body)
+    if hm:
+        return hm.group(1).strip()
     m = re.search(rf"\*\*{re.escape(label)}\.\*\*\s*(.+?)(?:\n\s*\n|\Z)", body, re.S)
     return m.group(1).strip() if m else None
 
@@ -269,15 +291,15 @@ def audit_chapter(ch, spec, draft, rep, corpus):
                 rep.err(where, "role-order", "ladder roles must not go backward")
             last = max(last, ROLES.index(e["role"]))
             if not e.get("src"):
-                rep.err(where, "no-source", "title must end with (LeetCode N) or (Author exercise)")
+                rep.err(where, "no-source", "add <!-- source: LeetCode N --> or <!-- source: Author exercise --> below the exercise ID")
             for lab, minw in FIELDS:
                 v = field(e["body"], lab)
                 if v is None:
-                    rep.err(where, "field-missing", f"missing **{lab}.**")
+                    rep.err(where, "field-missing", f"missing academic section for {lab}")
                 elif len(WORDS(v)) < minw:
-                    rep.err(where, "field-thin", f"**{lab}.** has {len(WORDS(v))} words; minimum {minw}")
+                    rep.err(where, "field-thin", f"{lab} has {len(WORDS(v))} words; minimum {minw}")
                 elif lab.startswith("Example") and not ("input" in v.lower() and "output" in v.lower()):
-                    rep.err(where, "example-shape", f"**{lab}.** must state an Input and an output")
+                    rep.err(where, "example-shape", f"{lab} must state an Input and an output")
         for r in ("Build", "Vary", "Boundary", "Recognize"):
             if exs and r not in roles:
                 rep.err(f, "ladder-gap", f"[{title}] practice ladder has no {r} step")
@@ -310,9 +332,15 @@ def audit_chapter(ch, spec, draft, rep, corpus):
                     continue
                 for lab in ("Approach", "Complexity"):
                     if field(body, lab) is None:
-                        rep.err(f"{sp.name} :: {e['title']}", "solution-field", f"missing **{lab}.**")
+                        rep.err(f"{sp.name} :: {e['title']}", "solution-field", f"missing academic section for {lab}")
                 if not any(i.split()[:1] == ["java"] for i, _ in fences(body)):
                     rep.err(f"{sp.name} :: {e['title']}", "solution-code", "solution has no ```java block")
+                if e.get("academic"):
+                    java_text = "\n".join(code for info, code in fences(body) if info.split()[:1] == ["java"])
+                    if "// Algorithm:" not in java_text:
+                        rep.err(f"{sp.name} :: {e['title']}", "solution-comments", "academic Java needs an // Algorithm: comment explaining the execution strategy")
+                    if "// Complexity:" not in java_text:
+                        rep.err(f"{sp.name} :: {e['title']}", "solution-comments", "academic Java needs a // Complexity: comment stating time and space costs")
             for k in sols:
                 if k not in have:
                     rep.warn(sp, "solution-orphan", f"solution '{k}' matches no exercise")

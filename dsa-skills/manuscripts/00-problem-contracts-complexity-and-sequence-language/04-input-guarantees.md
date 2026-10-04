@@ -95,70 +95,126 @@ Java adds specific traps. `int[][] grid` may be ragged, so `grid[0].length` is n
 <!-- stage: exercises -->
 ### Exercises
 
-#### [Build] Non-Empty Maximum (Author exercise)
+#### Non-Empty Maximum
 <!-- id: pc-non-empty-maximum -->
+<!-- role: Build -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The contract sheet from this lesson.
+##### Problem Statement
 
-**Problem.** Under a contract that promises a non-empty array, return its maximum by initializing from `nums[0]`. Explain why initializing from zero fails for `[-8,-3]`, and why an empty-array guard is unnecessary under this exact contract.
+Under a contract that promises a non-empty array, return its maximum by initializing from `nums[0]`. Explain why initializing from zero fails for `[-8,-3]`, and why an empty-array guard is unnecessary under this exact contract.
 
-**Constraints.** `1 <= nums.length <= 10^5` and `-10^9 <= nums[i] <= 10^9`. Do not add branches for inputs the contract excludes.
+##### Constraints
+
+`1 <= nums.length <= 10^5` and `-10^9 <= nums[i] <= 10^9`. Do not add branches for inputs the contract excludes.
+
+##### Examples
 
 **Example 1.** Input `nums = [-8,-3]`, output -3, whereas a zero-start version would return 0.
 
 **Example 2.** Input `nums = [7]`, output 7, so a single element is already a valid maximum.
 
-**Hint.** Which real element of the input is guaranteed to exist? What does a starting value of zero assume about the data?
+##### Prerequisites
 
-**Changed decision.** First rung: the starting value comes from the input itself because the contract guarantees it exists.
+The contract sheet from this lesson.
 
-#### [Vary] Possibly Empty (Author exercise)
+##### Hint
+
+Which real element of the input is guaranteed to exist? What does a starting value of zero assume about the data?
+
+##### Learning Objective
+
+First rung: the starting value comes from the input itself because the contract guarantees it exists.
+
+#### Possibly Empty
 <!-- id: pc-possibly-empty -->
+<!-- role: Vary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The non-empty maximum exercise above.
+##### Problem Statement
 
-**Problem.** Change the contract so the array may be empty. Choose and document exactly one response for the empty case, either a sentinel, an exception or an optional result, and make the method signature agree with that choice.
+Change the contract so the array may be empty. Choose and document exactly one response for the empty case, either a sentinel, an exception or an optional result, and make the method signature agree with that choice.
 
-**Constraints.** `0 <= nums.length <= 10^5` and `-10^9 <= nums[i] <= 10^9`. The chosen response must not collide with any legal maximum.
+##### Constraints
+
+`0 <= nums.length <= 10^5` and `-10^9 <= nums[i] <= 10^9`. The chosen response must not collide with any legal maximum.
+
+##### Examples
 
 **Example 1.** Input `nums = []` under an optional-result contract, output an empty optional.
 
 **Example 2.** Input `nums = [-5]` under the same contract, output an optional holding -5, so a legal negative answer is never confused with "no answer".
 
-**Hint.** Is there any `int` value that can never be a legal maximum for this range? If not, what should carry the "no answer" signal instead?
+##### Prerequisites
 
-**Changed decision.** The contract now permits an empty input, so absence has to become part of the interface.
+The non-empty maximum exercise above.
 
-#### [Boundary] Rectangular Or Ragged (Author exercise)
+##### Hint
+
+Is there any `int` value that can never be a legal maximum for this range? If not, what should carry the "no answer" signal instead?
+
+##### Learning Objective
+
+The contract now permits an empty input, so absence has to become part of the interface.
+
+#### Rectangular Or Ragged
 <!-- id: pc-rectangular-or-ragged -->
+<!-- role: Boundary -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** The two exercises above.
+##### Problem Statement
 
-**Problem.** For `int[][] grid`, distinguish a rectangular guarantee from a ragged array. Explain why `grid[0].length` is unsafe as the column bound for every row when ragged input is legal, and write the loop that is safe in both cases.
+For `int[][] grid`, distinguish a rectangular guarantee from a ragged array. Explain why `grid[0].length` is unsafe as the column bound for every row when ragged input is legal, and write the loop that is safe in both cases.
 
-**Constraints.** `0 <= grid.length <= 100`. Under the ragged contract each row may have a different length, including zero.
+##### Constraints
+
+`0 <= grid.length <= 100`. Under the ragged contract each row may have a different length, including zero.
+
+##### Examples
 
 **Example 1.** Input `grid = {{1,2,3},{4},{5,6}}` under a ragged contract, output a cell count of 6.
 
 **Example 2.** Input `grid = {{1,2},{3,4}}` under a rectangular contract, output a cell count of 4, and either loop form gives the same result.
 
-**Hint.** What does `grid[0].length` measure, one row or all rows? What bound do you use if every row can differ?
+##### Prerequisites
 
-**Changed decision.** The shape promise changes from rectangular to ragged, so the inner loop bound moves from one shared length to each row's own length.
+The two exercises above.
 
-#### [Recognize] Sorted Promise (Author exercise)
+##### Hint
+
+What does `grid[0].length` measure, one row or all rows? What bound do you use if every row can differ?
+
+##### Learning Objective
+
+The shape promise changes from rectangular to ragged, so the inner loop bound moves from one shared length to each row's own length.
+
+#### Sorted Promise
 <!-- id: pc-sorted-promise -->
+<!-- role: Recognize -->
+<!-- source: Author exercise -->
 
-**Prerequisites.** All three exercises above.
+##### Problem Statement
 
-**Problem.** An array is promised sorted in non-decreasing order. Show which conclusion this promise makes valid, namely that equal values form adjacent runs, and use it to count the distinct values in one pass. Do not introduce binary search or two pointers.
+An array is promised sorted in non-decreasing order. Show which conclusion this promise makes valid, namely that equal values form adjacent runs, and use it to count the distinct values in one pass. Do not introduce binary search or two pointers.
 
-**Constraints.** `0 <= nums.length <= 10^5`. The sorted order is a guarantee and need not be checked.
+##### Constraints
+
+`0 <= nums.length <= 10^5`. The sorted order is a guarantee and need not be checked.
+
+##### Examples
 
 **Example 1.** Input `nums = [1,1,2,2,2,5]`, output 3 distinct values.
 
 **Example 2.** Input `nums = []`, output 0, since an empty sorted array has no values and no runs.
 
-**Hint.** If equal values are always neighbors, how can you tell that a new value has started? What would break if the array were not sorted?
+##### Prerequisites
 
-**Changed decision.** A single promise, sorted order, replaces a whole lookup structure with a comparison against the previous element.
+All three exercises above.
+
+##### Hint
+
+If equal values are always neighbors, how can you tell that a new value has started? What would break if the array were not sorted?
+
+##### Learning Objective
+
+A single promise, sorted order, replaces a whole lookup structure with a comparison against the previous element.

@@ -2,6 +2,7 @@
  "lessons": [
   "array-cycle-state",
   "duplicate-skipping",
+  "index-state-and-floyd",
   "k-sum-reduction",
   "opposite-ends",
   "read-and-write",
@@ -24,6 +25,10 @@
   "tp-follow-links",
   "tp-four-sum-dedup",
   "tp-immediate-array-cycle",
+  "tp-index-state-alternatives",
+  "tp-index-state-duplicate",
+  "tp-index-state-near-start",
+  "tp-index-state-path",
   "tp-k-four-sum",
   "tp-k-three-sum",
   "tp-move-zeroes",

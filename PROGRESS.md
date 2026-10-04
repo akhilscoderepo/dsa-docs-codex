@@ -14,7 +14,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 05 | Sorting and Java comparators | content_complete_human_review_pending | 9/9 | human review |
 | 06 | Binary search | in_progress | 4/11 | Peak Search |
 | 07 | Prefix sums and difference arrays | in_progress | 8/11 | 2D Prefix |
-| 08 | Two pointers | in_progress | 9/10 | Index State And Floyd |
+| 08 | Two pointers | in_progress | 10/10 | unlocked combinations and review |
 | 09 | Sliding window | content_complete_human_review_pending | 10/10 | human review |
 | 10 | Intervals | in_progress | 2/7 | Merge And Insert |
 | 11-41 | Remaining specifications | not_started | 0 | chapter 11 after active drafts |
@@ -66,4 +66,5 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Chapter 06 First True passed the JDK 25 draft audit: 4/11 lessons, 16 paired solutions, zero errors; next is Peak Search.
 - Chapter 07 Difference Arrays passed the JDK 25 draft audit: 8/11 lessons, 32 paired solutions, zero errors; next is 2D Prefix.
 - Chapter 10 Touching-Boundary Semantics passed the JDK 25 draft audit: 2/7 lessons, 8 paired solutions, zero errors; next is Merge And Insert.
+- Chapter 08 Index State And Floyd passed the JDK 25 draft audit: all 10 lessons and 40 paired solutions are present with zero errors. The unlocked-combinations and review sections remain before the chapter build.
 

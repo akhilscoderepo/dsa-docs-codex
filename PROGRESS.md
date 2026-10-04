@@ -13,8 +13,8 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 04 | Hash maps and sets | content_complete_human_review_pending | 9/9 | human review |
 | 05 | Sorting and Java comparators | content_complete_build_pending | 9/9 | browser smoke/render, then human review |
 | 06 | Binary search | in_progress | 2/11 | Lower And Upper Bounds |
-| 07 | Prefix sums and difference arrays | in_progress | 4/11 | Earliest Balance |
-| 08 | Two pointers | in_progress | 5/10 | K-Sum Reduction |
+| 07 | Prefix sums and difference arrays | in_progress | 6/11 | Prefix XOR |
+| 08 | Two pointers | in_progress | 8/10 | Strings And Two Pointers |
 | 09 | Sliding window | content_complete_build_pending | 10/10 | HTML build and human review |
 | 10 | Intervals | in_progress | 1/7 | Touching-Boundary Semantics |
 | 11-41 | Remaining specifications | not_started | 0 | chapter 11 after active drafts |
@@ -55,4 +55,6 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Chapter 08 reached 5/10 lessons with 20 solutions and zero draft-audit errors; next is K-Sum Reduction.
 - The complete approved Chapter 09 exemplar was promoted to the canonical manuscript directory: 10 lessons, 45 solutions, zero draft-audit errors, and Java validated on JDK 25. Low-diversity and template-phrase warnings remain for human review.
 - Chapter 10 reached 1/7 lessons with 4 solutions and zero draft-audit errors; next is Touching-Boundary Semantics.
+- Parallel continuation advanced Chapter 07 through Remainder Classes: 6/11 lessons, 24 paired solutions, zero draft-audit errors; next is Prefix XOR.
+- Parallel continuation advanced Chapter 08 through Array Cycle State and the Sorting And Two Pointers combination: 8/10 lessons, 32 paired solutions, zero draft-audit errors; next is Strings And Two Pointers.
 

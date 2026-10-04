@@ -19,10 +19,10 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - chapter: `05-sorting-and-java-comparators`
 - owner: `codex-local-scheduled-pipeline`
 - started: `2026-10-03T20:00:00+05:30`
-- updated: `2026-10-04T09:33:01.2660172+05:30`
+- updated: `2026-10-04T09:34:24.0511369+05:30`
 - completed_lessons: `[01-ordering-contracts, 02-arrays-sort, 03-comparator-contracts, 04-object-ordering, 05-stability-and-ties, 06-sort-and-sweep, 07-sort-and-deduplicate, 08-sort-then-scan, 09-strings-maps-and-sorting]`
 - next_lesson: `release-build`
-- push_status: `push_pending`
+- push_status: `pushed at be4fd65`
 
 ## Decision log
 
@@ -44,4 +44,5 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Automation run on 2026-10-04 resumed the recorded lesson-08 boundary and preserved the pre-existing lesson-09 drafts. During repair, another process advanced HEAD from 9453aa1 to 4864436 and committed the live manuscript before its paired repair was complete. No earlier completed lesson was regenerated. Work stopped after the latest lesson-09 draft audit passed; next_lesson remains release-build.
 - The current chapter draft audit ran on Oracle JDK 25.0.1 with --release 25: 9 lessons, 36 exercises, 0 errors, 1 warning (no-human-review, left open for Akhil). Of 54 Java blocks, 48 compiled and 43 ran with assertions; 6 intentionally marked nocompile blocks were skipped. Lesson 09 now has independent randomized solution comparisons, own computed samples, and a trace generated from executable grouping code; the review ends with three rebuild tasks and a fresh composition problem.
 - Publication blockers verified this run: Node module resolution reports MODULE_NOT_FOUND for both jsdom and playwright-core. Smoke and Chromium render gates did not run. The installed stamp/build/audit tools bind only a Java digest and lack the required manuscriptDigest; the non-draft wrapper also treats no-human-review as fatal rather than a separately open human gate. These infrastructure discrepancies remain unresolved because the concurrent checkpoint required stopping. The existing untracked HTML is not a validated publication.
-- Remote verification failed: fatal: unable to access 'https://github.com/akhilscoderepo/dsa-docs-codex.git/': Failed to connect to github.com port 443 via 127.0.0.1 after 2063 ms: Could not connect to server. push_pending remains set until a successful push is confirmed.
+- Remote verification failed: fatal: unable to access 'https://github.com/akhilscoderepo/dsa-docs-codex.git/': Failed to connect to github.com port 443 via 127.0.0.1 after 2063 ms: Could not connect to server. The subsequent authorized push outside the restricted network succeeded: checkpoint be4fd65 reached origin/main.
+

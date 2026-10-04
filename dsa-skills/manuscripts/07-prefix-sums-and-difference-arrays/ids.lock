@@ -7,9 +7,14 @@
   "prefix-counts",
   "prefix-xor",
   "range-queries",
-  "remainder-classes"
+  "remainder-classes",
+  "two-dimensional-prefix"
  ],
  "exercises": [
+  "ps-2d-matrix-block-sum",
+  "ps-2d-range-sum-query",
+  "ps-2d-single-cell-rectangle",
+  "ps-2d-whole-matrix-query",
   "ps-balanced-prefix-zero",
   "ps-binary-subarrays-sum",
   "ps-contiguous-array",

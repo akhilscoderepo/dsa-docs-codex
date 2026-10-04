@@ -1,0 +1,27 @@
+{
+ "lessons": [
+  "exclusion-state",
+  "prefix-construction",
+  "prefix-counts",
+  "range-queries"
+ ],
+ "exercises": [
+  "ps-binary-subarrays-sum",
+  "ps-empty-prefix",
+  "ps-half-open-query",
+  "ps-nice-subarrays",
+  "ps-pivot-index",
+  "ps-prefix-averages",
+  "ps-prefix-suffix-maximums",
+  "ps-product-except-self",
+  "ps-product-with-zeros",
+  "ps-range-sum-immutable",
+  "ps-running-sum",
+  "ps-subarray-sum-k",
+  "ps-sum-except-self",
+  "ps-whole-array-query",
+  "ps-xor-range-query",
+  "ps-zero-target-count"
+ ],
+ "retired": []
+}

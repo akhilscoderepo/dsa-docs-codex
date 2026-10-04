@@ -9,11 +9,11 @@
  },
  "release_requested": "25",
  "release_effective": "25",
- "blocks": 41,
- "ok": 40,
+ "blocks": 47,
+ "ok": 46,
  "failed": 0,
  "skipped": 1,
  "not_validated": 0,
- "ran_with_assertions": 40,
- "digest": "ea09d537aa25a7a34ad83b90aff33367c2fa028391fff940eb5becf59dec9bad"
+ "ran_with_assertions": 45,
+ "digest": "42c95b4d797e1d13368a712bbabcdda632d4f15fe9ddd12b193b05fd752915e7"
 }

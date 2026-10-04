@@ -13,8 +13,8 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 04 | Hash maps and sets | content_complete_human_review_pending | 9/9 | human review |
 | 05 | Sorting and Java comparators | content_complete_human_review_pending | 9/9 | human review |
 | 06 | Binary search | in_progress | 3/11 | First True |
-| 07 | Prefix sums and difference arrays | in_progress | 7/11 | Earliest Balance |
-| 08 | Two pointers | in_progress | 8/10 | Strings And Two Pointers |
+| 07 | Prefix sums and difference arrays | in_progress | 7/11 | Difference Arrays |
+| 08 | Two pointers | in_progress | 9/10 | Index State And Floyd |
 | 09 | Sliding window | content_complete_human_review_pending | 10/10 | human review |
 | 10 | Intervals | in_progress | 1/7 | Touching-Boundary Semantics |
 | 11-41 | Remaining specifications | not_started | 0 | chapter 11 after active drafts |
@@ -59,6 +59,8 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Parallel continuation advanced Chapter 08 through Array Cycle State and the Sorting And Two Pointers combination: 8/10 lessons, 32 paired solutions, zero draft-audit errors; next is Strings And Two Pointers.
 - The user authorized continuous rolling batches: finish the active five chapters, immediately claim the next five unfinished chapters, and continue through Chapter 41 without waiting for another prompt. Parallel workers own separate chapter directories; only the coordinator edits shared state and Git.
 - Chapter 06 Lower And Upper Bounds passed the JDK 25 draft audit: 3/11 lessons, 12 paired solutions, zero errors; next is First True.
-- Chapter 07 Prefix XOR passed the JDK 25 draft audit: 7/11 lessons, 28 paired solutions, zero errors; next is Earliest Balance. The pre-existing Lesson 03 role advisory remains open for chapter completion.
+- Chapter 07 Prefix XOR passed the JDK 25 draft audit: 7/11 lessons, 28 paired solutions, zero errors; next is Difference Arrays. The pre-existing Lesson 03 role advisory remains open for chapter completion.
 - Chapters 05 and 09 passed source-bound HTML audits with jsdom smoke tests and real Chrome desktop/phone render checks. Both are content complete with only the human-owned review gate open.
+- The recovery ledger correction for Chapter 07 points to Difference Arrays: Earliest Balance was already released as lesson 05 in commit 14c860c.
+- Chapter 08 Strings And Two Pointers passed the JDK 25 draft audit: 9/10 lessons, 36 paired solutions, zero errors; next is Index State And Floyd.
 

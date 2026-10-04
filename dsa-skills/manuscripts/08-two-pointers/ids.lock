@@ -6,6 +6,7 @@
   "opposite-ends",
   "read-and-write",
   "sorting-and-two-pointers",
+  "strings-and-two-pointers",
   "three-way-partition",
   "two-way-partition"
  ],
@@ -36,6 +37,10 @@
   "tp-remove-sorted-duplicates",
   "tp-sort-colors",
   "tp-sort-parity",
+  "tp-strings-is-subsequence",
+  "tp-strings-reverse-string",
+  "tp-strings-valid-palindrome",
+  "tp-strings-valid-palindrome-ii",
   "tp-three-sum-closest",
   "tp-three-sum-dedup",
   "tp-three-way-pivot",

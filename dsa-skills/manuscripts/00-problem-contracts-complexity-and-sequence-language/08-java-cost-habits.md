@@ -1,16 +1,16 @@
 <!-- lesson-kind: standard -->
 <!-- lesson-id: java-cost-habits -->
-## Java Cost Habits
+## Java API Costs and Correctness Semantics
 
 <!-- stage: context -->
-### Convenient Calls Can Hide Quadratic Work
+### Library Calls Can Hide Quadratic Work
 
 An engineer builds an event processor that takes events off the front of a list and handles them one at a time, then writes a summary line for each event by appending text to a growing report string. In testing, with a few hundred events, it finishes before she can switch windows. On the first real night, with a hundred thousand events, it is still running when the morning shift arrives.
 
 She re-reads the code and finds no nested loops, so the usual quadratic suspects are absent. The slowness comes from two ordinary-looking library calls, each of which does a large hidden piece of work every time it is called. Writing a correct algorithm is only half of the job in Java, because the other half is knowing what the convenient calls actually do.
 
 <!-- stage: naive -->
-### Choose The Most Readable Call
+### Prefer Readable APIs with Known Costs
 
 The processor, written the way it first reads, looks like this.
 
@@ -28,14 +28,14 @@ static String processAll(List<Integer> events) {
 It is short and obviously correct. Each statement states its intent plainly, `remove(0)` takes the first event and `+` builds text, and a reviewer would have no reason to object. The loop runs once per event, which looks like O(n).
 
 <!-- stage: bottleneck -->
-### Repeated Linear Calls Become Quadratic
+### Repeated Linear Operations Become Quadratic
 
 Draining an `ArrayList` from the front is the first problem. Removing the element at index 0 shifts every later element one position to the left, which the class documents. So the first removal moves `n - 1` elements, the next moves `n - 2`, and the total is `n * (n - 1) / 2`, which is O(n^2). For 100,000 events that is about five billion element moves.
 
 Building a string with `+` in a loop is the second problem. Strings are immutable, so each concatenation creates a brand-new string and copies every character of the old one. After `k` steps the string has about `k` times a constant number of characters, so the total number of characters copied also grows as O(n^2) and reaches billions for a long report. Both costs are invisible in the source, because neither shows up as a loop. The loop count said O(n), and the library calls multiplied it by another factor of `n` each.
 
 <!-- stage: insight -->
-### Include Every API Cost
+### Include API Costs in Complexity Analysis
 
 Treat every library call in a loop as an operation whose cost must be added to the analysis. The code you write is only part of the work, and the call you do not see may be the dominant part.
 
@@ -48,12 +48,12 @@ Two more Java facts matter for correctness, not speed. **Reference equality**, w
 The invariant is that the cost and meaning of every library call you rely on must be known and included in the claimed bound. Convenience syntax never changes the contract you are supposed to satisfy.
 
 <!-- stage: variables -->
-### Check Cost Semantics And Representation
+### Verify API Complexity and Representation
 
 For each library call inside a loop, write three things beside it. First, its cost per call as a function of the sizes involved, and whether that cost is amortized. Second, whether it mutates its input or returns something new. Third, whether it compares by reference or by value, and whether it works on primitives or on boxed objects. A call you cannot describe on those three lines is a call you should look up before relying on it.
 
 <!-- stage: trace -->
-### Remove Four Front Elements
+### Trace Repeated Front Removal
 
 Take a list holding 10, 20, 30 and 40, and drain it with `remove(0)`. The first call removes 10 and shifts the other three values one place left, so three elements move. The second call removes what is now at the front, 20, and shifts the remaining two, so two elements move. The third call removes 30 and shifts the last one. The fourth call removes 40 and has nothing left to shift.
 
@@ -64,7 +64,7 @@ The totals are 3, then 2, then 1, then 0, which is 6 moves in all, and the formu
 ```
 
 <!-- stage: code -->
-### Replace Expensive Java Operations
+### Replace Costly Java Operations
 
 ```java
 import java.util.*;
@@ -106,7 +106,7 @@ Two more Java hazards belong on the same list. Boxed collections such as `List<I
 <!-- stage: exercises -->
 ### Exercises
 
-#### Front Removal
+#### Analyze ArrayList Front Removal
 <!-- id: pc-front-removal -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -137,7 +137,7 @@ When the first element is removed, which other elements must change position? Wh
 
 First rung: replaces a convenient call with an index so that the per-step cost becomes constant.
 
-#### String Construction
+#### Compare String Concatenation and StringBuilder
 <!-- id: pc-string-construction -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -168,7 +168,7 @@ Each time the string is extended, how many old characters are copied into the ne
 
 The costly call moves from list shifting to string copying, and the cure becomes a buffer that grows geometrically.
 
-#### Primitive Arrays
+#### Understand Arrays.asList with Primitive Arrays
 <!-- id: pc-primitive-arrays -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -199,7 +199,7 @@ Could an `int[]` be treated as an `Object[]`? What does the compiler pass to the
 
 The question moves from running time to meaning, because the call compiles and runs and still means something other than intended.
 
-#### Value Equality
+#### Distinguish Reference and Value Equality
 <!-- id: pc-value-equality -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

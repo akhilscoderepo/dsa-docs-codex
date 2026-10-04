@@ -1,16 +1,16 @@
 <!-- lesson-kind: standard -->
 <!-- lesson-id: constraint-signals -->
-## Constraint Signals
+## Analyzing Input Limits and Operation Budgets
 
 <!-- stage: context -->
-### Small Samples Hide Slow Code
+### Sample Inputs Hide Scalability Problems
 
 A teammate posts a pair-finding method for review. The task is to find two readings in a list whose sum equals a target, and the method passes all three sample inputs on the first run. She submits it to the grader and gets a time-limit failure on the fourth test. Nothing is wrong with the logic, which is the unsettling part. The method simply was never going to finish on the largest allowed input, and a glance at the last two lines of the problem statement would have told her so before she typed anything.
 
 Those lines are the constraints, and most people read them last, if at all. This lesson is about reading them first. A constraint is a promise about how big the input can get, and every promise rules some approaches in and others out before any code exists.
 
 <!-- stage: naive -->
-### Match The Sample First
+### Validate Correctness on Sample Inputs
 
 The habit that produced the failure is to translate the sample directly into code and trust it. For the pair task, the direct translation checks every pair of positions.
 
@@ -28,14 +28,14 @@ static boolean hasPairBrute(int[] nums, int target) {
 On a sample with five readings it does ten comparisons and returns instantly. It is a correct method and a reasonable first draft.
 
 <!-- stage: bottleneck -->
-### Ten Comparisons Grow To Billions
+### Pairwise Work Grows Quadratically
 
 Count the comparisons instead of timing the sample. For `n` readings there are `n * (n - 1) / 2` pairs, so the work grows as O(n^2). With `n = 5` that is 10 comparisons. With the stated maximum of `n = 100,000` it is 4,999,950,000, close to five billion, for a single call.
 
 A judge or an interview machine performs very roughly one hundred million simple steps in the time we are normally given, and the exact figure varies by language and hardware. Five billion is fifty times over that, so the failure is not bad luck or a slow laptop. The sample could not reveal it because the sample is tiny, and the method's cost depends on the largest legal input, not the one on the page. The method needs O(1) extra space, which is fine, and the time is the entire problem.
 
 <!-- stage: insight -->
-### Read Limits Before Coding
+### Evaluate Constraints Before Implementation
 
 Before choosing an approach, write down the largest legal input and compute how many steps each candidate would take on it. Compare that number to what the time limit allows. This takes ten seconds and eliminates whole families of solutions at once.
 
@@ -56,12 +56,12 @@ Each limit in a statement is a **constraint signal**, a hint about which growth 
 A second signal hides in the value range. If every value is tiny, a table indexed by value becomes affordable, and if values are huge, that table is impossible. A third signal is how many operations the problem asks for. The size of the data and the number of questions asked about it are two different quantities, and both belong in the arithmetic.
 
 <!-- stage: variables -->
-### Track Size Range And Work
+### Record Size Range and Workload
 
 Write down the largest input size, the range of the values, and the number of operations the problem will ask you to perform. Add the budget as a fourth line, about 10^8. For each approach you are considering, compute its step count at the maximum and compare it with the budget. Use `long` for that arithmetic, because squaring 100,000 already overflows a 32-bit `int`, and an overflowed estimate can look comfortably small.
 
 <!-- stage: trace -->
-### Increase The Input Tenfold
+### Project Growth at Larger Inputs
 
 Watch the pair method next to a sort-based method as the input grows. At `n = 10` the all-pairs count is 45 and a sort costs about 40 steps, so they look alike, and nobody learns anything from the sample. At `n = 1,000` all pairs reaches 499,500 against roughly 10,000 for sorting, and both are still instant. At `n = 100,000` the gap opens completely. All pairs needs 4,999,950,000 steps, which is far past the budget, while sorting needs about 1.7 million, which is a rounding error against it.
 
@@ -72,7 +72,7 @@ The lesson of the run is that the two methods are indistinguishable until the in
 ```
 
 <!-- stage: code -->
-### Calculate The Operation Budget
+### Estimate the Operation Budget
 
 ```java
 static final long BUDGET = 100_000_000L;
@@ -90,7 +90,7 @@ static boolean plausible(long stepsAtMax) { return stepsAtMax <= BUDGET; }
 All arithmetic is in `long`, and `n * (n - 1) / 2` multiplies before it divides, so the product `n * (n - 1)` is the thing that would overflow an `int`. The `nLogN` helper uses the bit length of `n - 1` as the ceiling of the base-2 logarithm, which is exact for powers of two. The helper is a thinking tool, so it stays coarse on purpose and ignores constants. Each call is O(1), and the method is only worth writing because the habit it builds, computing before coding, is worth having.
 
 <!-- stage: applicability -->
-### Let Constraints Filter Approaches
+### Eliminate Infeasible Algorithms
 
 Use this reading whenever a problem gives limits, which is nearly always. The invariant is that a proposed approach must stay within its operation budget and memory budget at the maximum legal input, not at the sample size. Before you commit to an idea, write one line such as "n up to 100,000, all pairs is 5 billion, too slow", and only then continue.
 
@@ -101,7 +101,7 @@ Java adds the overflow hazard already mentioned, plus the fact that boxed collec
 <!-- stage: exercises -->
 ### Exercises
 
-#### Budget Check
+#### Classify Algorithm Feasibility
 <!-- id: pc-budget-check -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -132,7 +132,7 @@ Do the estimate at the largest legal `n` and write the number out. Which two of 
 
 First rung of the ladder: replaces a feeling about speed with a computed step count at the maximum input.
 
-#### Small Domain
+#### Select a Frequency Table by Range
 <!-- id: pc-small-domain -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -163,7 +163,7 @@ The size of a value-indexed table is the size of the value range, not the number
 
 The signal changes from the input size to the value range, which decides whether a value-indexed table is affordable.
 
-#### Hidden Overflow
+#### Choose a Safe Accumulator Type
 <!-- id: pc-hidden-overflow -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -194,7 +194,7 @@ Multiply the largest element by the largest count and compare the product with t
 
 The question moves from running time to numeric range, so the constraint signal now decides the accumulator type.
 
-#### Query Pressure
+#### Choose Preprocessing for Repeated Queries
 <!-- id: pc-query-pressure -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

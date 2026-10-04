@@ -21,6 +21,7 @@ Each gate says how it is checked. "Script" means the named check code appears in
 ## Practice quality
 
 - Reader-facing problem titles use professional names; Build, Vary, Boundary and Recognize live in metadata and render as standardized progression badges.
+- The H1-H4 outline uses established technical terminology. Every heading is understandable without surrounding prose; coined labels, metaphors, narrative slogans and internal curriculum shorthand are release errors. Retitling must preserve permanent IDs.
 - Every exercise presents Problem Statement, Constraints, Examples, Prerequisites, Hint and Learning Objective as hierarchical academic subsections.
 - Every paired solution presents Algorithmic Solution and Complexity Analysis, and its Java comments explain the strategy, invariant-bearing decisions, and time/space cost without narrating obvious syntax.
 

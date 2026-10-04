@@ -7,6 +7,8 @@ description: Build self-contained interactive HTML textbook chapters from Markdo
 
 The Markdown manuscripts are the single source of truth. This skill turns a chapter directory into one HTML file with the CSS and JavaScript inlined, so it opens by double-click, works offline and on a phone, and makes no network requests. Fix content in the Markdown and rebuild; never hand-edit the HTML.
 
+The orientation manuscript may declare `<!-- chapter-title: ... -->`. Use that established technical title for the browser title, top bar and H1 unless the caller explicitly supplies `--title`. Section navigation labels come from each section's H2 rather than internal section-kind metadata, so the visible outline remains consistent with the manuscript.
+
 Only full lesson manuscripts are publishable inputs. A compact chapter specification, PDF-builder data object or generated lesson summary may scaffold authoring, but must never be rendered as though it were a completed chapter. The builder does not invent prose, hints, examples or solutions.
 
 ## Setup

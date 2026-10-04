@@ -1,7 +1,7 @@
 <!-- solutions-for: 08-java-cost-habits -->
-### Java Cost Habits
+### Java API Costs and Correctness Semantics
 
-#### Solution: Front Removal
+#### Solution: Analyze ArrayList Front Removal
 <!-- id: pc-front-removal -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -43,7 +43,7 @@ public final class FrontRemoval {
 }
 ```
 
-#### Solution: String Construction
+#### Solution: Compare String Concatenation and StringBuilder
 <!-- id: pc-string-construction -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -82,7 +82,7 @@ public final class StringConstruction {
 }
 ```
 
-#### Solution: Primitive Arrays
+#### Solution: Understand Arrays.asList with Primitive Arrays
 <!-- id: pc-primitive-arrays -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -120,7 +120,7 @@ public final class PrimitiveArrays {
 }
 ```
 
-#### Solution: Value Equality
+#### Solution: Distinguish Reference and Value Equality
 <!-- id: pc-value-equality -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

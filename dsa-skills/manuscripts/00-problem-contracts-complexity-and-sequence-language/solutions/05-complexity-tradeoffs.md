@@ -1,7 +1,7 @@
 <!-- solutions-for: 05-complexity-tradeoffs -->
-### Complexity Tradeoffs
+### Analyzing Time and Space Complexity
 
-#### Solution: Consecutive Loops
+#### Solution: Analyze Sequential Loops
 <!-- id: pc-consecutive-loops -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -34,7 +34,7 @@ public final class ConsecutiveLoops {
 }
 ```
 
-#### Solution: Triangular Work
+#### Solution: Analyze a Triangular Nested Loop
 <!-- id: pc-triangular-work -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -70,7 +70,7 @@ public final class TriangularWork {
 }
 ```
 
-#### Solution: Two Dimensions
+#### Solution: Analyze Two-Dimensional Traversal
 <!-- id: pc-two-dimensions -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -105,7 +105,7 @@ public final class TwoDimensions {
 }
 ```
 
-#### Solution: Sort Then Scan
+#### Solution: Compare Sorting with Pairwise Search
 <!-- id: pc-sort-then-scan -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

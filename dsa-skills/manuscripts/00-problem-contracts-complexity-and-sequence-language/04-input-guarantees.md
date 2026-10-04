@@ -1,16 +1,16 @@
 <!-- lesson-kind: standard -->
 <!-- lesson-id: input-guarantees -->
-## Input Guarantees
+## Using Input Guarantees in Algorithm Design
 
 <!-- stage: context -->
-### Negative Values Expose Initialization Bugs
+### Initialize Correctly for Negative Values
 
 A weather station logs overnight temperatures in degrees below and above freezing. A small method reports the warmest reading of the night, and for months it has reported sensible values. Then a cold snap arrives and every reading is negative. The report says the warmest reading was 0 degrees, a night that never reached it.
 
 A colleague proposes a fix, which is to return 0 whenever something looks wrong. That fix would also hide the night the logger was offline and sent an empty list. Both failures come from the same place. The method makes silent guesses about its input, and nobody wrote down what the caller had actually promised. This lesson separates what the input is guaranteed to be from what the code merely hopes.
 
 <!-- stage: naive -->
-### Start From Zero And Guard
+### Handle Empty Input Explicitly
 
 The first version initializes the answer to zero because zero feels neutral, and it adds a guard for the empty case because the code might crash.
 
@@ -28,14 +28,14 @@ static int warmest(int[] temps) {
 It never crashes, it passes every sample with a positive reading, and it looks careful. Each defensive line was added from habit, and no line is tied to a rule in the problem.
 
 <!-- stage: bottleneck -->
-### Invented Assumptions Break Correctness
+### Avoid Unsupported Input Assumptions
 
 The method returns 0 for `[-8, -3, -6]` when the true maximum is -3, and returns 0 for an empty array, which is not a maximum of anything. The time is O(n) and the space is O(1), so every cost the earlier lessons taught us to check looks fine. The damage is to correctness, and it is silent: no exception, no warning, just a plausible number.
 
 The defensive guard is a second kind of damage. It defines a behavior, "empty means 0", that the problem never requested. If the contract promises a non-empty array, the guard is dead code that suggests the opposite promise. If the contract allows empty input and expects an error, the guard hides it. In both cases the code now makes a claim about the problem that the author did not intend. Failures like this are expensive precisely because they pass review, since each line reads as careful.
 
 <!-- stage: insight -->
-### Use Guarantees Without Inventing Them
+### Rely Only on Documented Guarantees
 
 Every problem makes a set of promises about its input, and a solution is correct only for inputs that keep them. Collect those promises before writing code, and keep them in a separate list from anything your solution adds on top.
 
@@ -48,12 +48,12 @@ A guarantee also decides how to initialize. With a promised non-empty array, the
 A guarantee can also unlock a stronger conclusion. If an array is promised sorted, equal values must sit side by side in runs, which is a structural fact the code can use without checking.
 
 <!-- stage: variables -->
-### Record The Input Contract
+### Document the Input Contract
 
 For any problem, keep five lines in view. Is the input possibly empty or null, and does the statement say so. What are the value and size ranges. Is there an ordering promise such as sorted order. What is the shape, meaning whether a two-dimensional input is rectangular. And what must the method return when no answer exists. Under each line, mark whether the statement promises it or your code assumes it. Anything in the second category needs a check or a note.
 
 <!-- stage: trace -->
-### Compare Two Initial Values
+### Compare Maximum Initialization Strategies
 
 Run both initializations on `[-8, -3, -6]`. The zero-start version holds 0 from the beginning. At -8 the comparison fails because -8 is not larger than 0, so it stays 0. At -3 and at -6 the same thing happens. The loop ends, and it reports 0 for a night in which no reading reached 0.
 
@@ -64,7 +64,7 @@ The first-element version starts from -8, since that is a real reading. At -3 th
 ```
 
 <!-- stage: code -->
-### Express Contracts In The Signature
+### Represent Contracts in Method Signatures
 
 ```java
 // Contract: temps is non-empty. No guard, because the guarantee already covers it.
@@ -84,7 +84,7 @@ static java.util.OptionalInt warmestOrNone(int[] temps) {
 Both methods run in O(n) time with O(1) extra space. The first trusts its guarantee and says so in a comment, so a reader knows the missing guard is deliberate and not an oversight. The second spends one branch to make "no answer" explicit, and callers must handle it because the type forces them to. Neither one invents a value. A third option for a contract that allows empty input is to throw `IllegalArgumentException` and document it, which is also fine as long as the contract says so.
 
 <!-- stage: applicability -->
-### Read Guarantees Before Adding Guards
+### Add Guards Only When Required
 
 Run the contract sheet before choosing initial values and before adding guards. The invariant to hold is that code relies only on what the statement guarantees and checks or documents everything else. Initial values come from real input whenever the contract allows, and sentinels are chosen only when they cannot collide with a real answer.
 
@@ -95,7 +95,7 @@ Java adds specific traps. `int[][] grid` may be ragged, so `grid[0].length` is n
 <!-- stage: exercises -->
 ### Exercises
 
-#### Non-Empty Maximum
+#### Find the Maximum in Non-Empty Input
 <!-- id: pc-non-empty-maximum -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -126,7 +126,7 @@ Which real element of the input is guaranteed to exist? What does a starting val
 
 First rung: the starting value comes from the input itself because the contract guarantees it exists.
 
-#### Possibly Empty
+#### Define Behavior for Empty Input
 <!-- id: pc-possibly-empty -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -157,7 +157,7 @@ Is there any `int` value that can never be a legal maximum for this range? If no
 
 The contract now permits an empty input, so absence has to become part of the interface.
 
-#### Rectangular Or Ragged
+#### Handle Rectangular and Ragged Arrays
 <!-- id: pc-rectangular-or-ragged -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -188,7 +188,7 @@ What does `grid[0].length` measure, one row or all rows? What bound do you use i
 
 The shape promise changes from rectangular to ragged, so the inner loop bound moves from one shared length to each row's own length.
 
-#### Sorted Promise
+#### Use Sorted-Input Guarantees
 <!-- id: pc-sorted-promise -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

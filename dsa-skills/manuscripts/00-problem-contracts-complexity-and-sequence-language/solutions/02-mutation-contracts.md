@@ -1,7 +1,7 @@
 <!-- solutions-for: 02-mutation-contracts -->
-### Mutation Contracts
+### In-Place Mutation and Output Contracts
 
-#### Solution: Meaningful Prefix
+#### Solution: Interpret a Valid Output Prefix
 <!-- id: pc-meaningful-prefix -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -42,7 +42,7 @@ public final class MeaningfulPrefix {
 }
 ```
 
-#### Solution: Preserve Input
+#### Solution: Preserve the Input Array
 <!-- id: pc-preserve-input -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -83,7 +83,7 @@ public final class PreserveInput {
 }
 ```
 
-#### Solution: Aliased Input
+#### Solution: Analyze Aliased Array References
 <!-- id: pc-aliased-input -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -120,7 +120,7 @@ public final class AliasedInput {
 }
 ```
 
-#### Solution: Output Space
+#### Solution: Distinguish Output and Auxiliary Space
 <!-- id: pc-output-space -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

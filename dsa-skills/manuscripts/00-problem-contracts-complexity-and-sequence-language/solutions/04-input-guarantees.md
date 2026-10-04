@@ -1,7 +1,7 @@
 <!-- solutions-for: 04-input-guarantees -->
-### Input Guarantees
+### Using Input Guarantees in Algorithm Design
 
-#### Solution: Non-Empty Maximum
+#### Solution: Find the Maximum in Non-Empty Input
 <!-- id: pc-non-empty-maximum -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -39,7 +39,7 @@ public final class NonEmptyMaximum {
 }
 ```
 
-#### Solution: Possibly Empty
+#### Solution: Define Behavior for Empty Input
 <!-- id: pc-possibly-empty -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -73,7 +73,7 @@ public final class PossiblyEmpty {
 }
 ```
 
-#### Solution: Rectangular Or Ragged
+#### Solution: Handle Rectangular and Ragged Arrays
 <!-- id: pc-rectangular-or-ragged -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -116,7 +116,7 @@ public final class RectangularOrRagged {
 }
 ```
 
-#### Solution: Sorted Promise
+#### Solution: Use Sorted-Input Guarantees
 <!-- id: pc-sorted-promise -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

@@ -1,7 +1,7 @@
 <!-- solutions-for: 06-amortized-cost -->
-### Amortized Cost
+### Amortized Analysis of Dynamic Arrays
 
-#### Solution: Doubling Array
+#### Solution: Analyze Capacity Doubling
 <!-- id: pc-doubling-array -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -49,7 +49,7 @@ public final class DoublingArray {
 }
 ```
 
-#### Solution: Grow By One
+#### Solution: Analyze Linear Capacity Growth
 <!-- id: pc-grow-by-one -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -87,7 +87,7 @@ public final class GrowByOne {
 }
 ```
 
-#### Solution: One Expensive Append
+#### Solution: Identify a Worst-Case Append
 <!-- id: pc-one-expensive-append -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -127,7 +127,7 @@ public final class OneExpensiveAppend {
 }
 ```
 
-#### Solution: Potential Intuition
+#### Solution: Explain the Potential Method
 <!-- id: pc-potential-intuition -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

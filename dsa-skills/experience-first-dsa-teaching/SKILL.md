@@ -20,7 +20,7 @@ The compact specification is a curriculum contract, not finished textbook prose.
 Write exactly one lesson and its matching solution file per authoring run. Audit them, fix every error, and only then start the next lesson. An explicitly requested parallel batch may assign different chapters or lessons to independent workers, but each worker still stops at a complete lesson boundary. Output goes to `manuscripts/NN-<topic>/`:
 
 ```
-00-orientation.md              <!-- section: orientation -->
+00-orientation.md              <!-- section: orientation -->, <!-- chapter-title: established technical title -->
 NN-<lesson-slug>.md            <!-- lesson-kind: standard | combination -->, <!-- lesson-id: slug -->
 solutions/NN-<lesson-slug>.md  one solution record per exercise, same ids
 90-unlocked-combinations.md    <!-- section: unlocked-combinations -->
@@ -40,7 +40,7 @@ One rule set, applied everywhere:
 
 - A patient mentor speaking to a peer. Use "we" and "you", plain sentences, no hype.
 - Open with a concrete problem or scenario that exposes the decision. A short analogy is optional, not mandatory; omit decorative stories and switch to the precise term as soon as the state is visible.
-- Headings are short, concrete, and descriptive: at most 7 words, no colon, no period. Use standard terms and name the exact operation or concept. Prefer an active heading such as "Move The Left Pointer" to an abstract heading such as "Pointer Movement."
+- Headings are short, concrete, and descriptive: at most 7 words, no colon, no period. Use universally recognized computer-science or software-engineering terminology and name the exact operation, contract, failure mode, or algorithmic decision. A heading must make sense in a table of contents without the surrounding prose. Never preserve an author's coined label, creative metaphor, narrative slogan, or internal curriculum shorthand when a standard term exists. For example, use "Analyzing Input Limits and Operation Budgets," "In-Place Mutation and Output Contracts," and "Adversarial Test Cases and Manual Tracing" instead of opaque labels such as "Constraint Signals," "Mutation Contracts," or "Hostile Dry Runs."
 - Teach in prose. Bullets are for constraints and short enumerations, never for the explanation itself. No card grids, callout boxes, or repeated label blocks.
 - Behavior before vocabulary: show the repeated work or the failure first, then name the technique once, in the insight stage.
 - Prefer compact, exact prose over sheer length. Match the approved exemplar's clarity and completeness, not its word count. Remove any paragraph that does not change recognition, correctness, implementation or transfer.
@@ -73,6 +73,10 @@ Headings show the reader where each idea belongs. Keep the hierarchy structural 
 - Do not choose a heading level because of font size. The semantic relationship selects the level; CSS controls appearance.
 
 Apply the readability contract to headings too. Each heading names a concrete concept or action, uses standard terminology, and introduces only one idea. Avoid vague labels such as "The Process," heavy nominalizations such as "Execution Of Pointer Advancement," generic filler such as "Important Concepts," and headings that merely repeat the chapter title.
+
+Before release, read the H1-H4 outline without its body text. Every entry must identify the exact subject being taught or the exact task being solved. H2 lesson titles name established technical concepts; H3 titles name a specific operation, decision, analysis step, or failure mode; H4 exercise titles name the concrete problem. Rewrite any heading that needs a metaphor, story, or local vocabulary to be understood. Heading edits never change permanent lesson or exercise IDs.
+
+Declare the canonical H1 in the orientation file with `<!-- chapter-title: ... -->`. Do not rely on a directory slug to supply reader-facing terminology. The HTML builder uses this title for the page, browser tab, top bar, and chapter heading.
 
 ## The lesson stages
 

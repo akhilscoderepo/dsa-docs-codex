@@ -1,16 +1,16 @@
 <!-- lesson-kind: standard -->
 <!-- lesson-id: amortized-cost -->
-## Amortized Cost
+## Amortized Analysis of Dynamic Arrays
 
 <!-- stage: context -->
-### Occasional Resizes Distort One Call
+### A Resize Makes One Append Expensive
 
 You rent a storage unit for boxes and start with one that holds a single box. When it fills, you rent a unit twice the size and carry every box across. Most days you simply add a box, which takes seconds. Occasionally a day arrives when the unit is full, and the whole afternoon goes to moving.
 
 Ask how long adding a box takes and two honest answers exist. The worst single day takes as long as the whole move, and the typical day takes seconds. A budget that planned every day around the worst afternoon would be absurdly pessimistic, and a budget that ignored the move days would be wrong. Software sees the same pattern whenever a structure repairs or resizes itself now and then, and we need a way to price a whole sequence of operations without lying about either kind of day.
 
 <!-- stage: naive -->
-### Charge Every Append Its Worst Cost
+### Assign Worst-Case Cost to Every Append
 
 The cautious approach to cost is to take the most expensive single operation and multiply by the number of operations. A growing array that copies everything when it fills can be modeled like this.
 
@@ -24,14 +24,14 @@ static long worstCasePerAppend(long appends) {
 For one million appends it announces a total of about one trillion steps. That number comes from a real fact, since a single append can indeed copy a lot, and from a wrong multiplication, since not every append can.
 
 <!-- stage: bottleneck -->
-### Worst-Case Multiplication Overstates Total Work
+### Worst-Case Multiplication Overestimates Total Cost
 
 The worst-case product is O(n^2), and for `n = 1,000,000` it says 10^12. Counting the copies that a doubling array actually performs for that many appends gives roughly one million, a number that is O(n). The claim is wrong by a factor of about a million, and a team that believed it would reject a perfectly good design.
 
 The mistake is treating the expensive operation as if it happened every time. After a doubling copy of `c` elements, the array has `c` empty slots, so the next `c` appends cost almost nothing before another copy is needed. The expensive events are rare and they pay for themselves by creating room. The opposite danger is just as real. An array that grows by one slot each time really does cost O(n^2) in total, because every append copies everything, and the pessimistic estimate is accurate for that policy and not for doubling.
 
 <!-- stage: insight -->
-### Spread Resize Cost Across Appends
+### Distribute Resize Cost Across Appends
 
 The right question is not what the most expensive call costs, but what a long sequence of calls costs in total, divided evenly by the number of calls. That average over a worst-case sequence is the **amortized cost** per operation. It is a guarantee about whole sequences, with no randomness and no assumption about typical inputs.
 
@@ -44,12 +44,12 @@ Another view is a **potential**, a stored quantity that measures how much prepai
 The invariant behind every amortized argument is that, over any sequence of operations, the total amount charged is at least the total actual work done. It does not say any single call is cheap.
 
 <!-- stage: variables -->
-### Track Size Capacity And Copies
+### Track Size Capacity and Copy Count
 
 Track three numbers for the growing array. The size is how many values are stored. The capacity is how many slots are allocated, and a resize happens exactly when the size equals the capacity and one more value arrives. The copy count is the total number of elements moved by resizes so far. The amortized claim compares the copy count after `n` appends with `n` itself, so you will watch that ratio stay bounded under doubling and grow without limit under grow-by-one.
 
 <!-- stage: trace -->
-### Trace Eight Doubling Appends
+### Trace Capacity Doubling
 
 Start with capacity 1. The first append finds one free slot and writes, so no copy happens. The second append finds the array full, grows the capacity to 2, copies the single stored element and then writes. The third append finds capacity 2 full, grows to 4 and copies two elements. The fourth append fits without any work.
 
@@ -60,7 +60,7 @@ The fifth append triggers the largest repair so far. Capacity 4 is full, so the 
 ```
 
 <!-- stage: code -->
-### Measure A Growth Policy
+### Compare Dynamic Array Growth Policies
 
 ```java
 static long copiesForAppends(int appends, boolean doubling) {
@@ -80,7 +80,7 @@ static long copiesForAppends(int appends, boolean doubling) {
 The loop mirrors what a growable array does when a value arrives. The condition `size == capacity` is the only place a resize happens, and the cost of that resize is the number of elements already stored. Switching the policy flag changes the capacity update and leaves the accounting identical, which is the point of the exercise. Both runs take O(appends) time to simulate, and the counts they return differ enormously, linear for doubling and quadratic for growing by one.
 
 <!-- stage: applicability -->
-### Amortized Bounds Cover Operation Sequences
+### Distinguish Amortized and Worst-Case Bounds
 
 Reach for amortized reasoning when an operation is usually cheap but sometimes does a large repair, and the repair creates room for many cheap calls afterward. Typical cases are growable arrays, hash table resizing, and a queue built from two stacks, which a later chapter uses. The invariant is that the total charged cost over any sequence of operations pays for the total actual cost.
 
@@ -91,7 +91,7 @@ Java's `ArrayList` documents that `add` runs in amortized constant time, and int
 <!-- stage: exercises -->
 ### Exercises
 
-#### Doubling Array
+#### Analyze Capacity Doubling
 <!-- id: pc-doubling-array -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -122,7 +122,7 @@ Which appends find the array full? How many elements are stored at the moment of
 
 First rung: turns the idea of occasional repair into a concrete tally of copies.
 
-#### Grow By One
+#### Analyze Linear Capacity Growth
 <!-- id: pc-grow-by-one -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -153,7 +153,7 @@ With growth by one, how often is the array full, and how many elements are store
 
 Only the growth rule changes, and it converts a linear total into a quadratic one.
 
-#### One Expensive Append
+#### Identify a Worst-Case Append
 <!-- id: pc-one-expensive-append -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -184,7 +184,7 @@ When is the array full after exactly a power of two values? How many copies came
 
 The question moves from the total to a single spike, and the exercise asks you to explain why one costly call does not break the average.
 
-#### Potential Intuition
+#### Explain the Potential Method
 <!-- id: pc-potential-intuition -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

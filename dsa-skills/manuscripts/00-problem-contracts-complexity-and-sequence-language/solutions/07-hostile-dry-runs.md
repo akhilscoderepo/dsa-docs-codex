@@ -1,7 +1,7 @@
 <!-- solutions-for: 07-hostile-dry-runs -->
-### Hostile Dry Runs
+### Adversarial Test Cases and Manual Tracing
 
-#### Solution: Singleton
+#### Solution: Test a Single-Element Input
 <!-- id: pc-singleton -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -43,7 +43,7 @@ public final class Singleton {
 }
 ```
 
-#### Solution: All Equal
+#### Solution: Test Duplicate Values
 <!-- id: pc-all-equal -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -82,7 +82,7 @@ public final class AllEqual {
 }
 ```
 
-#### Solution: Numeric Extremes
+#### Solution: Test Integer Overflow
 <!-- id: pc-numeric-extremes -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -111,7 +111,7 @@ public final class NumericExtremes {
 }
 ```
 
-#### Solution: Mutation Order
+#### Solution: Trace Overlapping Array Mutation
 <!-- id: pc-mutation-order -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

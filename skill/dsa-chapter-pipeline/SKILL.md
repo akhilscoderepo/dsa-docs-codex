@@ -38,6 +38,8 @@ Apply the authoring skill's readability contract before accepting a lesson. The 
 
 Reject a manuscript with a flat or skipped heading structure. The generated chapter title owns H1; lessons and chapter sections use H2; lesson stages use H3; exercises and solution records use H4; their academic subsections use H5. Headings name one concrete action or standard concept and never use a level merely to change visual size.
 
+Apply a terminology gate to the complete H1-H4 outline. Every heading must use established computer-science or software-engineering phrasing and remain meaningful when read by itself in the table of contents. Replace coined labels, metaphors, narrative slogans, and internal authoring shorthand with the concrete concept, operation, contract, failure mode, or problem task. H2 names the technical subject, H3 names the specific analysis or operation, and H4 names the exact exercise. Preserve stable IDs when retitling headings.
+
 Do not expose Build, Vary, Boundary, or Recognize as reader-facing problem headings. Preserve those roles as exercise metadata for staircase audits, then present each problem through Problem Statement, Constraints, Examples, Hint, and Algorithmic Solution sections. Require Java comments that explain the invariant, control-flow decisions, and complexity without narrating obvious syntax.
 
 ## Persistence

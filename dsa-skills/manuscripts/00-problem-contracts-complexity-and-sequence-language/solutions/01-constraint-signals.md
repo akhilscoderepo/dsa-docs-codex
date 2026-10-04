@@ -1,7 +1,7 @@
 <!-- solutions-for: 01-constraint-signals -->
-### Constraint Signals
+### Analyzing Input Limits and Operation Budgets
 
-#### Solution: Budget Check
+#### Solution: Classify Algorithm Feasibility
 <!-- id: pc-budget-check -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -38,7 +38,7 @@ public final class BudgetCheck {
 }
 ```
 
-#### Solution: Small Domain
+#### Solution: Select a Frequency Table by Range
 <!-- id: pc-small-domain -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -75,7 +75,7 @@ public final class SmallDomain {
 }
 ```
 
-#### Solution: Hidden Overflow
+#### Solution: Choose a Safe Accumulator Type
 <!-- id: pc-hidden-overflow -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -107,7 +107,7 @@ public final class HiddenOverflow {
 }
 ```
 
-#### Solution: Query Pressure
+#### Solution: Choose Preprocessing for Repeated Queries
 <!-- id: pc-query-pressure -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

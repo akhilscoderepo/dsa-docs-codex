@@ -1,7 +1,7 @@
 <!-- solutions-for: 03-sequence-language -->
-### Sequence Language
+### Sequence Definitions and Index Relationships
 
-#### Solution: Classify [2,4]
+#### Solution: Classify a Candidate Sequence
 <!-- id: pc-classify-2-4 -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -42,7 +42,7 @@ public final class ClassifyPositions {
 }
 ```
 
-#### Solution: Order Matters
+#### Solution: Verify Relative Order
 <!-- id: pc-order-matters -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -74,7 +74,7 @@ public final class OrderMatters {
 }
 ```
 
-#### Solution: Empty Choice
+#### Solution: Apply the Empty-Sequence Contract
 <!-- id: pc-empty-choice -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -113,7 +113,7 @@ public final class EmptyChoice {
 }
 ```
 
-#### Solution: Contiguous Maximum
+#### Solution: Compare Subarray and Subsequence Optimization
 <!-- id: pc-contiguous-maximum -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

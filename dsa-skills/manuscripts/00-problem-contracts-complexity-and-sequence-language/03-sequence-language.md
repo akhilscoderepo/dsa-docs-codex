@@ -1,16 +1,16 @@
 <!-- lesson-kind: standard -->
 <!-- lesson-id: sequence-language -->
-## Sequence Language
+## Sequence Definitions and Index Relationships
 
 <!-- stage: context -->
-### Choose Days Or A Streak
+### Distinguish Selection from Contiguity
 
 A product manager asks an analyst for the best stretch of days in a week of sales changes: `[2, -5, 3, 4]`. The analyst returns 9, reasoning that the good days are 2, 3 and 4. The manager looks at the calendar and says there is no stretch of days that adds up to 9. The most any unbroken run of days can give is 7, from the last two days, and the day with the loss of 5 sits in the middle of the only run that includes both the 2 and the 3.
 
 The analyst answered a different question than the one asked. Both are reasonable questions, and the words that separate them are small. Problem statements use a handful of such words constantly, and a wrong reading of one of them produces a correct-looking answer to the wrong problem.
 
 <!-- stage: naive -->
-### Keep Only Profitable Days
+### Select Noncontiguous Profitable Elements
 
 The quick reading of "best portion of the list" is to keep whatever helps. For a sum, that means adding up every positive value and ignoring the rest.
 
@@ -27,14 +27,14 @@ static int bestPortionLoose(int[] nums) {
 On `[2, -5, 3, 4]` this returns 9. It is fast, it is simple, and it matches the sample if the sample happens to be a pick-any-days question. It is a correct answer to that question and a wrong answer to the streak question.
 
 <!-- stage: bottleneck -->
-### Contiguity Changes The Search Space
+### Contiguity Restricts Candidate Sequences
 
 The difference is the size of what is being searched. A run of consecutive days is fixed by where it starts and where it ends, so a list of `n` values has `n * (n + 1) / 2` non-empty runs, which is O(n^2). For `n = 20` that is 210 candidates. Picking any days while keeping their order, or picking any days at all, gives `2^n - 1` non-empty choices. For `n = 20` that is 1,048,575 candidates, and at `n = 60` it is beyond what any machine can enumerate.
 
 So the two readings do not only give different answers on one sample, they call for different algorithms with different costs. A method that quietly solves the larger space, as the greedy sum above does, can be fast because the larger space has an easy answer for sums, and it is still wrong for the smaller space, because the smaller space imposes a restriction the greedy sum ignores. The restriction is what the lesson names.
 
 <!-- stage: insight -->
-### Preserve The Required Index Relation
+### Preserve Required Index Relationships
 
 Each of the three words describes a rule about the positions you may choose. Write the rule down before reading the examples.
 
@@ -47,12 +47,12 @@ Every subarray is also a subsequence, and every subsequence is also a subset, bu
 The invariant that decides a classification is positional. Write the positions of the candidate's values in the original array. If those positions are consecutive, the candidate is a subarray. If they strictly increase but have gaps, it is a subsequence and not a subarray. If they appear in any other order, it is only a subset. Two further words need the same care. A prefix is a subarray that starts at the first position, and a suffix is one that ends at the last position.
 
 <!-- stage: variables -->
-### Track Positions Gaps And Order
+### Track Indices Gaps and Relative Order
 
 Classification needs one list and two questions. The list is the positions of the chosen values in the original array, read in the order the candidate lists them. The first question is whether each position is exactly one more than the previous one, which tests for no gaps. The second is whether each position is larger than the previous one, which tests for preserved order. Repeated values make this slightly harder, because the same value may sit at several positions, so the question becomes whether some assignment of positions satisfies the rule.
 
 <!-- stage: trace -->
-### Classify Two Candidate Sequences
+### Compare Subarrays Subsequences and Subsets
 
 Take the array `[1, 2, 3, 4]` and the candidate `[2, 4]`. The value 2 lives at position 1 and the value 4 at position 3. The positions rise, from 1 to 3, so the original order is preserved. The gap between them is 2, not 1, so position 2 was skipped. That makes the candidate a subsequence and a subset and rules out a subarray.
 
@@ -63,7 +63,7 @@ Now take the candidate `[4, 2]` on the same array. The value 4 lives at position
 ```
 
 <!-- stage: code -->
-### Classify From Source Positions
+### Classify Sequences by Source Indices
 
 ```java
 // True when cand appears in nums as one unbroken block.
@@ -89,7 +89,7 @@ static boolean isInOrder(int[] nums, int[] cand) {
 The first method tries every start position and compares a block, so it costs O(n * m) for a candidate of length `m`. The second is a single left-to-right scan, which is O(n), and its greedy choice of the earliest match is safe because taking an earlier position never makes a later match harder. The two methods differ by exactly the rule the lesson stated, a block versus an ordered selection. A subset test would ignore order and compare counts of values, which a later chapter on hash maps makes cheap.
 
 <!-- stage: applicability -->
-### Read The Sequence Term First
+### Identify the Required Sequence Type
 
 Whenever a statement says subarray, substring, subsequence, subset, prefix or suffix, restate its index rule in one line before looking at the examples. The invariant is that the answer must satisfy the stated position rule exactly, not merely resemble a sample. A fast greedy that passes the samples but answers a larger search space than the one asked is the typical failure.
 
@@ -100,7 +100,7 @@ Java gives mild support for the contiguous case and none for the others. `String
 <!-- stage: exercises -->
 ### Exercises
 
-#### Classify [2,4]
+#### Classify a Candidate Sequence
 <!-- id: pc-classify-2-4 -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -131,7 +131,7 @@ Write down the position of each candidate value. Are the positions consecutive, 
 
 First rung: replaces an impression of similarity with a test on positions.
 
-#### Order Matters
+#### Verify Relative Order
 <!-- id: pc-order-matters -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -162,7 +162,7 @@ What happens to the positions when you list 4 before 2? Which of the three rules
 
 The candidate's order flips, so the test moves from checking gaps to checking direction.
 
-#### Empty Choice
+#### Apply the Empty-Sequence Contract
 <!-- id: pc-empty-choice -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -193,7 +193,7 @@ What is the sum of an empty block, and does the contract say such a block counts
 
 The legal set of candidates changes by one element, the empty selection, and that one element flips the answer.
 
-#### Contiguous Maximum
+#### Compare Subarray and Subsequence Optimization
 <!-- id: pc-contiguous-maximum -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

@@ -1,16 +1,16 @@
 <!-- lesson-kind: standard -->
 <!-- lesson-id: complexity-tradeoffs -->
-## Complexity Tradeoffs
+## Analyzing Time and Space Complexity
 
 <!-- stage: context -->
-### Similar Code Can Scale Differently
+### Similar Code Can Have Different Growth
 
 Two engineers review the same method during a code review. The method scans a list of orders once to find the largest, then scans it a second time to count how many orders match that largest value. One engineer says it has two loops, so it must be quadratic and should be rewritten. The other says it is obviously linear and fine as it is.
 
 They are not arguing about taste, because one of them is simply wrong, and the way to tell is to count how many times the innermost line runs instead of counting the loops on the screen. The same dispute appears whenever someone compares two solutions that spend different resources, one using more memory to save time, another changing the input to save both. Choosing between them requires a shared way to say what each one costs.
 
 <!-- stage: naive -->
-### Count Each Loop Separately
+### Add Costs of Sequential Loops
 
 The popular shortcut is to read the number of loops as the exponent. One loop is linear, two loops are quadratic, three loops are cubic. Here are two methods that a loop-counter would treat identically.
 
@@ -34,14 +34,14 @@ static int pairCount(int[] orders) {
 Both have two `for` keywords that touch the array. By the shortcut they would be classified the same way. They are not the same.
 
 <!-- stage: bottleneck -->
-### Nesting Multiplies The Work
+### Multiply Costs of Nested Loops
 
 Count how often the innermost statement runs. In `twoScans`, the first loop runs `n` times and the second loop runs `n` times afterward, so the total is `n + n = 2n`, which is O(n). In `pairCount` the outer loop runs `n` times and the inner loop runs a shrinking number of times, `n - 1`, then `n - 2`, down to 0. The total is `n * (n - 1) / 2`, which is O(n^2).
 
 The cost of the wrong classification is real in both directions. Calling `twoScans` quadratic leads someone to rewrite correct, fast code and risk introducing a bug. Calling `pairCount` linear leads someone to accept a method that needs five billion steps at `n = 100,000`. A rule that cannot distinguish them is worse than no rule, because it produces confident wrong answers. The correct tool is to count executions of the dominant statement.
 
 <!-- stage: insight -->
-### Combine Bounds By Control Flow
+### Combine Complexity by Control Flow
 
 Loops that run one after another add their costs. Loops placed inside one another multiply the cost of the inner body by the number of times it is reached. After counting, the final bound keeps only the part that grows fastest.
 
@@ -54,12 +54,12 @@ A bound is meaningful only for a named input. The bound should describe the domi
 A **tradeoff** exists when two correct solutions spend different resources: time, extra memory, a preprocessing step, or permission to change the input. Comparing them means writing each one's cost in the same units and stating what each one gives up. Sorting first costs O(n log n) and may reorder or copy the data, and it can replace an all-pairs search with a single pass. The honest comparison is that you pay a modest cost to buy a large one, and that you give up the original order.
 
 <!-- stage: variables -->
-### Name The Dominant Operation
+### Identify the Dominant Operation
 
 Name three things before computing a bound. The first is the size variable, `n`, and any second dimension such as `rows` and `cols`, which must not be silently merged into one letter. The second is the exact operation you are counting, such as comparisons, array reads or element copies. The third is the shape of the loops, whether they are sequential, nested with a fixed inner bound, or nested with an inner bound that shrinks or depends on the outer index.
 
 <!-- stage: trace -->
-### Count A Shrinking Inner Loop
+### Count a Triangular Nested Loop
 
 Take `pairCount` with `n = 4`. The outer index `i` is 0 and the inner index `j` runs 1, 2 and 3, so the statement executes three times. With `i` equal to 1 the inner index runs 2 and 3, which adds two executions, and with `i` equal to 2 it runs only 3, which adds one. With `i` equal to 3 the inner loop has nothing left to run.
 
@@ -70,7 +70,7 @@ The total is 3 + 2 + 1 + 0, which is 6, and the formula `n * (n - 1) / 2` gives 
 ```
 
 <!-- stage: code -->
-### Count Executions In Java
+### Count Executed Operations in Java
 
 ```java
 static long countTwoScans(int n) {
@@ -98,7 +98,7 @@ static long countGrid(int rows, int cols) {
 Each counter mirrors the loop structure of the method it models, and `steps++` stands for the dominant statement. The first returns `2n`, the second `n * (n - 1) / 2` and the third `rows * cols`. The counters are written with `long` because the triangular count for `n = 100,000` already exceeds what an `int` can hold. Their own running time equals the count they return, which is why they are only used on small inputs to check a formula before trusting it.
 
 <!-- stage: applicability -->
-### State The Bound Precisely
+### State Complexity in Relevant Variables
 
 Count executions of the dominant statement whenever you claim a time or space bound, and say which input the bound describes. The invariant is that the stated bound describes the dominant work on the worst legal input, in units that the problem's variables can express. If there are two size variables, the bound uses both.
 
@@ -109,7 +109,7 @@ Java adds hidden costs that loop counting misses. A library call inside a loop, 
 <!-- stage: exercises -->
 ### Exercises
 
-#### Consecutive Loops
+#### Analyze Sequential Loops
 <!-- id: pc-consecutive-loops -->
 <!-- role: Build -->
 <!-- source: Author exercise -->
@@ -140,7 +140,7 @@ Do the executions of the second loop depend on how many times the first loop ran
 
 First rung: separates adding sequential work from multiplying nested work.
 
-#### Triangular Work
+#### Analyze a Triangular Nested Loop
 <!-- id: pc-triangular-work -->
 <!-- role: Vary -->
 <!-- source: Author exercise -->
@@ -171,7 +171,7 @@ Add up how many inner iterations happen for `i = 0`, then for `i = 1`, and so on
 
 The inner bound now depends on the outer index, so the total is a sum and not a simple product.
 
-#### Two Dimensions
+#### Analyze Two-Dimensional Traversal
 <!-- id: pc-two-dimensions -->
 <!-- role: Boundary -->
 <!-- source: Author exercise -->
@@ -202,7 +202,7 @@ If one dimension is tiny, what does the product look like? What would you write 
 
 A second size variable appears, and the bound must keep both instead of merging them.
 
-#### Sort Then Scan
+#### Compare Sorting with Pairwise Search
 <!-- id: pc-sort-then-scan -->
 <!-- role: Recognize -->
 <!-- source: Author exercise -->

@@ -430,10 +430,24 @@ def style_checks(rep, corpus):
         for ph in FILLER:
             if ph in low:
                 rep.err(f, "filler", f"filler phrase: '{ph}'")
-        for h in re.findall(r"(?m)^(#{2,3}) (.+?)\s*$", strip_fences(text)):
+        nonstandard_headings = {
+            "constraint signals",
+            "mutation contracts",
+            "sequence language",
+            "input guarantees",
+            "complexity tradeoffs",
+            "amortized cost",
+            "hostile dry runs",
+            "java cost habits",
+        }
+        for h in re.findall(r"(?m)^(#{2,4}) (.+?)\s*$", strip_fences(text)):
             t = h[1]
-            if ":" in t or t.endswith(".") or len(t.split()) > 7:
+            visible_title = re.sub(r"^Solution:\s*", "", t, flags=re.I).strip()
+            if ":" in visible_title or visible_title.endswith(".") or len(visible_title.split()) > 7:
                 rep.err(f, "heading-style", f"heading '{t}': use a short descriptive title (no colon, no period, at most 7 words)")
+            visible = visible_title.lower()
+            if visible in nonstandard_headings:
+                rep.err(f, "heading-terminology", f"heading '{t}' uses local shorthand; replace it with the established technical concept or operation")
         for p in re.split(r"\n\s*\n", prose(text)):
             p = p.strip()
             if not p or FIELD_PARA.match(p):

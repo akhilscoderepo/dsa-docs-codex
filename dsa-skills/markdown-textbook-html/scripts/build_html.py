@@ -221,7 +221,13 @@ def main():
     d = Path(a.chapter_dir)
     m = re.match(r"(\d+)-(.*)", d.name)
     num = a.chapter or (m.group(1) if m else "00")
-    title = a.title or (m.group(2).replace("-", " ").title() if m else d.name)
+    declared_title = None
+    for source in sorted(d.glob("*.md")):
+        tm = re.search(r"<!--\s*chapter-title:\s*(.*?)\s*-->", source.read_text(encoding="utf-8"))
+        if tm:
+            declared_title = tm.group(1).strip()
+            break
+    title = a.title or declared_title or (m.group(2).replace("-", " ").title() if m else d.name)
     stamp = None
     if a.validation:
         stamp = json.loads(Path(a.validation).read_text(encoding="utf-8"))
@@ -245,7 +251,8 @@ def main():
             main_parts.append(h)
         elif s:
             kind = s.group(1)
-            label = {"orientation": "Orientation", "unlocked-combinations": "Unlocked combinations", "review": "Review"}.get(kind, kind.title())
+            heading = re.search(r"(?m)^##\s+(.+?)\s*$", text)
+            label = heading.group(1).strip() if heading else kind.replace("-", " ").title()
             sid = f"sec-{f.stem}"
             nav.append(("front" if kind == "orientation" else "back", f'<li><a href="#{sid}"><span>{label}</span></a></li>'))
             sec = f'<section class="chapter-section" id="{sid}">{B.render(text)}</section>'
@@ -257,7 +264,7 @@ def main():
     lessons = "".join(x for g, x in nav if g == "lesson")
     back = "".join(x for g, x in nav if g == "back")
     navhtml = ('<input id="search" type="search" placeholder="Search this chapter" aria-label="Search this chapter"><div id="search-results"></div>'
-               f'<ol>{front}</ol><div class="grp">Lessons</div><ol>{lessons}</ol><div class="grp">Wrap-up</div><ol>{back}<li><a href="#my-notes"><span>My notes</span></a></li></ol>')
+               f'<ol>{front}</ol><div class="grp">Technical Lessons</div><ol>{lessons}</ol><div class="grp">Review and Resources</div><ol>{back}<li><a href="#my-notes"><span>My Notes</span></a></li></ol>')
     notes = ('<section class="mynotes" id="my-notes"><h2>My Notes</h2><p>Write what you would tell yourself before an interview: the recognition cues you missed, '
              'the invariants you broke, and the problems to repeat. Notes are saved in this browser only, so export a backup now and then.</p>'
              '<label for="chapter-notes"><strong>Chapter notes</strong> <span id="chapter-saved" class="src"></span></label>'

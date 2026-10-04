@@ -1,9 +1,9 @@
 <!-- section: review -->
-## Review
+## Foundation Review and Self-Assessment
 
 Use this section after you finish the lessons, and again a few days later. The questions describe situations without naming the habit, so decide before you open the options. They test recognition and prediction, which a guided ladder of exercises does not.
 
-### Test Pattern Recognition
+### Assess Pattern Recognition
 
 ```quiz
 {"id":"pc-rev-budget","q":"A problem allows n up to 200,000 and asks for the count of pairs with a given difference. A teammate proposes checking every pair. What does the constraint signal say?","options":["Fine, because the sample has only six values.","Too slow: about 2 * 10^10 pair checks is far past a budget near 10^8.","Fine, because pairs are checked with simple subtraction.","Too slow only if the values are negative."],"answer":1,"explain":"The count of pairs is n * (n - 1) / 2, which at n = 200,000 is about 2 * 10^10. The sample size is irrelevant, and the cost of each comparison does not change the growth class."}
@@ -37,6 +37,6 @@ Use this section after you finish the lessons, and again a few days later. The q
 {"id":"pc-rev-java","q":"Which line inside a loop over n items can silently make the loop quadratic?","options":["total += list.get(i);","list.remove(0);","builder.append(ch);","count++;"],"answer":1,"explain":"Removing at index 0 of an ArrayList shifts every later element, so each call costs O(n). The other lines are constant or amortized constant per call."}
 ```
 
-### Rebuild The Core Reasoning
+### Reconstruct the Core Reasoning
 
 Close this page and answer from memory, then check against the lessons. State the contract sheet for a problem of your choice in five lines. Write the loop that counts the steps of a nested loop whose inner index starts one past the outer index, and give its closed form. Explain in two sentences why a doubling array has amortized constant append cost, using either credit or prepaid room. Name three Java calls whose cost or meaning surprises people in a loop, and state the cheaper alternative for each.

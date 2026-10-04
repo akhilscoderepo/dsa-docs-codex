@@ -3,12 +3,16 @@
   "exact-search",
   "first-and-last",
   "first-true",
-  "lower-and-upper-bounds"
+  "lower-and-upper-bounds",
+  "peak-search"
  ],
  "exercises": [
   "bs-complete-target-range",
   "bs-descending-target",
+  "bs-endpoint-peak",
   "bs-exact-target",
+  "bs-find-any-peak",
+  "bs-find-in-mountain-array",
   "bs-first-bad-version",
   "bs-first-occurrence",
   "bs-first-true-boolean",
@@ -16,6 +20,7 @@
   "bs-last-occurrence",
   "bs-no-true-value",
   "bs-outside-range",
+  "bs-peak-index-mountain",
   "bs-recognize-first-bad",
   "bs-recognize-row-major",
   "bs-search-insert-position",

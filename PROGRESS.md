@@ -12,7 +12,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 03 | Strings | content_complete_human_review_pending | 7/7 | human review |
 | 04 | Hash maps and sets | content_complete_human_review_pending | 9/9 | human review |
 | 05 | Sorting and Java comparators | content_complete_human_review_pending | 9/9 | human review |
-| 06 | Binary search | in_progress | 4/11 | Peak Search |
+| 06 | Binary search | in_progress | 5/11 | Rotated Minimum |
 | 07 | Prefix sums and difference arrays | in_progress | 10/11 | Prefix State And Maps |
 | 08 | Two pointers | content_complete_human_review_pending | 10/10 | human review |
 | 09 | Sliding window | content_complete_human_review_pending | 10/10 | human review |
@@ -72,4 +72,5 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Chapter 08 HTML passed the structural audit, jsdom smoke test, and real Chrome desktop/phone render checks with zero HTML warnings. Only human review remains.
 - Chapter 10 Merge And Insert passed the JDK 25 draft audit: 3/7 lessons, 12 paired solutions, zero errors; next is Two-List Intersection.
 - Chapter 07 2D Difference passed the JDK 25 draft audit: 10/11 lessons, 40 paired solutions, zero errors; next is Prefix State And Maps.
+- Chapter 06 Peak Search passed the JDK 25 draft audit: 5/11 lessons, 20 paired solutions, zero errors; next is Rotated Minimum.
 

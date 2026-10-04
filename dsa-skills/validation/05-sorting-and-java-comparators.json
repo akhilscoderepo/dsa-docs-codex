@@ -10,10 +10,10 @@
  "release_requested": "25",
  "release_effective": "25",
  "blocks": 54,
- "ok": 47,
+ "ok": 48,
  "failed": 0,
- "skipped": 7,
+ "skipped": 6,
  "not_validated": 0,
  "ran_with_assertions": 43,
- "digest": "5dc154c22d42f6b1f02860247e67d53ac739ed2ba06fd288d5b10d9d6f9b7966"
+ "digest": "0922a4f37b2b9741c5edffafbc310752064781cf67d2ab9879b68be7c321bece"
 }

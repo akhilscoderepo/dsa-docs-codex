@@ -1,7 +1,8 @@
 {
  "lessons": [
   "exact-search",
-  "first-and-last"
+  "first-and-last",
+  "lower-and-upper-bounds"
  ],
  "exercises": [
   "bs-complete-target-range",
@@ -9,9 +10,13 @@
   "bs-exact-target",
   "bs-first-occurrence",
   "bs-last-occurrence",
+  "bs-outside-range",
   "bs-recognize-first-bad",
   "bs-recognize-row-major",
-  "bs-two-element-proof"
+  "bs-search-insert-position",
+  "bs-smallest-greater-letter",
+  "bs-two-element-proof",
+  "bs-upper-bound"
  ],
  "retired": []
 }

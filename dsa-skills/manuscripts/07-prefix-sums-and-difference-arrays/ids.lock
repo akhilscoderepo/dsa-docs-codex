@@ -4,6 +4,7 @@
   "exclusion-state",
   "prefix-construction",
   "prefix-counts",
+  "prefix-xor",
   "range-queries",
   "remainder-classes"
  ],
@@ -12,6 +13,7 @@
   "ps-binary-subarrays-sum",
   "ps-contiguous-array",
   "ps-continuous-divisible",
+  "ps-count-xor-k",
   "ps-divisible-subarrays",
   "ps-empty-prefix",
   "ps-equal-a-b",
@@ -30,6 +32,9 @@
   "ps-subarray-sum-k",
   "ps-sum-except-self",
   "ps-whole-array-query",
+  "ps-xor-empty-prefix",
+  "ps-xor-equal-triplets",
+  "ps-xor-range-queries",
   "ps-xor-range-query",
   "ps-zero-target-count"
  ],

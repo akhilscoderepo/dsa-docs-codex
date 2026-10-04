@@ -11,11 +11,11 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 02 | Matrices and 2D arrays | content_complete_human_review_pending | 7/7 | human review |
 | 03 | Strings | content_complete_human_review_pending | 7/7 | human review |
 | 04 | Hash maps and sets | content_complete_human_review_pending | 9/9 | human review |
-| 05 | Sorting and Java comparators | content_complete_build_pending | 9/9 | browser smoke/render, then human review |
-| 06 | Binary search | in_progress | 2/11 | Lower And Upper Bounds |
-| 07 | Prefix sums and difference arrays | in_progress | 6/11 | Prefix XOR |
+| 05 | Sorting and Java comparators | content_complete_human_review_pending | 9/9 | human review |
+| 06 | Binary search | in_progress | 3/11 | First True |
+| 07 | Prefix sums and difference arrays | in_progress | 7/11 | Earliest Balance |
 | 08 | Two pointers | in_progress | 8/10 | Strings And Two Pointers |
-| 09 | Sliding window | content_complete_build_pending | 10/10 | HTML build and human review |
+| 09 | Sliding window | content_complete_human_review_pending | 10/10 | human review |
 | 10 | Intervals | in_progress | 1/7 | Touching-Boundary Semantics |
 | 11-41 | Remaining specifications | not_started | 0 | chapter 11 after active drafts |
 
@@ -58,4 +58,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Parallel continuation advanced Chapter 07 through Remainder Classes: 6/11 lessons, 24 paired solutions, zero draft-audit errors; next is Prefix XOR.
 - Parallel continuation advanced Chapter 08 through Array Cycle State and the Sorting And Two Pointers combination: 8/10 lessons, 32 paired solutions, zero draft-audit errors; next is Strings And Two Pointers.
 - The user authorized continuous rolling batches: finish the active five chapters, immediately claim the next five unfinished chapters, and continue through Chapter 41 without waiting for another prompt. Parallel workers own separate chapter directories; only the coordinator edits shared state and Git.
+- Chapter 06 Lower And Upper Bounds passed the JDK 25 draft audit: 3/11 lessons, 12 paired solutions, zero errors; next is First True.
+- Chapter 07 Prefix XOR passed the JDK 25 draft audit: 7/11 lessons, 28 paired solutions, zero errors; next is Earliest Balance. The pre-existing Lesson 03 role advisory remains open for chapter completion.
+- Chapters 05 and 09 passed source-bound HTML audits with jsdom smoke tests and real Chrome desktop/phone render checks. Both are content complete with only the human-owned review gate open.
 

@@ -1,13 +1,21 @@
 # DSA chapter pipeline runbook
 
-This repository publishes one interactive Java DSA chapter at a time. The Markdown manuscripts are canonical. Generated HTML is never edited by hand.
+This repository publishes interactive Java DSA chapters in rolling batches. The Markdown manuscripts are canonical. Generated HTML is never edited by hand.
 
 ## Start of every run
 
 1. Read this file, `skill/dsa-chapter-pipeline/SKILL.md`, and `PROGRESS.md`.
 2. Read only the current chapter specification, its chapter map if present, and the gold exemplar named by the pipeline skill.
-3. Check `git status --short`. Preserve unrelated changes. Do not start a second chapter while one is marked `in_progress`.
-4. Resume the lesson named under the active chapter. If no chapter is active, claim the lowest chapter numbered 05 through 41 whose status is `not_started`.
+3. Check `git status --short`. Preserve unrelated changes. Never assign the same chapter to two workers.
+4. Resume every chapter in the active batch at its recorded next lesson. If no batch is active, claim the five lowest unfinished chapters numbered 05 through 41. The final batch may contain fewer than five chapters.
+
+## Rolling batch execution
+
+- Continue without asking for a `next` message. When every chapter in a batch reaches its publication boundary, immediately claim the next five unfinished chapters and begin them.
+- Use available parallel workers, with one chapter directory owned by one worker at a time. If fewer workers than chapters are available, give the next queued chapter to the first worker that reaches a safe boundary.
+- A worker writes only its assigned manuscript directory and validation stamp. The coordinator alone edits `PROGRESS.md`, generated indexes, Git state, and shared tooling.
+- Each worker still completes exactly one lesson transaction at a time. Parallelism changes chapter scheduling, not the lesson quality gate.
+- Pause only for a genuine authority requirement, a repeated blocker needing user input, or an exhausted execution budget. For budget stops, checkpoint every passing boundary so the next run resumes automatically.
 
 ## Canonical paths
 

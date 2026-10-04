@@ -1,11 +1,11 @@
 ---
 name: dsa-chapter-pipeline
-description: Resume and publish exactly one chapter of Akhil's spec-driven Java DSA curriculum using its progress ledger, canonical manuscripts, paired solutions, deterministic audits, and checkpoint protocol. Use for scheduled or manual continuation of chapters 05-41; not for isolated DSA explanations.
+description: Resume and publish rolling five-chapter batches of Akhil's spec-driven Java DSA curriculum using its progress ledger, canonical manuscripts, paired solutions, deterministic audits, and checkpoint protocol. Use for scheduled or manual continuation of chapters 05-41; not for isolated DSA explanations.
 ---
 
 # DSA chapter pipeline
 
-Treat `RUNBOOK.md` as the operational authority and `PROGRESS.md` as the recovery state. Complete exactly one chapter per scheduled run. A manually supervised run may stop earlier, but only at a complete lesson boundary.
+Treat `RUNBOOK.md` as the operational authority and `PROGRESS.md` as the recovery state. Work through the active batch of up to five consecutive chapters. When that batch finishes, claim the next five without waiting for the user. End a run only at complete lesson boundaries, with every unfinished chapter's next lesson recorded.
 
 ## Required skills
 
@@ -24,9 +24,9 @@ Do not load completed chapters as a substitute for the gold pair.
 
 ## Resume rule
 
-Resume the active claim in `PROGRESS.md`. Verify that every listed completed lesson has a manuscript, paired solutions, stable IDs, and a passing draft audit. Start at `next_lesson`; never regenerate a completed lesson unless an audit identifies a concrete defect.
+Resume every active batch claim in `PROGRESS.md`. Verify that every listed completed lesson has a manuscript, paired solutions, stable IDs, and a passing draft audit. Start each chapter at `next_lesson`; never regenerate a completed lesson unless an audit identifies a concrete defect.
 
-If there is no active claim, claim the lowest unfinished chapter. Write the claim before authoring. Never work on two chapters in one scheduled run.
+If there is no active batch, claim the five lowest unfinished chapters, or all remaining chapters when fewer than five remain. Write the claims before authoring. Assign one worker per chapter when parallel workers are available; only the coordinator edits shared state or Git.
 
 ## Quality boundary
 
@@ -36,7 +36,7 @@ Use plain technical English. Vary sentence structure naturally. Do not reuse exe
 
 ## Persistence
 
-After each passing lesson audit, update `PROGRESS.md`. At the end of a run, follow the runbook's checkpoint procedure and push. A checkpoint represents a durable lesson boundary, not completion. Report exactly what passed and what remains.
+After each passing lesson audit, the coordinator updates `PROGRESS.md`. At the end of a run, follow the runbook's checkpoint procedure and push every chapter boundary. A checkpoint represents a durable lesson boundary, not completion. Do not stop for user confirmation after a chapter or batch; continue with the next recorded work while execution time remains.
 
 Never create `review-log.md`. Until Akhil reviews the chapter, the strongest allowed status is `content complete, human review pending`.
 

@@ -57,4 +57,5 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Chapter 10 reached 1/7 lessons with 4 solutions and zero draft-audit errors; next is Touching-Boundary Semantics.
 - Parallel continuation advanced Chapter 07 through Remainder Classes: 6/11 lessons, 24 paired solutions, zero draft-audit errors; next is Prefix XOR.
 - Parallel continuation advanced Chapter 08 through Array Cycle State and the Sorting And Two Pointers combination: 8/10 lessons, 32 paired solutions, zero draft-audit errors; next is Strings And Two Pointers.
+- The user authorized continuous rolling batches: finish the active five chapters, immediately claim the next five unfinished chapters, and continue through Chapter 41 without waiting for another prompt. Parallel workers own separate chapter directories; only the coordinator edits shared state and Git.
 

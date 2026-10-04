@@ -11,8 +11,13 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 02 | Matrices and 2D arrays | content_complete_human_review_pending | 7/7 | human review |
 | 03 | Strings | content_complete_human_review_pending | 7/7 | human review |
 | 04 | Hash maps and sets | content_complete_human_review_pending | 9/9 | human review |
-| 05 | Sorting and Java comparators | in_progress | 9/9 | release build |
-| 06-41 | Remaining specifications | not_started | 0 | chapter 06 after chapter 05 |
+| 05 | Sorting and Java comparators | content_complete_build_pending | 9/9 | browser smoke/render, then human review |
+| 06 | Binary search | in_progress | 2/11 | Lower And Upper Bounds |
+| 07 | Prefix sums and difference arrays | in_progress | 4/11 | Earliest Balance |
+| 08 | Two pointers | in_progress | 5/10 | K-Sum Reduction |
+| 09 | Sliding window | content_complete_build_pending | 10/10 | HTML build and human review |
+| 10 | Intervals | in_progress | 1/7 | Touching-Boundary Semantics |
+| 11-41 | Remaining specifications | not_started | 0 | chapter 11 after active drafts |
 
 ## Active claim
 
@@ -45,4 +50,9 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - The current chapter draft audit ran on Oracle JDK 25.0.1 with --release 25: 9 lessons, 36 exercises, 0 errors, 1 warning (no-human-review, left open for Akhil). Of 54 Java blocks, 48 compiled and 43 ran with assertions; 6 intentionally marked nocompile blocks were skipped. Lesson 09 now has independent randomized solution comparisons, own computed samples, and a trace generated from executable grouping code; the review ends with three rebuild tasks and a fresh composition problem.
 - Publication blockers verified this run: Node module resolution reports MODULE_NOT_FOUND for both jsdom and playwright-core. Smoke and Chromium render gates did not run. The installed stamp/build/audit tools bind only a Java digest and lack the required manuscriptDigest; the non-draft wrapper also treats no-human-review as fatal rather than a separately open human gate. These infrastructure discrepancies remain unresolved because the concurrent checkpoint required stopping. The existing untracked HTML is not a validated publication.
 - Remote verification failed: fatal: unable to access 'https://github.com/akhilscoderepo/dsa-docs-codex.git/': Failed to connect to github.com port 443 via 127.0.0.1 after 2063 ms: Could not connect to server. The subsequent authorized push outside the restricted network succeeded: checkpoint be4fd65 reached origin/main.
+- User explicitly requested a parallel Chapters 06-10 batch. Chapter 06 reached 2/11 lessons with 8 solutions and zero draft-audit errors; next is Lower And Upper Bounds.
+- Chapter 07 reached 4/11 lessons with 16 solutions and zero draft-audit errors; next is Earliest Balance. One advisory role warning reflects LC 238 appearing twice in the specification.
+- Chapter 08 reached 5/10 lessons with 20 solutions and zero draft-audit errors; next is K-Sum Reduction.
+- The complete approved Chapter 09 exemplar was promoted to the canonical manuscript directory: 10 lessons, 45 solutions, zero draft-audit errors, and Java validated on JDK 25. Low-diversity and template-phrase warnings remain for human review.
+- Chapter 10 reached 1/7 lessons with 4 solutions and zero draft-audit errors; next is Touching-Boundary Semantics.
 

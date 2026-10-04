@@ -1,0 +1,17 @@
+{
+ "lessons": [
+  "exact-search",
+  "first-and-last"
+ ],
+ "exercises": [
+  "bs-complete-target-range",
+  "bs-descending-target",
+  "bs-exact-target",
+  "bs-first-occurrence",
+  "bs-last-occurrence",
+  "bs-recognize-first-bad",
+  "bs-recognize-row-major",
+  "bs-two-element-proof"
+ ],
+ "retired": []
+}

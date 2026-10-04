@@ -1,0 +1,32 @@
+{
+ "lessons": [
+  "duplicate-skipping",
+  "opposite-ends",
+  "read-and-write",
+  "three-way-partition",
+  "two-way-partition"
+ ],
+ "exercises": [
+  "tp-all-equal-triplet",
+  "tp-closest-pair-sum",
+  "tp-container-water",
+  "tp-empty-region",
+  "tp-four-sum-dedup",
+  "tp-move-zeroes",
+  "tp-parity-indices",
+  "tp-partition-012",
+  "tp-partition-pivot",
+  "tp-reinspect-high",
+  "tp-remove-duplicates-two",
+  "tp-remove-element",
+  "tp-remove-sorted-duplicates",
+  "tp-sort-colors",
+  "tp-sort-parity",
+  "tp-three-sum-dedup",
+  "tp-three-way-pivot",
+  "tp-two-sum-ii",
+  "tp-two-values",
+  "tp-unique-pairs"
+ ],
+ "retired": []
+}

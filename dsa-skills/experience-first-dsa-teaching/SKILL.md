@@ -40,7 +40,7 @@ One rule set, applied everywhere:
 
 - A patient mentor speaking to a peer. Use "we" and "you", plain sentences, no hype.
 - Open with a concrete problem or scenario that exposes the decision. A short analogy is optional, not mandatory; omit decorative stories and switch to the precise term as soon as the state is visible.
-- Headings are short and descriptive: at most 7 words, no colon, no period.
+- Headings are short, concrete, and descriptive: at most 7 words, no colon, no period. Use standard terms and name the exact operation or concept. Prefer an active heading such as "Move The Left Pointer" to an abstract heading such as "Pointer Movement."
 - Teach in prose. Bullets are for constraints and short enumerations, never for the explanation itself. No card grids, callout boxes, or repeated label blocks.
 - Behavior before vocabulary: show the repeated work or the failure first, then name the technique once, in the insight stage.
 - Prefer compact, exact prose over sheer length. Match the approved exemplar's clarity and completeness, not its word count. Remove any paragraph that does not change recognition, correctness, implementation or transfer.
@@ -60,6 +60,19 @@ Apply these rules to every teaching paragraph, exercise, hint, and solution expl
 - Introduce a section with the practical reason the concept matters, then walk through one small concrete input. Let the reader track the exact array cells, indices, pointers, intervals, or state values as the code runs.
 
 Perform a sentence-level cognitive-load pass before handoff. A reader should not need to translate a noun phrase into an action, guess an unnamed actor, resolve a vague pronoun, decode an arrow, or hold several new decisions in working memory. For example, replace "practice reading a contract, predicting a cost and designing a hostile test, one at a time, before any named algorithm competes for your attention" with three direct sentences that introduce the input contract, the cost estimate, and the boundary test separately.
+
+### Heading hierarchy
+
+Headings show the reader where each idea belongs. Keep the hierarchy structural rather than decorative:
+
+- The HTML builder creates the single H1 chapter title. Manuscript files never add another H1.
+- Use H2 (`##`) for each lesson and for chapter-level sections such as Orientation, Unlocked Combinations, and Review.
+- Use H3 (`###`) for the lesson stages and other direct subdivisions of an H2 section.
+- Use H4 (`####`) for exercises, solution records, quiz groups, or another item that belongs inside an H3 section.
+- Do not skip a level, place an H4 directly under an H2, or use the same heading level for a parent and its child.
+- Do not choose a heading level because of font size. The semantic relationship selects the level; CSS controls appearance.
+
+Apply the readability contract to headings too. Each heading names a concrete concept or action, uses standard terminology, and introduces only one idea. Avoid vague labels such as "The Process," heavy nominalizations such as "Execution Of Pointer Advancement," generic filler such as "Important Concepts," and headings that merely repeat the chapter title.
 
 ## The lesson stages
 

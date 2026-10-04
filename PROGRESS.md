@@ -11,7 +11,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 02 | Matrices and 2D arrays | content_complete_human_review_pending | 7/7 | human review |
 | 03 | Strings | content_complete_human_review_pending | 7/7 | human review |
 | 04 | Hash maps and sets | content_complete_human_review_pending | 9/9 | human review |
-| 05 | Sorting and Java comparators | in_progress | 8/9 | Strings, Maps, And Sorting |
+| 05 | Sorting and Java comparators | in_progress | 9/9 | release build |
 | 06-41 | Remaining specifications | not_started | 0 | chapter 06 after chapter 05 |
 
 ## Active claim
@@ -19,10 +19,10 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - chapter: `05-sorting-and-java-comparators`
 - owner: `codex-local-scheduled-pipeline`
 - started: `2026-10-03T20:00:00+05:30`
-- updated: `2026-10-03T20:48:19+05:30`
-- completed_lessons: `[01-ordering-contracts, 02-arrays-sort, 03-comparator-contracts, 04-object-ordering, 05-stability-and-ties, 06-sort-and-sweep, 07-sort-and-deduplicate, 08-sort-then-scan]`
-- next_lesson: `09-strings-maps-and-sorting`
-- push_status: `pushed at af70d46`
+- updated: `2026-10-04T09:24:39+05:30`
+- completed_lessons: `[01-ordering-contracts, 02-arrays-sort, 03-comparator-contracts, 04-object-ordering, 05-stability-and-ties, 06-sort-and-sweep, 07-sort-and-deduplicate, 08-sort-then-scan, 09-strings-maps-and-sorting]`
+- next_lesson: `release-build`
+- push_status: `checkpoint pending`
 
 ## Decision log
 
@@ -38,4 +38,5 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Chapter 05 lesson 06 passed the draft audit on JDK 25. Twenty-four exercises now have paired compiled-and-run solutions; the remaining six warnings identify three future lessons, two wrap-up sections, and human review. Queue Reconstruction is revisited from the partial-queue sweep invariant required by the source specification.
 - Chapter 05 lesson 07 passed the draft audit on JDK 25. Twenty-eight exercises now have paired compiled-and-run solutions; the remaining five warnings identify two future lessons, two wrap-up sections, and human review.
 - Chapter 05 lesson 08 passed the draft audit on JDK 25. Thirty-two exercises now have paired compiled-and-run solutions; the remaining four warnings identify the final combination lesson, two wrap-up sections, and human review.
+- Chapter 05 lesson 09 and both wrap-up sections passed the manuscript and Java checks on JDK 25. The chapter has 36 paired solutions. The only non-draft manuscript error is the human-owned review log. HTML was generated, but smoke and Chromium render checks remain unverified because jsdom and playwright-core are not installed; publication is still pending.
 

@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "date": "2026-10-03",
+ "date": "2026-10-04",
  "status": "validated",
  "jdk": {
   "version": "25.0.1",
@@ -9,11 +9,11 @@
  },
  "release_requested": "25",
  "release_effective": "25",
- "blocks": 48,
- "ok": 42,
+ "blocks": 54,
+ "ok": 47,
  "failed": 0,
- "skipped": 6,
+ "skipped": 7,
  "not_validated": 0,
- "ran_with_assertions": 38,
- "digest": "db187675409583663e1be2c36410422a575b1292be2c4c7144fcddb4cf2ad753"
+ "ran_with_assertions": 43,
+ "digest": "5dc154c22d42f6b1f02860247e67d53ac739ed2ba06fd288d5b10d9d6f9b7966"
 }

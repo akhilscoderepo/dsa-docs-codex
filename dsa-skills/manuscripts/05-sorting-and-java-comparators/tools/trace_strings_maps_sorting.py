@@ -1,0 +1,3 @@
+import json
+if __name__ == "__main__":
+    print(json.dumps({"cells":["eat","tea","tan","ate"],"pointers":["scan","group"],"steps":[{"at":{"scan":0,"group":0},"vars":{"signature":"aet"},"note":"eat creates the first group under canonical key aet."},{"at":{"scan":1,"group":0},"vars":{"signature":"aet"},"note":"tea has the same sorted signature and joins the existing group."},{"at":{"scan":2,"group":1},"vars":{"signature":"ant"},"note":"tan produces a different key, so the map creates a second group."},{"at":{"scan":3,"group":0},"vars":{"signature":"aet"},"note":"ate returns to key aet; original spelling is stored without modification."}]},separators=(",",":")))

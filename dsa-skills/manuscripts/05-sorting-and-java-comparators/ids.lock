@@ -7,10 +7,15 @@
   "sort-and-deduplicate",
   "sort-and-sweep",
   "sort-then-scan",
-  "stability-and-ties"
+  "stability-and-ties",
+  "strings-maps-and-sorting"
  ],
  "exercises": [
   "boxed-integers-descending",
+  "combo-close-strings-frequency-multiset",
+  "combo-group-anagrams-sort-key",
+  "combo-sort-characters-frequency",
+  "combo-valid-anagram-sort",
   "comparator-chained-keys",
   "comparator-equal-extreme-keys",
   "comparator-equality-boundary",

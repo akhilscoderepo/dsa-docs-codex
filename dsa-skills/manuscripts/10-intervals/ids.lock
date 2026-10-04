@@ -2,20 +2,25 @@
  "lessons": [
   "endpoint-ordering-contracts",
   "merge-and-insert",
-  "touching-boundary-semantics"
+  "touching-boundary-semantics",
+  "two-list-intersection"
  ],
  "exercises": [
   "interval-closed-overlap",
   "interval-half-open-shared-resource",
   "interval-insert-interval",
+  "interval-intersect-one-pair",
+  "interval-list-intersections",
   "interval-merge-already-sorted",
   "interval-merge-intervals",
   "interval-merge-supplied-contract",
+  "interval-one-against-list",
   "interval-one-covers-many",
   "interval-order-end-start",
   "interval-order-extreme-endpoints",
   "interval-order-merge-recognition",
   "interval-order-start-end",
+  "interval-touching-intersections",
   "interval-zero-length-models"
  ],
  "retired": []

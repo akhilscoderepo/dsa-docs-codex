@@ -16,7 +16,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 07 | Prefix sums and difference arrays | in_progress | 10/11 | Prefix State And Maps |
 | 08 | Two pointers | content_complete_human_review_pending | 10/10 | human review |
 | 09 | Sliding window | content_complete_human_review_pending | 10/10 | human review |
-| 10 | Intervals | in_progress | 3/7 | Two-List Intersection |
+| 10 | Intervals | in_progress | 4/7 | Overlap And Coverage |
 | 11-41 | Remaining specifications | not_started | 0 | chapter 11 after active drafts |
 
 ## Active claim
@@ -73,4 +73,5 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Chapter 10 Merge And Insert passed the JDK 25 draft audit: 3/7 lessons, 12 paired solutions, zero errors; next is Two-List Intersection.
 - Chapter 07 2D Difference passed the JDK 25 draft audit: 10/11 lessons, 40 paired solutions, zero errors; next is Prefix State And Maps.
 - Chapter 06 Peak Search passed the JDK 25 draft audit: 5/11 lessons, 20 paired solutions, zero errors; next is Rotated Minimum.
+- Chapter 10 Two-List Intersection passed the JDK 25 draft audit: 4/7 lessons, 16 paired solutions, zero errors; next is Overlap And Coverage.
 

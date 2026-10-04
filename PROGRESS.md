@@ -16,7 +16,7 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 | 07 | Prefix sums and difference arrays | in_progress | 8/11 | 2D Prefix |
 | 08 | Two pointers | in_progress | 9/10 | Index State And Floyd |
 | 09 | Sliding window | content_complete_human_review_pending | 10/10 | human review |
-| 10 | Intervals | in_progress | 1/7 | Touching-Boundary Semantics |
+| 10 | Intervals | in_progress | 2/7 | Merge And Insert |
 | 11-41 | Remaining specifications | not_started | 0 | chapter 11 after active drafts |
 
 ## Active claim
@@ -65,4 +65,5 @@ The machine-readable lines below are the recovery ledger. Update them only at a 
 - Chapter 08 Strings And Two Pointers passed the JDK 25 draft audit: 9/10 lessons, 36 paired solutions, zero errors; next is Index State And Floyd.
 - Chapter 06 First True passed the JDK 25 draft audit: 4/11 lessons, 16 paired solutions, zero errors; next is Peak Search.
 - Chapter 07 Difference Arrays passed the JDK 25 draft audit: 8/11 lessons, 32 paired solutions, zero errors; next is 2D Prefix.
+- Chapter 10 Touching-Boundary Semantics passed the JDK 25 draft audit: 2/7 lessons, 8 paired solutions, zero errors; next is Merge And Insert.
 

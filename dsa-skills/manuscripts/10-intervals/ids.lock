@@ -1,12 +1,17 @@
 {
  "lessons": [
-  "endpoint-ordering-contracts"
+  "endpoint-ordering-contracts",
+  "touching-boundary-semantics"
  ],
  "exercises": [
+  "interval-closed-overlap",
+  "interval-half-open-shared-resource",
+  "interval-merge-supplied-contract",
   "interval-order-end-start",
   "interval-order-extreme-endpoints",
   "interval-order-merge-recognition",
-  "interval-order-start-end"
+  "interval-order-start-end",
+  "interval-zero-length-models"
  ],
  "retired": []
 }

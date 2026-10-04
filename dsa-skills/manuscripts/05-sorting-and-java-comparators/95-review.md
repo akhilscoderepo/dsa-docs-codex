@@ -36,3 +36,9 @@ Use these questions after finishing the chapter and again after a few days. Each
 ```quiz
 {"id":"sort-rev-false-binary","q":"An array has been sorted. Is binary search automatically the right next step?","options":["Yes, every sorted problem is logarithmic.","No, binary search also needs a monotone query predicate; many tasks require a linear scan.","No, Java forbids binary search after Arrays.sort.","Yes, unless duplicates exist."],"answer":1,"explain":"Sorting can expose adjacency or a sweep frontier without creating a monotone yes/no question."}
 ```
+
+### Rebuild From The Invariant
+
+Close the solutions and rewrite three techniques. First, order records by a primary key and an explicit secondary key, explaining why each comparison is overflow-safe. Second, sort a private integer copy and emit one representative at each run boundary; state which prefix is already final. Third, group original words by sorted character keys, stating why every processed occurrence belongs to exactly one group and why the key preserves multiplicity.
+
+For a fresh problem, given an array of lowercase words, return each anagram family's number of occurrences, ordered by descending family size and then ascending sorted-character key. Empty words and duplicate words count as occurrences. Assume at most 10,000 words, each at most 100 characters, and preserve the caller's array. Before coding, identify what the map key represents, what its value counts, and which comparator owns output ties. Explain why sorting words by length alone cannot establish these families. This combines a key for equality with a separate order for reporting.
